@@ -46,10 +46,15 @@
 
 Please download/install the following extension:
 > `Name: Vue VS Code Extension Pack`
+
 > `Id: sdras.vue-vscode-extensionpack`
+
 > `Description: A collection of extensions for working with Vue Applications in VS Code`
+
 > `Version: 0.2.0`
+
 > `Publisher: sarah.drasner`
+
 > `VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack`
 
 <h3> GitHub </h3>
