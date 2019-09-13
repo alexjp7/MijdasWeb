@@ -55,7 +55,7 @@ Please download/install the following extension:
 
 > `Publisher: sarah.drasner`
 
-> `VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack`
+> `VS Marketplace Link: <https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack>`
 
 <h3> GitHub </h3>
 
