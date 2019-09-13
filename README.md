@@ -41,3 +41,18 @@
   and display the defulat vue page.
 
 - When running, the prompt will indicate what port is in use. 
+
+<h3> VS Code Extensions </h3>
+
+Please download/install the following extension:
+`Name: Vue VS Code Extension Pack
+Id: sdras.vue-vscode-extensionpack
+Description: A collection of extensions for working with Vue Applications in VS Code
+Version: 0.2.0
+Publisher: sarah.drasner
+VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack`
+
+<h3> You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
+
+Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui
+</h3>
