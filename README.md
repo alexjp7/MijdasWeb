@@ -17,11 +17,11 @@
 
 *** Please Note: There are two methods for this, cli and browser ui sexiness, for both of these follow the steps below ***
 
-<h4> browser sexiness </h4>
+<h4> - Browser Sexiness </h4>
 
-1. run `vue ui`
+1. run `vue ui --dev`
 
-<h4> hardcore cli compsci student method </h4>
+<h4> - Hardcore cli compsci student method </h4>
 
 1. run `vue create <project-name>` 
 2. Enter for next/confirm, space to select (if error is made just ctrl-c - rip)
@@ -32,7 +32,7 @@
 7. Select `in dedicated config file`
 8. Type `N` for not saving preset
 9. Change directory to the project you've created.
-10. OPTIONAL - run `vue ui` and import project directory for ui use later (provides analytics etc)
+10. OPTIONAL - run `vue ui --dev` and import project directory for ui use later (provides analytics etc)
 
 <h3> Using the Development Environment</h3>
 
