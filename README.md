@@ -11,7 +11,7 @@
 <h3> Installing Vue with CLI </h3>
 
 1. run `npm install vue`
-2. run `install -g @vue/cli`.  NOTE: -g installs globally to the machine
+2. run `npm install -g @vue/cli`.  NOTE: -g installs globally to the machine
 
 <h3> Creating your Vue Project </h3>
 
