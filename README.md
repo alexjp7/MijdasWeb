@@ -36,7 +36,7 @@
 
 <h3> Using the Development Environment</h3>
 
-- Once you have completed the above, you can run `run serve`
+- Once you have completed the above, you can run `npm run serve` or `npm run dev`
   which will create a localhost instance on an available port
   and display the defulat vue page.
 
