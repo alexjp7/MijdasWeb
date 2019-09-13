@@ -36,9 +36,9 @@
 
 <h3> Using the Development Environment</h3>
 
-- Once you have completed the above, you can run `npm run serve` or `npm run dev`
-  which will create a localhost instance on an available port
-  and display the defulat vue page.
+- Once you have completed the above, you can run `npm run serve` or `npm run dev` 
+(note: if you get errors/warnings run `npm run serve --fix`)
+  which will create a localhost instance on an available port and display the default vue page.
 
 - When running, the prompt will indicate what port is in use. 
 
@@ -52,7 +52,11 @@ Version: 0.2.0
 Publisher: sarah.drasner
 VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack`
 
-<h3> You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
+<h3> GitHub </h3>
+
+You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
+
+<h3> Bugs and Issues </h3>
 
 Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui
-</h3>
+
