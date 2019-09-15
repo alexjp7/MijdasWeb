@@ -11,11 +11,11 @@
 <h3> Installing Vue with CLI </h3>
 
 1. run `npm install vue`
-2. run `npm install -g @vue/cli`.  NOTE: -g installs globally to the machine
+2. run `npm install -g @vue/cli`. NOTE: -g installs globally to the machine
 
 <h3> Creating your Vue Project </h3>
 
-*** Please Note: There are two methods for this, cli and browser ui sexiness, for both of these follow the steps below ***
+**_ Please Note: There are two methods for this, cli and browser ui sexiness, for both of these follow the steps below _**
 
 <h4> - Browser Sexiness </h4>
 
@@ -23,7 +23,7 @@
 
 <h4> - Hardcore cli compsci student method </h4>
 
-1. run `vue create <project-name>` 
+1. run `vue create <project-name>`
 2. Enter for next/confirm, space to select (if error is made just ctrl-c - rip)
 3. Arrow key down to `manually select`
 4. Arrow key and space on `router` and `vuex` hit enter
@@ -36,15 +36,16 @@
 
 <h3> Using the Development Environment</h3>
 
-- Once you have completed the above, you can run `npm run serve` or `npm run dev` 
-(note: if you get errors/warnings run `npm run serve --fix`)
+- Once you have completed the above, you can run `npm run serve` or `npm run dev`
+  (note: if you get errors/warnings run `npm run serve --fix`)
   which will create a localhost instance on an available port and display the default vue page.
 
-- When running, the prompt will indicate what port is in use. 
+- When running, the prompt will indicate what port is in use.
 
 <h3> VS Code Extensions </h3>
 
 Please download/install the following extension:
+
 > `Name: Vue VS Code Extension Pack`
 
 > `Id: sdras.vue-vscode-extensionpack`
@@ -61,7 +62,16 @@ Please download/install the following extension:
 
 You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
 
-<h3> Bugs and Issues </h3>
+<h3> !!! Bugs and Issues !!! </h3>
 
 Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui
 
+<h3> Packages </h3>
+
+> Vuetify - allows for advanced components such as forms/calendars/navbars etc `vue add veutify` then hit enter on `default settings`
+
+> Vuex - State Management Pattern uses state,view and actions powerful for large SPA run `npm install vuex --save`
+
+> Vuex-router-sync - Dependancy that allows for certain states to change the route and updates the store of vuex. To run `npm install vuex-router-sync`
+
+> Vue-resource - provides capability for making web requests and handle responses using \$http to install run `npm install vue-resource` (note: not required)
