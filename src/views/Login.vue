@@ -1,8 +1,18 @@
+<style scoped>
+#fields
+{    
+  display: inline-blockinline-block;
+  margin:5%;
+
+
+}
+
+</style>
 
 <template>
-  <div class="login">
+  <div>
     <v-layout column>
-      <v-flex xs6 offset-xs3>
+      <v-flex xs6 offset-xs3 id ="fields">
         <panel title="Login">
           <v-text-field label="Email" v-model="email"></v-text-field>
           <br />
@@ -35,6 +45,7 @@ export default {
       password: ""
     };
   },
+  /*
   methods: {
     async login() {
       const response = await Authentication.login({
@@ -51,6 +62,7 @@ export default {
       });
     }
   }
+  */
 }
 }
 </script>

@@ -1,16 +1,10 @@
 //Base Vue Import
 import Vue from "vue";
 import Router from "vue-router";
-
-//BASE VIEW
 import Home from "@/views/Home.vue";
-
 //Components
-
 import SubjectDisplay from "@/components/SubjectDisplay";
 import Navigation from "@/components/Navigation";
-
-
 /**
  * Create the routes for the views
  * Note that these maybe nested to serve possible purpose

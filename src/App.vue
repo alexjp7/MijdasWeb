@@ -1,9 +1,9 @@
 <template>
   <v-app app>
     <Navigation />
-    <v-content>
-      <v-container fluid>
-        <router-view></router-view>
+    <v-content >
+      <v-container fluid >
+        <router-view ></router-view>
       </v-container>
     </v-content>
   </v-app>
@@ -27,7 +27,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .danger-alert {
   color: red;

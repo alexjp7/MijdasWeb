@@ -1,7 +1,17 @@
+<style scoped>
+#fields
+{    
+  display: inline-blockinline-block;
+  margin:5%;
+
+
+}
+
+</style>
 <template>
   <div>
     <v-layout column>
-      <v-flex xs6 offset-xs3>
+     <v-flex xs6 offset-xs3 id ="fields">
         <panel title="Register">
           <form name="register" autocomplete="off">
             <v-text-field label="Username" v-model="username"></v-text-field>

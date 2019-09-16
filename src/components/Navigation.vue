@@ -65,8 +65,8 @@
 
 
 <template>
-  <div class="nav">
-    <v-toolbar :extended="extended" :flat="flat">
+  <div class="nav" >
+    <v-toolbar :extended="extended" :flat="flat"  color="primary">
       <v-toolbar-title>
         <router-link to="/">
           <v class="btn">
@@ -74,19 +74,19 @@
           </v>
         </router-link>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
+      <v-spacer ></v-spacer>
+      <v-toolbar-items >
         <router-link to="/about">
-          <v-btn text>About Us</v-btn>
+          <v-btn text class="navText">About Us</v-btn>
         </router-link>
         <router-link to="/login">
-          <v-btn text>Login</v-btn>
+          <v-btn text class="navText">Login</v-btn>
         </router-link>
         <router-link to="/register">
-          <v-btn text>Register</v-btn>
+          <v-btn text class="navText">Register</v-btn>
         </router-link>
         <router-link to="/calendar">
-          <v-btn text>Calendar</v-btn>
+          <v-btn text class="navText">Calendar</v-btn>
         </router-link>
       </v-toolbar-items>
     </v-toolbar>
@@ -118,5 +118,8 @@ export default {
 }
 .home:hover {
   color: #e9e;
+}
+.navText{
+  color:white !important;
 }
 </style>
