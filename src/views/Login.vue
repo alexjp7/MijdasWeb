@@ -1,67 +1,56 @@
 
 <template>
   <div class="login">
-    <SubjectDisplay/>
+    <v-layout column>
+      <v-flex xs6 offset-xs3>
+        <panel title="Login">
+          <v-text-field label="Email" v-model="email"></v-text-field>
+          <br />
+          <v-text-field label="Password" type="password" v-model="password"></v-text-field>
+          <br />
+          <div class="danger-alert" v-html="error" />
+          <br />
+          <v-btn dark class="cyan" @click="login">Login</v-btn>
+        </panel>
+      </v-flex>
+    </v-layout>
   </div>
 </template>
+
 <script>
-
-import LoginForm from "@/components/LoginForm.vue";
-import SubjectDisplay from "@/components/SubjectDisplay.vue";
-
+import Authentication from "@/services/Authentication";
 export default {
-
   name: "login",
   components:{ 
-     SubjectDisplay
 
-  }
-/*
+  },
   data:
   {
-    message:'hey'
+    message:'hey',
+  components: {},
+  data() {
+    return {
+      request: "LOGIN",
+      username: "",
+      password: ""
+    };
   },
-  methods:
-  {
-    addPost: function() {
-      axios
-        .post(
-          "https://markit.mijdas.com/api/requests/user/",
-          this.username,
-          this.password,
-        )
-        .then(response =>
-        {
-          console.log(response);
-        
-        })
-    },
-
-    test:function()
-    {
-      message = "h3ey"
-      
+  methods: {
+    async login() {
+      const response = await Authentication.login({
+        request: this.request,
+        username: this.email,
+        password: this.password
+      }).then(function(response) {
+        console.log(response);
+      });
+      //this.$store.dispatch("setToken", response.data.token);
+      //this.$store.dispatch("setUser", response.data.user);
+      this.$router.push({
+        name: "Calendar"
+      });
     }
   }
-  */
-  /*** This is an example of a native fetch request AND an additonal way of inline templating***/
-
-  /*
-  mounted() {
-    fetch("https://markit.mijdas.com/api/requests/user/")
-      .then(response => response.json())
-      .then(data => {
-        this.users = data;
-      });
-  },
-  template: `
-        <div>
-            <li v-for="user in users"> {{user}} </li>
-        </div>
-    `
-    */
-};
+}
+}
 </script>
-
-<style scoped>
-</style>

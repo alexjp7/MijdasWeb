@@ -31,25 +31,19 @@
 					<v-btn  x-large class="subjects" block color="secondary" light>{{subject.subject_code}}</v-btn>
 				</v-card-actions>
 				</div>
-		
 		</v-card>
 	</div>
-
 </div>
 </template>
 
 <script>
-
 export default {
 	name: "SubjectDisplay",
 	data:() => ({
-
 		institutions:[]
 	}),
-
 	methods:{	
 	},
-
 	created() {
 		this.$http.post("https://markit.mijdas.com/api/subject/",{
 			"request":"POPULATE_SUBJECTS",
