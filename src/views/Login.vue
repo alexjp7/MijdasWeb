@@ -1,22 +1,20 @@
 
 <template>
   <div class="login">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-    <LoginForm/>
+    <SubjectDisplay/>
   </div>
 </template>
 <script>
 
 import LoginForm from "@/components/LoginForm.vue";
-import HelloWorld from "@/components/HelloWorld.vue";
+import SubjectDisplay from "@/components/SubjectDisplay.vue";
 
 export default {
 
   name: "login",
   components:{ 
-     LoginForm,
-     HelloWorld,
-  
+     SubjectDisplay
+
   }
 /*
   data:

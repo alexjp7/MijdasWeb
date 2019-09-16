@@ -6,9 +6,9 @@ import Router from "vue-router";
 import Home from "@/views/Home.vue";
 
 //Components
-import HelloWorld from "@/components/HelloWorld";
 import LoginForm from "@/components/LoginForm";
 import Navigation from "@/views/Navigation";
+import SubjectDisplay from "@/components/SubjectDisplay";
 
 /**
  * Create the routes for the views
@@ -87,14 +87,7 @@ export default new Router({
     /**************
      * COMPONENTS
      **************/
-    {
-      path: "/",
-      name: "HelloWorld",
-      component: HelloWorld,
-      meta: {
-        guest: true
-      }
-    },
+
     {
       path: "/",
       name: "LoginForm",
@@ -107,6 +100,11 @@ export default new Router({
       path: "/Navigation",
       name: "Navigation",
       component: Navigation
+    },
+    {
+      path: "/SubjectDisplay",
+      name: "SubjectDisplay",
+      component: SubjectDisplay
     } /*
     {
       path: "/Admin",
