@@ -1,17 +1,14 @@
 <style scoped>
-#fields
-{    
+#fields {
   display: inline-blockinline-block;
-  margin:5%;
-
-
+  margin: 5%;
 }
-
 </style>
+
 <template>
   <div>
     <v-layout column>
-     <v-flex xs6 offset-xs3 id ="fields">
+      <v-flex xs6 offset-xs3 id="fields">
         <panel title="Register">
           <form name="register" autocomplete="off">
             <v-text-field label="Username" v-model="username"></v-text-field>
@@ -26,7 +23,12 @@
           <br />
           <div class="danger-alert" v-html="error" />
           <br />
-          <v-btn dark class="cyan" @click="register">Register</v-btn>
+          <v-row>
+            <v-btn dark class="primary" @click="register">Register</v-btn>
+            <router-link to="/login" class="btn btn-link">
+              <v-btn dark class="primary">Login</v-btn>
+            </router-link>
+          </v-row>
         </panel>
       </v-flex>
     </v-layout>

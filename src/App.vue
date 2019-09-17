@@ -1,9 +1,10 @@
 <template>
   <v-app app>
+    <v-system-bar :flat="flat" color="primary"></v-system-bar>
     <Navigation />
-    <v-content >
-      <v-container fluid >
-        <router-view ></router-view>
+    <v-content>
+      <v-container fluid>
+        <router-view></router-view>
       </v-container>
     </v-content>
   </v-app>
@@ -30,5 +31,8 @@ export default {
 }
 .danger-alert {
   color: red;
+}
+#divider {
+  margin: 3vw;
 }
 </style>
