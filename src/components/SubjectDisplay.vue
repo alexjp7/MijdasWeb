@@ -29,10 +29,10 @@
     <section v-else>
       <div v-if="loading">Loading...</div>
 
-      <div class="cards" v-for="institution in institutions" v-bind:key="institution">
+      <div class="cards" v-for="institution in institutions" v-bind:key="institution.id">
         <v-card>
           <h1>{{institution.institution}}</h1>
-          <div v-for="subject in institution.subjects" v-bind:key="subject">
+          <div v-for="subject in institution.subjects" v-bind:key="subject.id">
             <!-- Children nodes with clickable space-->
             <v-card-actions>
               <v-btn x-large class="subjects" block color="secondary" light>{{subject.subject_code}}</v-btn>
@@ -51,7 +51,7 @@ export default {
   data: () => ({
     request: "POPULATE_SUBJECTS",
     username: "st111",
-    institutions: "",
+    institutions: null,
     loading: true,
     errored: false
   }),
