@@ -3,6 +3,10 @@
   display: inline-blockinline-block;
   margin: 5%;
 }
+v-form {
+  width: 50vw;
+  margin-left: 25vw;
+}
 </style>
 
 <template>
@@ -24,9 +28,9 @@
           <div class="danger-alert" v-html="error" />
           <br />
           <v-row>
-            <v-btn dark class="primary" @click="register">Register</v-btn>
+            <v-btn id="divider" dark class="primary" @click="register">Register</v-btn>
             <router-link to="/login" class="btn btn-link">
-              <v-btn dark class="primary">Login</v-btn>
+              <v-btn id="divider" dark class="primary">Login</v-btn>
             </router-link>
           </v-row>
         </panel>

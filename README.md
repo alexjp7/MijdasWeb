@@ -44,13 +44,7 @@
 
 > Vue-resource - provides capability for making web requests and handle responses using \$http to install run `npm install vue-resource` (note: not required)
 
-<h3> Using the Development Environment</h3>
-
-- Once you have completed the above, you can run `npm run serve` or `npm run dev`
-  (note: if you get errors/warnings run `npm run serve --fix`)
-  which will create a localhost instance on an available port and display the default vue page.
-
-- When running, the prompt will indicate what port is in use.
+> FOR THIS ONE run `vue ui` and install the `dependancy` called: `vuetify-upload-button`
 
 <h3> VS Code Extensions </h3>
 
@@ -68,14 +62,16 @@ Please download/install the following extension:
 
 > `VS Marketplace Link: <https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack>`
 
+<h3> Using the Development Environment</h3>
+
+- Once you have completed the above, you can run `npm run serve` or `npm run dev`
+  (note: if you get errors/warnings run `npm run serve --fix`)
+  which will create a localhost instance on an available port and display the default vue page.
+
+- When running, the prompt will indicate what port is in use.
+
 <h3> GitHub </h3>
 
 You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
 
 <h2> !!! Bugs and Issues !!! </h2>
-
-> Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui
-
-> Redirect function in login is not working, for some reason sleep stops vuex reroute :(
-
-
