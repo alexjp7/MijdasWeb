@@ -6,5 +6,11 @@ export default {
   },
   login(credentials) {
     return Api().post("user/", credentials);
+  },
+  logout(credentials) {
+    return Api().post("user/", credentials);
+  },
+  profile(credentials) {
+    return Api().post("user/", credentials);
   }
 };

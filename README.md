@@ -34,6 +34,16 @@
 9. Change directory to the project you've created.
 10. OPTIONAL - run `vue ui --dev` and import project directory for ui use later (provides analytics etc)
 
+<h3> Packages that need to be installed </h3>
+
+> Vuetify - allows for advanced components such as forms/calendars/navbars etc `vue add veutify` then hit enter on `default settings`
+
+> Vuex - State Management Pattern uses state,view and actions powerful for large SPA run `npm install vuex --save`
+
+> Vuex-router-sync - Dependancy that allows for certain states to change the route and updates the store of vuex. To run `npm install vuex-router-sync`
+
+> Vue-resource - provides capability for making web requests and handle responses using \$http to install run `npm install vue-resource` (note: not required)
+
 <h3> Using the Development Environment</h3>
 
 - Once you have completed the above, you can run `npm run serve` or `npm run dev`
@@ -62,16 +72,6 @@ Please download/install the following extension:
 
 You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
 
-<h3> !!! Bugs and Issues !!! </h3>
+<h2> !!! Bugs and Issues !!! </h2>
 
-Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui
-
-<h3> Packages </h3>
-
-> Vuetify - allows for advanced components such as forms/calendars/navbars etc `vue add veutify` then hit enter on `default settings`
-
-> Vuex - State Management Pattern uses state,view and actions powerful for large SPA run `npm install vuex --save`
-
-> Vuex-router-sync - Dependancy that allows for certain states to change the route and updates the store of vuex. To run `npm install vuex-router-sync`
-
-> Vue-resource - provides capability for making web requests and handle responses using \$http to install run `npm install vue-resource` (note: not required)
+> Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui

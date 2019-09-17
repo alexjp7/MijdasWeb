@@ -1,20 +1,16 @@
 <style scoped>
-#fields
-{    
+#fields {
   display: inline-blockinline-block;
-  margin:5%;
-
-
+  margin: 5%;
 }
-
 </style>
 
 <template>
   <div>
     <v-layout column>
-      <v-flex xs6 offset-xs3 id ="fields">
+      <v-flex xs6 offset-xs3 id="fields">
         <panel title="Login">
-          <v-text-field label="Email" v-model="email"></v-text-field>
+          <v-text-field label="Username" v-model="username"></v-text-field>
           <br />
           <v-text-field label="Password" type="password" v-model="password"></v-text-field>
           <br />
@@ -31,13 +27,6 @@
 import Authentication from "@/services/Authentication";
 export default {
   name: "login",
-  components:{ 
-
-  },
-  data:
-  {
-    message:'hey',
-  components: {},
   data() {
     return {
       request: "LOGIN",
@@ -45,24 +34,21 @@ export default {
       password: ""
     };
   },
-  /*
   methods: {
     async login() {
       const response = await Authentication.login({
         request: this.request,
-        username: this.email,
+        username: this.username,
         password: this.password
       }).then(function(response) {
         console.log(response);
       });
       //this.$store.dispatch("setToken", response.data.token);
       //this.$store.dispatch("setUser", response.data.user);
-      this.$router.push({
-        name: "Calendar"
-      });
+      // this.$router.push({
+      //   name: "Calendar"
+      // });
     }
   }
-  */
-}
-}
+};
 </script>
