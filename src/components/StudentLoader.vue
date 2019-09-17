@@ -1,28 +1,26 @@
 <template>
 <div id="StudentLoader">
-    <v-card color="background">
+    <v-card>
         <v-card-title>
-            <h2 id="studentHeading">Students</h2>
+            <h2 id="pageBreakHeading">Students</h2>
         </v-card-title>
         <v-card-actions>
         <div id="uploader" >
             <upload-btn icon @file-update="readFileInput">
                 <template slot="icon">
-                    <v-icon >add</v-icon>
+                    <v-icon  color="background" >mdi-cloud-upload</v-icon>
                 </template>
             </upload-btn>
             <h2>Click To Upload</h2>
         </div>
         </v-card-actions>
-        <v-card>
-            <span id="fileName">{{fileName}}</span>
-        </v-card>
+        <span id="fileName">{{fileName}}</span>
         <div v-if = "hasValidFile == true">
-           <v-btn block @click="submitStudents" color="secondary" >Submit</v-btn>
+            <v-card-actions>
+                <v-btn block @click="submitStudents" color="secondary" >Submit</v-btn>
+            </v-card-actions>
         </div>
-        <div v-else>
 
-        </div>
     </v-card>      
 </div>
 </template>
@@ -30,13 +28,16 @@
 
 
 <script>
-  import UploadButton from 'vuetify-upload-button'
+ import UploadButton from 'vuetify-upload-button';
+ import Subject from "@/services/Subject";
 export default {
 
     data:() => ({
         fileName:"",
         students:[],
         hasValidFile:false,
+        request:"ADD_STUDENTS",
+        subject_id:1
     }),
     components: {
         'upload-btn': UploadButton
@@ -50,9 +51,13 @@ export default {
             this.fileName = file.name;
             this.hasValidFile = true;
         },
-        submitStudents() {
-           
-        }
+        async submitStudents() {
+                const response = await Subject.addStudents({
+                request: this.request,
+                students: this.students,
+                subject_id:this.subject_id
+            });
+        },
     }
 }
 </script>
@@ -65,15 +70,16 @@ export default {
     }  
 
     #StudentLoader {
-
-        margin-right: 10% !important;
-        padding:2% !important;
-        max-width:50%;  
+        margin-left: 10%;
+        margin-right: 10%;
+        max-width:100%;  
+        display: block;
     }
     #fileName{
         color:blue;
         font-weight: bold;
         text-align: center !important;
         font-style: italic;
+  
     }
 </style>

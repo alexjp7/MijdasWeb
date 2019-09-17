@@ -1,17 +1,26 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
     <SubjectDisplay></SubjectDisplay>
+    <br>
+    <br>
+    <StudentLoader></StudentLoader>
   </div>
 </template>
 
 
 <script>
 import SubjectDisplay from "@/components/SubjectDisplay.vue"
+import StudentLoader from "@/components/StudentLoader.vue"
 export default {
   name: "about",
   components:{
-    SubjectDisplay
+    SubjectDisplay,StudentLoader
   }
 }
 </script>
+
+<style  scoped>
+  .about{
+
+  }
+</style>
