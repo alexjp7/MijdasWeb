@@ -62,7 +62,6 @@ export default {
     })
       .then(response => {
         this.institutions = response.data;
-        console.log(response);
       })
       .catch(error => {
         console.log(error);

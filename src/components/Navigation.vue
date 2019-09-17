@@ -1,6 +1,6 @@
 <template>
-  <div class="nav" >
-    <v-toolbar :extended="extended" :flat="flat"  color="primary">
+  <div class="nav">
+    <v-toolbar :extended="extended" :flat="flat" color="primary">
       <v-toolbar-title>
         <router-link to="/">
           <v class="btn">
@@ -8,8 +8,8 @@
           </v>
         </router-link>
       </v-toolbar-title>
-      <v-spacer ></v-spacer>
-      <v-toolbar-items >
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
         <router-link to="/about">
           <v-btn text class="navText">About Us</v-btn>
         </router-link>
@@ -53,7 +53,7 @@ export default {
 .home:hover {
   color: #e9e;
 }
-.navText{
-  color:white !important;
+.navText {
+  color: white !important;
 }
 </style>
