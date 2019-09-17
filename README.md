@@ -75,3 +75,7 @@ You will need to pull/clone this repo and use it to replace the pre-existing src
 <h2> !!! Bugs and Issues !!! </h2>
 
 > Please note that when you get to `npm run serve` you will get an error in the main.js file this is due to installing a plugin via `vue ui` i'd recommend commenting it out or installing it via vue ui
+
+> Redirect function in login is not working, for some reason sleep stops vuex reroute :(
+
+
