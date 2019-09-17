@@ -11,38 +11,48 @@ form {
 
 <template>
   <div>
-    <v-flex xs6 offset-xs3 id="fields">
-      <panel title="Login">
-        <v-form class="px-3" ref="form">
-          <v-text-field label="Username" v-model="username" clearable filled :rules="usernameRules"></v-text-field>
-          <br />
-          <v-text-field
-            label="Password"
-            v-model="password"
-            type="password"
-            hint="At least 8 characters"
-            clearable
-            filled
-            :rules="passwordRules"
-          ></v-text-field>
-          <br />
-          <div class="danger-alert" v-html="error" />
-          <br />
-          <v-row>
-            <v-btn id="divider" class="primary" dark tile @click="login">Login</v-btn>
-            <router-link to="/register" class="btn btn-link" color="white">
-              <v-btn id="divider" dark class="primary" tile>Register</v-btn>
-            </router-link>
-          </v-row>
-        </v-form>
-      </panel>
-    </v-flex>
-    <div v-if="correct == true">
-      <v-alert type="success">Successfully logged in!</v-alert>
-    </div>
-    <div v-else-if="correct == false">
-      <v-alert type="error">Incorrect credentials, please try again.</v-alert>
-    </div>
+    <v-container fluid>
+      <v-flex xs6 offset-xs3 id="fields">
+        <panel title="Login">
+          <v-form class="px-3" ref="form">
+            <div class="pl-4 pr-4 pt-2 pb-2">
+              <v-text-field
+                label="Username"
+                v-model="username"
+                clearable
+                filled
+                :rules="usernameRules"
+              ></v-text-field>
+              <br />
+              <v-text-field
+                label="Password"
+                v-model="password"
+                type="password"
+                hint="At least 8 characters"
+                clearable
+                filled
+                :rules="passwordRules"
+              ></v-text-field>
+              <br />
+              <div class="danger-alert" v-html="error" />
+              <br />
+              <v-row>
+                <v-btn id="divider" class="primary" dark tile @click="login">Login</v-btn>
+                <router-link to="/register" class="btn btn-link" color="white">
+                  <v-btn id="divider" dark class="primary" tile>Register</v-btn>
+                </router-link>
+              </v-row>
+            </div>
+          </v-form>
+        </panel>
+      </v-flex>
+      <div v-if="correct == true">
+        <v-alert type="success">Successfully logged in!</v-alert>
+      </div>
+      <div v-else-if="correct == false">
+        <v-alert type="error">Incorrect credentials, please try again.</v-alert>
+      </div>
+    </v-container>
   </div>
 </template>
 
@@ -72,34 +82,39 @@ export default {
   },
   methods: {
     async login() {
+      this.errored = false;
       if (this.$refs.form.validate()) {
-        const response = await Authentication.login({
+        await Authentication.login({
           request: this.request,
           username: this.username,
           password: this.password
-        })
-          .catch(error => {
-            console.log(error);
-            this.errored = true;
-          })
-          .finally(() => (this.correct = true));
+        }).catch(error => {
+          console.log(error);
+          this.errored = true;
+        });
+        if (this.errored == false) {
+          this.correct = true;
+        }
         //this.$store.dispatch("setToken", response.data.token);
-        //this.$store.dispatch("setUser", response.data.user);
-      } else {
-        this.correct = false;
-      }
-      if (this.correct == "true") {
-        this.redirect;
+        else {
+          this.correct = false;
+        }
+        if (this.correct == true) {
+          this.$store.dispatch("setUser", this.username);
+          console.log("peni");
+          const sleep = milliseconds => {
+            return new Promise(resolve => setTimeout(resolve, milliseconds));
+          };
+          sleep(1500).then(() => {
+            this.redirect();
+          });
+        }
       }
     },
-    //method be broke idk y
     redirect() {
-      setTimeout(
-        this.$router.push({
-          name: "Home"
-        }),
-        2000
-      );
+      this.$router.push({
+        name: "Home"
+      });
     }
   }
 };
