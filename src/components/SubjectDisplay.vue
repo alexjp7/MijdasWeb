@@ -7,11 +7,18 @@
     </section>
 
     <section v-else>
-      <div v-if="loading">Loading...</div>
 	  <div class="col-container">
-	  	<div class="col-2"><h2  id="pageBreakHeading">Your Subjects</h2></div>
-	  	<div class="col-2 col-align-right"><span class="add-button">Add Subject</span></div>
+	  	<div class="col-2">
+			<h2  id="pageBreakHeading">Your Subjects</h2>
+		</div>
+	  	<div class="col-2 col-align-right">
+			<router-link to="/add-subject">
+				<v-btn text class="add-button">Add Subject</v-btn>
+				<!-- <span class="">Add Subject</span> -->
+			</router-link>
+		</div>
 	  </div>
+      <div v-if="loading">Loading...</div>
       <div class="cards" v-for="institution in institutions" v-bind:key="institution.id">
           <!-- <v-card-title  ></v-card-title> -->
         <div id="subjectBody">
@@ -101,13 +108,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 .col-2 {
 	width: 50%;
+	min-width: 50%;
 	display: flex;
 }
 .col-align-right {
-	align-items: right;
+	justify-content: flex-end;
 }
 .add-button {
 	margin-right: 3%;
+
 }
 </style>
 

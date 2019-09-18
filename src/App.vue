@@ -1,6 +1,7 @@
 <template>
   <v-app app>
-    <v-system-bar :flat="flat" color="primary"></v-system-bar>
+    <!-- <v-system-bar :flat="flat" color="primary"></v-system-bar> -->
+    <v-system-bar color="primary"></v-system-bar>
     <Navigation />
     <v-content>
       <v-container fluid>
