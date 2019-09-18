@@ -24,14 +24,11 @@
     </v-card>      
 </div>
 </template>
-
-
-
 <script>
  import UploadButton from 'vuetify-upload-button';
  import Subject from "@/services/Subject";
 export default {
-
+    name: "StudenLoader",
     data:() => ({
         fileName:"",
         students:[],
