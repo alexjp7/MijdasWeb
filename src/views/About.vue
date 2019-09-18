@@ -14,7 +14,8 @@ import StudentLoader from "@/components/StudentLoader.vue"
 export default {
   name: "about",
   components:{
-    SubjectDisplay,StudentLoader
+    SubjectDisplay,
+    StudentLoader
   }
 }
 </script>

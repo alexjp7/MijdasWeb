@@ -9,7 +9,7 @@
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <router-link to="/about">
-          <v-btn v-if="$store.state.isUserLoggedIn" text class="navText">About Us</v-btn>
+          <v-btn v-if="$store.state.isUserLoggedIn" text class="navText">Dashboard</v-btn>
         </router-link>
         <router-link to="/login">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Login</v-btn>

@@ -7,9 +7,9 @@
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer color="trim">
-      <div id="homeFooter">
-        <p>Mijdas Tech 2019. All rights reserved.</p>
+    <v-footer id="footer" color="trim">
+      <div class="inner-container">
+        <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
       </div>
     </v-footer>
   </v-app>
@@ -41,10 +41,12 @@ export default {
 #divider {
   margin: 3vw;
 }
-#homeFooter {
-  min-height: 2vw;
+#footer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+#footer .inner-container {
   width: 100vw;
-  color: white !important;
-  text-align: center !important;
+  color: rgb(85, 85, 85) !important;
 }
 </style>

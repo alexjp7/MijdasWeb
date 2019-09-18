@@ -113,7 +113,7 @@ export default {
     },
     redirect() {
       this.$router.push({
-        name: "Home"
+        name: "about"
       });
     }
   }
