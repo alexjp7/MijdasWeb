@@ -5,6 +5,7 @@ import Home from "@/views/Home.vue";
 //Components
 import SubjectDisplay from "@/components/SubjectDisplay";
 import Navigation from "@/components/Navigation";
+import AddSubject from "@/components/AddSubject.vue";
 /**
  * Create the routes for the views
  * Note that these maybe nested to serve possible purpose
@@ -81,6 +82,11 @@ export default new Router({
       name: "Settings",
       component: () => import("./views/Settings.vue")
     },
+    {
+      path: "/add-subject",
+      name: "AddSuject",
+      component: () => import("./views/AddSubject.vue")
+    },
 
     /**************
      * COMPONENTS
@@ -95,7 +101,9 @@ export default new Router({
       path: "/SubjectDisplay",
       name: "SubjectDisplay",
       component: SubjectDisplay
-    } /*
+    }
+    
+    /*
 
     }
 
