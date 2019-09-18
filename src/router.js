@@ -5,6 +5,8 @@ import Home from "@/views/Home.vue";
 //Components
 import SubjectDisplay from "@/components/SubjectDisplay";
 import Navigation from "@/components/Navigation";
+import { Store } from "vuex";
+// import store from "./store";
 /**
  * Create the routes for the views
  * Note that these maybe nested to serve possible purpose
@@ -26,9 +28,24 @@ export default new Router({
       component: Home
     },
     {
-      path: "/about",
-      name: "about",
-      component: () => import("./views/About.vue")
+      path: "/dashboard",
+      name: "dashboard",
+      component: () => import("./views/Dashboard.vue")
+
+      // async beforeRouteLeave(to, from, next) {
+      //   try {
+      //     var hasPermission = await Store.state("isUserLoggedIn");
+      //     console.log("hello");
+      //     if (hasPermission) {
+      //       next();
+      //     }
+      //   } catch (e) {
+      //     next({
+      //       name: "home",
+      //       query: { redirectFrom: to.fullPath }
+      //     });
+      //   }
+      // }
     },
     {
       path: "/login",
@@ -39,46 +56,41 @@ export default new Router({
       }
     },
     {
-      path: "/Announcements",
-      name: "Announcements",
+      path: "/announcements",
+      name: "announcements",
       component: () => import("./views/Announcements.vue")
     },
     {
-      path: "/Calendar",
-      name: "Calendar",
+      path: "/calendar",
+      name: "calendar",
       component: () => import("./views/Calendar.vue")
     },
     {
-      path: "/Criteria",
-      name: "Criteria",
+      path: "/criteria",
+      name: "criteria",
       component: () => import("./views/Criteria.vue")
     },
     {
-      path: "/JobBoard",
-      name: "JobBoard",
+      path: "/jobboard",
+      name: "jobboard",
       component: () => import("./views/JobBoard.vue")
     },
     {
-      path: "/Logout",
-      name: "Logout",
-      component: () => import("./views/Logout.vue")
-    },
-    {
-      path: "/Register",
-      name: "Register",
+      path: "/register",
+      name: "register",
       component: () => import("./views/Register.vue"),
       meta: {
         guest: true
       }
     },
     {
-      path: "/Profile",
-      name: "Profile",
+      path: "/profile",
+      name: "profile",
       component: () => import("./views/Profile.vue")
     },
     {
-      path: "/Settings",
-      name: "Settings",
+      path: "/settings",
+      name: "settings",
       component: () => import("./views/Settings.vue")
     },
 
@@ -87,13 +99,13 @@ export default new Router({
      **************/
 
     {
-      path: "/Navigation",
-      name: "Navigation",
+      path: "/navigation",
+      name: "navigation",
       component: Navigation
     },
     {
-      path: "/SubjectDisplay",
-      name: "SubjectDisplay",
+      path: "/subjectDisplay",
+      name: "subjectDisplay",
       component: SubjectDisplay
     } /*
 
@@ -108,6 +120,20 @@ export default new Router({
       meta: {
         requiresAuth: true,
         is_admin: true
-      }*/
+      },
+      async beforeEnter(to, from, next) {
+        try {
+          var hasPermission = await Store.state("isUserLoggedIn");
+          if (hasPermission) {
+            next();
+          }
+        } catch (e) {
+          next({
+            name: "login",
+            query: { redirectFrom: to.fullPath }
+          });
+        }
+      }
+      */
   ]
 });

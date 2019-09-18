@@ -3,7 +3,7 @@
   display: inline-blockinline-block;
   margin: 5%;
 }
-form {
+v-form {
   width: 50vw;
   margin-left: 25vw;
 }
@@ -102,18 +102,18 @@ export default {
         if (this.correct == true) {
           this.$store.dispatch("setUser", this.username);
           console.log("peni");
-          const sleep = milliseconds => {
-            return new Promise(resolve => setTimeout(resolve, milliseconds));
-          };
-          sleep(1500).then(() => {
-            this.redirect();
-          });
+          // const sleep = milliseconds => {
+          //   return new Promise(resolve => setTimeout(resolve, milliseconds));
+          // };
+          // sleep(1500).then(() => {
+          this.redirect();
+          // });
         }
       }
     },
     redirect() {
       this.$router.push({
-        name: "about"
+        name: "dashboard"
       });
     }
   }

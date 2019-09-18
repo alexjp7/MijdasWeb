@@ -1,15 +1,21 @@
 <template>
   <v-app app>
-    <v-system-bar :flat="flat" color="primary"></v-system-bar>
+    <v-system-bar :flat="flat" color="white"></v-system-bar>
     <Navigation />
+    <div v-if="$store.state.isUserLoggedIn">
+      <Drawer />
+    </div>
     <v-content>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
-    <v-footer id="footer" color="trim">
+    <v-footer id="footer" color="background">
       <div class="inner-container">
         <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
+        <a href src="https://mijdas.com/">
+          <v-btn text class="navText" style="text-align:right">About Us</v-btn>
+        </a>
       </div>
     </v-footer>
   </v-app>
@@ -17,11 +23,13 @@
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import Drawer from "@/components/Drawer.vue";
 
 export default {
   name: "app",
   components: {
-    Navigation
+    Navigation,
+    Drawer
   }
 };
 </script>
@@ -33,7 +41,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #e1e2e1;
+  background-color: white;
 }
 .danger-alert {
   color: red;
@@ -47,6 +55,6 @@ export default {
 }
 #footer .inner-container {
   width: 100vw;
-  color: rgb(85, 85, 85) !important;
+  /* color: rgb(255, 255, 255) !important; */
 }
 </style>
