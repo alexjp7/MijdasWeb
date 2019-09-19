@@ -2,9 +2,6 @@
   <v-app app>
     <v-system-bar :flat="flat" color="white"></v-system-bar>
     <Navigation />
-    <!-- <div v-if="$store.state.isUserLoggedIn">
-      <Drawer />
-    </div>-->
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -20,13 +17,11 @@
 
 <script>
 import Navigation from "@/components/Navigation.vue";
-import Drawer from "@/components/Drawer.vue";
 
 export default {
   name: "app",
   components: {
-    Navigation,
-    Drawer
+    Navigation
   }
 };
 </script>
