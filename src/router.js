@@ -5,7 +5,7 @@ import Home from "@/views/Home.vue";
 //Components
 import SubjectDisplay from "@/components/SubjectDisplay";
 import Navigation from "@/components/Navigation";
-import { Store } from "vuex";
+// import { Store } from "vuex";
 // import store from "./store";
 /**
  * Create the routes for the views
@@ -16,6 +16,13 @@ import { Store } from "vuex";
 Vue.use(Router);
 
 export default new Router({
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return { x: 0, y: 0 };
+  },
+
   mode: "history",
   base: process.env.BASE_URL,
   routes: [

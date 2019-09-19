@@ -2,9 +2,9 @@
   <v-app app>
     <v-system-bar :flat="flat" color="white"></v-system-bar>
     <Navigation />
-    <div v-if="$store.state.isUserLoggedIn">
+    <!-- <div v-if="$store.state.isUserLoggedIn">
       <Drawer />
-    </div>
+    </div>-->
     <v-content>
       <v-container fluid>
         <router-view></router-view>
@@ -13,9 +13,6 @@
     <v-footer id="footer" color="background">
       <div class="inner-container">
         <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
-        <a href src="https://mijdas.com/">
-          <v-btn text class="navText" style="text-align:right">About Us</v-btn>
-        </a>
       </div>
     </v-footer>
   </v-app>
@@ -58,4 +55,8 @@ export default {
   /* color: rgb(255, 255, 255) !important; */
 }
 </style>
-<style> *{ text-transform: none !important; } </style>
+<style>
+* {
+  text-transform: none !important;
+}
+</style>
