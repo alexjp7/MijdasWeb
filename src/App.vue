@@ -58,3 +58,4 @@ export default {
   /* color: rgb(255, 255, 255) !important; */
 }
 </style>
+<style> *{ text-transform: none !important; } </style>

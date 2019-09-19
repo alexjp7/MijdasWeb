@@ -6,5 +6,14 @@ export default {
   },
   addStudents(credentials) {
     return Api().post("subject/", credentials);
+  },
+  addStaffMember(credentials){
+    return Api().post("subject/",credentials);
+  },
+  getTutors(credentials){
+    return Api().post("subject/",credentials);
+  },
+  removeStaff(credentials){
+    return Api().post("subject/",credentials);
   }
 };
