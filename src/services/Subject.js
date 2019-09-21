@@ -7,6 +7,9 @@ export default {
   addStudents(credentials) {
     return Api().post("subject/", credentials);
   },
+  getStudents(credentials) {
+    return Api().post("subject/", credentials);
+  },
   addStaffMember(credentials){
     return Api().post("subject/",credentials);
   },

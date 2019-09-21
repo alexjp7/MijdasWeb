@@ -5,15 +5,18 @@
     </section>
 
     <section v-else>
-      <div v-if="loading">Loading...</div>
-      <div class="col-container">
-        <div class="col-2">
-          <h2 id="pageBreakHeading">Your Subjects</h2>
+      <v-card color="secondary" >
+        <div v-if="loading">Loading...</div>
+        <div class="col-container">
+          <div class="col-2">
+            <h2 id="pageBreakHeading">Your Subjects</h2>
+          </div>
+          <v-spacer></v-spacer>
+          <div class="col-2 col-align-right">
+            <span class="add-button">Add Subject</span>
+          </div>
         </div>
-        <div class="col-2 col-align-right">
-          <span class="add-button">Add Subject</span>
-        </div>
-      </div>
+      </v-card>
       <div class="cards" v-for="institution in institutions" v-bind:key="institution.id">
         <!-- <v-card-title  ></v-card-title> -->
         <div id="subjectBody">
@@ -88,11 +91,9 @@ export default {
   padding: 30%;
 }
 #pageBreakHeading {
-  text-align: left;
-  margin-left: 3%;
-  padding-top: 1%;
-  font-size: 30px;
-  color: #333;
+      padding:1%;
+      display:flex;
+      color:white;
 }
 h1,
 h2,
@@ -122,5 +123,6 @@ h6 {
 .add-button {
   margin-right: 3%;
 }
+
 </style>
 

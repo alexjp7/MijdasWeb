@@ -1,9 +1,11 @@
 <template>
   <div id="StudentLoader">
-    <v-card>
-      <v-card-title>
-        <h2 id="pageBreakHeading">Students</h2>
+    <v-card color="secondary"  >
+      <v-card-title  >
+        <span id="pageBreakHeading"><h2 >Student Import</h2></span>
       </v-card-title>
+    </v-card>
+    <v-card>
       <v-card-actions>
         <div id="uploader">
           <upload-btn icon @file-update="readFileInput">
@@ -20,6 +22,7 @@
           <v-btn block @click="submitStudents" color="secondary">Submit</v-btn>
         </v-card-actions>
       </div>
+      
     </v-card>
   </div>
 </template>
@@ -32,13 +35,13 @@ export default {
     students: [],
     hasValidFile: false,
     request: "ADD_STUDENTS",
-    subject_id: 1
+    subject_id: 2
   }),
   components: {
     "upload-btn": UploadButton
   },
   methods: {
-    readFileInput(file) {
+    readFileInput(file) { 
       const reader = new FileReader();
       reader.onload = e => (this.students = e.target.result.split(","));
       reader.readAsText(file);
@@ -75,5 +78,11 @@ export default {
   font-weight: bold;
   text-align: center !important;
   font-style: italic;
+}
+#pageBreakHeading {
+      padding:1%;
+      width:100%;
+      text-align:left;
+      color:white;
 }
 </style>

@@ -1,8 +1,18 @@
 <template>
-    <v-card id="staffLinker">
-        <v-card-title id="pageBreakHeading">
-            <h2>Teaching Staff</h2>
+    <div id="staffLinker">
+    <v-card  color="secondary">
+        <v-card-title class="pageBreakHeading">
+            <span id="teachingStaffHeading">
+                <h2>Teaching Staff</h2>
+            </span>
+                 <v-spacer></v-spacer>
+                <v-card-action>
+                    <v-btn  @click="getStaff" color=secondary>
+                        <v-icon>mdi-refresh</v-icon> 
+                    </v-btn>
+                </v-card-action>
         </v-card-title>
+    </v-card>
         <hr>
         <div v-if = "teachingStaff == null">
          <v-card>
@@ -12,16 +22,17 @@
         </div>
         <div v-else>
         <!-- Populate Existing Staff Members --> 
+        <v-card>
             <div  id = "staffCards" v-for="staff in teachingStaff" v-bind:key="staff">
                 <v-card id="currentStaff">
-                <v-icon>mdi-account</v-icon> <span class ="staffName"> {{staff}}</span>
-                <v-spacer></v-spacer>
-                <v-btn @click="removeStaff(staff)">
-                    <v-icon>mdi-delete</v-icon>
-                </v-btn>
-                    
+                    <span class ="staffName"><v-icon>mdi-account</v-icon> <h4> {{staff}} </h4></span>
+                    <v-spacer></v-spacer>
+                    <v-btn @click="removeStaff(staff)">
+                        <v-icon>mdi-delete</v-icon>
+                    </v-btn>      
                 </v-card>
-            </div>    
+            </div> 
+        </v-card>   
         </div>
         <h3  id="pageBreakHeading" align="left" >Search By Username</h3>
         <div id="searchComponent">
@@ -53,7 +64,7 @@
                     </v-card>
                 </div>
             </div>
-    </v-card>
+        </div>
 </template>
 
 <script>
@@ -108,9 +119,10 @@ export default {
                 "request":"ADD_TUTOR",
                 "tutors": [this.searchString],
                 "subject_id":this.subjectCode
-            }).then().then(this.getStaff()).catch(error => console.log(response));
+            }).catch(error => console.log(response));
+            this.getStaff();
+            this.searchString="";
         },
-        
         //Makes an asyncronous call to popualte linked staff members
         async getStaff() {
             Subject.getTutors({
@@ -127,24 +139,26 @@ export default {
                 "request": "REMOVE_TUTOR",
                 "subject_id": this.subjectCode,
                 "tutor_username": staff
-            }).finally(this.getStaff()); 
-    
-      
+            }).then().finally(this.getStaff()); 
         }
     },
-    async mounted(){
+    async created(){
         this.getStaff()
     }
 }
 </script>
 
 <style>
-    #pageBreakHeading {
+    .pageBreakHeading {
         padding:1%;
+        display:flex;
+        color:white;
+    }
+    #teachingStaffHeading {
+        display: inline-flex;
     }
     #staffLinker {
         border:1px;
-        padding:1%;
         max-width: 100%;
         display:block;
         margin-left: 10%;
@@ -165,20 +179,18 @@ export default {
     }
     #currentStaff {
         text-align:left;
-        margin: 1%;
+        margin: .5%;
         padding: 1%;
-        border-style: solid;
-        border-color: black;
-        border-width: 1px;
         display: flex !important;
         max-width: 100%;
         
     }
     .staffName {
         padding-left: 1%;
-        font-size: 15px !important;
+        font-size: 1em !important;
         font-style: bold;
-        max-width: 100%;
+        min-width: 80%;
+        display: -webkit-inline-box;
     }
     #staffCards {
      
