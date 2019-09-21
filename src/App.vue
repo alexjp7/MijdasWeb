@@ -1,27 +1,69 @@
 <template>
   <v-app app>
-    <v-system-bar :flat="flat" color="white"></v-system-bar>
-    <Navigation />
-    <v-content>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
-    <v-footer id="footer" color="background">
-      <div class="inner-container">
-        <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
-      </div>
-    </v-footer>
+    <div v-scroll="handleScroll">
+      <v-system-bar :flat="flat" color="white"></v-system-bar>
+      <Navigation />
+      <v-content>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
+      </v-content>
+      <v-btn
+        id="scrollToTopButton"
+        class="md-5 mr-3 elevation-21"
+        dark
+        fab
+        append
+        button
+        bottom
+        style="visibility: hidden"
+        right
+        color="primary"
+        fixed
+        @click="scrollToTop"
+      >
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+
+      <v-footer id="footer" color="background">
+        <div class="inner-container">
+          <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
+        </div>
+      </v-footer>
+    </div>
   </v-app>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import { log } from "util";
 
 export default {
   name: "app",
   components: {
     Navigation
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+    },
+    handleScroll: function(evt, el) {
+      if (window.scrollY > 150) {
+        document.getElementById("scrollToTopButton").style.visibility =
+          "visible";
+      } else {
+        document.getElementById("scrollToTopButton").style.visibility =
+          "hidden";
+      }
+      return window.scrollY < 149;
+    }
   }
 };
 </script>

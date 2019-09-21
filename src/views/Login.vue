@@ -101,7 +101,6 @@ export default {
         }
         if (this.correct == true) {
           this.$store.dispatch("setUser", this.username);
-          console.log("peni");
           // const sleep = milliseconds => {
           //   return new Promise(resolve => setTimeout(resolve, milliseconds));
           // };
