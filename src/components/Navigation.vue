@@ -1,6 +1,7 @@
 <template>
   <nav>
     <div v-if="$store.state.isUserLoggedIn">
+      <!----------- Navigation Drawer - Side Bar ----------------->
       <v-navigation-drawer
         id="app-drawer"
         v-model="drawer"
@@ -30,6 +31,23 @@
           <!-- Bug in Vuetify for first child of v-list not receiving proper border-radius -->
           <div />
 
+
+<!--------------------------- The comment out below is messing around for accordian/dropdown for dashboard link to display like subjects or assessments etc --------------------------------->
+          <!-- <v-list-group no-action sub-group value="true">
+            <template v-slot:activator>
+              <v-list-item-content>
+                <v-list-item-title></v-list-item-title>
+              </v-list-item-content>
+            </template>
+
+            <v-list-item v-for="(dashboard, i) in dashboards" :key="i" link>
+              <v-list-item-title v-text="dashboard[0]"></v-list-item-title>
+              <v-list-item-icon>
+                <v-icon v-text="dashboard[1]"></v-icon>
+              </v-list-item-icon>
+            </v-list-item>
+          </v-list-group> -->
+
           <v-list-item
             v-for="(link, i) in links"
             :key="i"
@@ -58,8 +76,9 @@
       </v-navigation-drawer>
     </div>
 
+    <!----------------------- Top Navigation ------------------------------------->
     <v-toolbar :extended="extended" :flat="flat" color="white">
-      <v-toolbar-title class="tertiary--text font-weight-light align-self-center">{{ title }}</v-toolbar-title>
+      <v-toolbar-title class="tertiary--text font-weight-light align-self-center">MarkIt</v-toolbar-title>
       <v-btn
         v-if="$store.state.isUserLoggedIn"
         depressed
@@ -74,6 +93,9 @@
         <router-link to="/">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Home</v-btn>
         </router-link>
+        <router-link to="/Criteria">
+          <v-btn text class="navText">Criteria Test</v-btn>
+        </router-link>
         <router-link to="/login">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Login</v-btn>
         </router-link>
@@ -87,6 +109,15 @@
     </v-toolbar>
   </nav>
 </template>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------
+-- |
+-- | We have two types of nav bars: `top nav && side nav.`
+-- | We also need to decide on where we place what certain links, such as:
+-- | Nav-bar: about, profile, calendar, settings etc
+-- | Side-nav: subjects, assessments, criteria, tutors etc
+-- |
+--------------------------------------------------------------------------------------------------------------------------------------------->
 
 <script>
 export default {
