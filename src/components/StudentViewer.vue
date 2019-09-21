@@ -2,17 +2,32 @@
     <div id="StudentLoader">
         <v-card  color="secondary">
             <v-card-title>
-                <span id="pageBreakHeading"><h2  style="color:white;">Students</h2></span>
+                <span id="pageBreakHeading">
+                    <h2  style="color:white;">Students</h2>
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                        v-model="studentSearch" 
+                        class = "searchBar"
+                        label="Search Student">
+                    </v-text-field>
+                <v-card-action>
+                <v-btn  @click="getStudents" color=secondary>
+                    <v-icon>mdi-refresh</v-icon> 
+                </v-btn>
+                </v-card-action>
+            </span>
             </v-card-title>
-            <v-data-table
-   
+            <v-data-table  
             :headers="headers"
             :items="students"
             :items-per-page="5"
+            :search="studentSearch"
             class="elevation-1"
             id="studentTable">
          </v-data-table>
+         
         </v-card>
+        
     </div>
 </template>
 
@@ -23,14 +38,21 @@ export default {
     data: () => ({
         subject_id :1,
         students:[],
-        headers:[],   
+        headers:[],
+        studentSearch:""   
     }),
-    async mounted() {
-        Subject.getStudents({
+    methods: {
+        //Returns the API response of student data per subject
+        async getStudents() {
+
+            Subject.getStudents({
             //Popualte students
             request:"VIEW_STUDENTS_BY_SUBJECT",
             subject_id: this.subject_id
         }).then(response => { 
+           //Reset values of students and headers, in the case of repeated calls (through refresh)
+            this.students = [];
+            this.headers = [];
             //Bind head for student ID 
             this.students = response.data    
             this.headers.push({
@@ -51,9 +73,15 @@ export default {
                     });
                 }
             }
+        }).catch( error => {
+            console.log(error);
         });
+        }
+    },
+    //On Page mount, populate table with student data
+    async mounted() {
+       this.getStudents();
     }
-    
 }
 </script>
 
@@ -62,6 +90,7 @@ export default {
       padding:1%;
       width:100%;
       text-align:left;
+      display:flex;
 }
 #StudentLoader {
   margin-left: 10%;
@@ -71,5 +100,11 @@ export default {
 }
  .v-data-footer {
     background-color: #2196F3 !important;
+}
+.searchBar {
+    padding:1%;
+    max-width: 25%;
+    background-color: white;
+    height:3.2vh;
 }
 </style>
