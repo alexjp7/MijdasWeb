@@ -101,9 +101,11 @@
         <router-link to="/register">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Register</v-btn>
         </router-link>
-        <a href src="https://mijdas.com/">
-          <v-btn text class="navText" style="text-align:right">About Us</v-btn>
-        </a>
+        <BreadcrumbItem>
+          <a href="https://mijdas.com/" target="_blank">
+            <v-btn text class="navText" style="text-align:right">About Us</v-btn>
+          </a>
+        </BreadcrumbItem>
       </v-toolbar>
     </v-app-bar>
   </nav>

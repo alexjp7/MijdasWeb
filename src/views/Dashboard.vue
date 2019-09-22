@@ -37,14 +37,14 @@
 
 <script>
 import SubjectDisplay from "@/components/SubjectDisplay.vue";
-import StudentLoader from "@/components/StudentLoader.vue";
+// import StudentLoader from "@/components/StudentLoader.vue";
 import StaffLinker from "@/components/StaffLinker.vue";
 import StudentViewer from "@/components/StudentViewer.vue";
 export default {
   name: "dashboard",
   components: {
     SubjectDisplay,
-    StudentLoader,
+    // StudentLoader,
     StaffLinker,
     StudentViewer
   }
