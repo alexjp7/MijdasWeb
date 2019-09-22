@@ -12,8 +12,15 @@
             <h2 id="pageBreakHeading">Your Subjects</h2>
           </div>
           <v-spacer></v-spacer>
-          <div class="col-2 col-align-right">
-            <span class="add-button">Add Subject</span>
+          <div class="col-1 col-align-right">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" color="secondary">
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
+              </template>
+              <span>Add Subject</span>
+            </v-tooltip>
           </div>
         </div>
       </v-card>
@@ -33,7 +40,6 @@
                   block
                   color="secondary"
                   light
-                  @click="subjectClicked"
                 >{{subject.subject_code}}</v-btn>
               </v-expansion-panel-header>
 
@@ -41,10 +47,10 @@
               <v-expansion-panel-content>
                 <v-row>
                   <v-col cols="6">
-                    <v-btn color="secondary" block>Teaching Staff</v-btn>
+                    <v-btn color="secondary" block @click="teachingStaffClicked">Teaching Staff</v-btn>
                   </v-col>
                   <v-col cols="6">
-                    <v-btn color="secondary" block>Students</v-btn>
+                    <v-btn color="secondary" block @click="studentsClicked">Students</v-btn>
                   </v-col>
                 </v-row>
                 <v-expansion-panel>
@@ -67,6 +73,7 @@
 <script>
 import Subject from "@/services/Subject";
 import Assessment from "@/components/Assessments.vue";
+
 export default {
   components: {
     Assessment
@@ -77,7 +84,8 @@ export default {
     username: null,
     institutions: null,
     loading: true,
-    errored: false
+    errored: false,
+    dialog: false
   }),
   async mounted() {
     this.username = this.$store.state.user;
@@ -96,10 +104,16 @@ export default {
       .finally(() => (this.loading = false));
   },
   method: {
-    subjectClicked() {
-      console.log("SubjectClicked");
+    teachingStaffClicked() {
+      console.log("teststaff");
       this.$router.push({
-        name: "assessments"
+        name: "teachingStaff"
+      });
+    },
+    studentsClicked() {
+      console.log("teststud");
+      this.$router.push({
+        name: "students"
       });
     }
   }

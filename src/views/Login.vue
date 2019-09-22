@@ -10,7 +10,7 @@ v-form {
 </style>
 
 <template>
-  <div>
+  <div style="margin-left: 25vw">
     <v-container fluid>
       <v-flex xs6 offset-xs3 id="fields">
         <panel title="Login">
