@@ -3,13 +3,9 @@
     <div v-scroll="handleScroll">
       <v-system-bar :flat="flat" color="white"></v-system-bar>
       <Navigation />
-      <br />
-      <br />
-      <br />
+
       <v-content>
-        <v-container fluid>
           <router-view></router-view>
-        </v-container>
       </v-content>
       <v-btn
         id="scrollToTopButton"
@@ -27,8 +23,6 @@
       >
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
-      <br />
-      <br />
       <v-footer id="footer" color="background" bottom absolute>
         <div class="inner-container">
           <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
@@ -79,7 +73,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: white;
+
 }
 .danger-alert {
   color: red;
@@ -92,8 +86,10 @@ export default {
   padding-bottom: 10px;
 }
 #footer .inner-container {
-  width: 100vw;
   /* color: rgb(255, 255, 255) !important; */
+}
+.inner-container {
+  width:100% ;
 }
 </style>
 <style>
