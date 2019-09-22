@@ -1,7 +1,10 @@
 import Api from "@/services/Api";
 
 export default {
-  subjects(credentials) {
-    return Api().post("subject/", credentials);
+  getAssessments(credentials) {
+    return Api().post("assessment/", credentials);
+  },
+  createAssessments(credentials) {
+    return Api().post("assessment/", credentials);
   }
 };

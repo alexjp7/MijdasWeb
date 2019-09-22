@@ -12,6 +12,7 @@
         floating
         mobile-break-point="991"
         persistent
+        fixed
         width="260"
       >
         <template v-slot:img="attrs">
@@ -31,8 +32,7 @@
           <!-- Bug in Vuetify for first child of v-list not receiving proper border-radius -->
           <div />
 
-
-<!--------------------------- The comment out below is messing around for accordian/dropdown for dashboard link to display like subjects or assessments etc --------------------------------->
+          <!--------------------------- The comment out below is messing around for accordian/dropdown for dashboard link to display like subjects or assessments etc --------------------------------->
           <!-- <v-list-group no-action sub-group value="true">
             <template v-slot:activator>
               <v-list-item-content>
@@ -46,7 +46,7 @@
                 <v-icon v-text="dashboard[1]"></v-icon>
               </v-list-item-icon>
             </v-list-item>
-          </v-list-group> -->
+          </v-list-group>-->
 
           <v-list-item
             v-for="(link, i) in links"
@@ -77,19 +77,18 @@
     </div>
 
     <!----------------------- Top Navigation ------------------------------------->
-    <v-toolbar :extended="extended" :flat="flat" color="white">
-      <v-toolbar-title class="tertiary--text font-weight-light align-self-center">MarkIt</v-toolbar-title>
-      <v-btn
-        v-if="$store.state.isUserLoggedIn"
-        depressed
-        tile
-        class="grey--text"
-        @click="drawer = !drawer"
-      >
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
+    <v-app-bar fixed="true" hide-on-scroll="true">
+      <v-toolbar :flat="flat" color="white" floating="true">
+        <v-btn
+          v-if="$store.state.isUserLoggedIn"
+          depressed
+          tile
+          class="grey--text"
+          @click="drawer = !drawer"
+        >
+          <v-icon>mdi-menu</v-icon>
+        </v-btn>
+        <v-spacer></v-spacer>
         <router-link to="/">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Home</v-btn>
         </router-link>
@@ -105,8 +104,8 @@
         <a href src="https://mijdas.com/">
           <v-btn text class="navText" style="text-align:right">About Us</v-btn>
         </a>
-      </v-toolbar-items>
-    </v-toolbar>
+      </v-toolbar>
+    </v-app-bar>
   </nav>
 </template>
 

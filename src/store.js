@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     // token: null,
     user: null,
-    isUserLoggedIn: false
+    isUserLoggedIn: false,
+    subject: null
   },
   mutations: {
     // setToken(state, token) {

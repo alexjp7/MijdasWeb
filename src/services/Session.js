@@ -1,7 +1,7 @@
 import Api from "@/services/Api";
 
 export default {
-    getStudents(credentials) {
+  getStudents(credentials) {
     return Api().post("session/", credentials);
-    }
+  }
 };

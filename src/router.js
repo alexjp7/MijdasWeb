@@ -114,7 +114,13 @@ export default new Router({
       path: "/subjectDisplay",
       name: "subjectDisplay",
       component: SubjectDisplay
-    } /*
+    },
+    {
+      path: "/assessments",
+      name: "assessments",
+      component: () => import("./components/Assessments.vue")
+    }
+    /*
 
     }
 

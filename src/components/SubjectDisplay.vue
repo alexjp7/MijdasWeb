@@ -5,7 +5,7 @@
     </section>
 
     <section v-else>
-      <v-card color="secondary" >
+      <v-card color="secondary">
         <div v-if="loading">Loading...</div>
         <div class="col-container">
           <div class="col-2">
@@ -17,24 +17,47 @@
           </div>
         </div>
       </v-card>
+
       <div class="cards" v-for="institution in institutions" v-bind:key="institution.id">
         <!-- <v-card-title  ></v-card-title> -->
         <div id="subjectBody">
-          <v-card>
-            <h1>{{institution.institution}}</h1>
-            <div v-for="subject in institution.subjects" v-bind:key="subject.id">
+          <h1>{{institution.institution}}</h1>
+
+          <v-expansion-panels accordion="true" focusable light multiple>
+            <v-expansion-panel v-for="subject in institution.subjects" v-bind:key="subject.id">
               <!-- Children nodes with clickable space-->
-              <v-card-actions>
+              <v-expansion-panel-header>
                 <v-btn
                   x-large
                   class="subjects"
                   block
                   color="secondary"
                   light
+                  @click="subjectClicked"
                 >{{subject.subject_code}}</v-btn>
-              </v-card-actions>
-            </div>
-          </v-card>
+              </v-expansion-panel-header>
+
+              <!-- <h3>Assessments</h3> -->
+              <v-expansion-panel-content>
+                <v-row>
+                  <v-col cols="6">
+                    <v-btn color="secondary" block>Teaching Staff</v-btn>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn color="secondary" block>Students</v-btn>
+                  </v-col>
+                </v-row>
+                <v-expansion-panel>
+                  <v-expansion-panel-header>
+                    <h3 style="text-align: center">Assessments</h3>
+                  </v-expansion-panel-header>
+                  <v-expansion-panel-content>
+                    <Assessment :subjectID="subject.id" />
+                  </v-expansion-panel-content>
+                </v-expansion-panel>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </div>
       </div>
     </section>
@@ -43,11 +66,14 @@
 
 <script>
 import Subject from "@/services/Subject";
+import Assessment from "@/components/Assessments.vue";
 export default {
+  components: {
+    Assessment
+  },
   name: "SubjectDisplay",
   data: () => ({
     request: "VIEW_OWNED_SUBJECTS",
-    // username: "st111",
     username: null,
     institutions: null,
     loading: true,
@@ -68,6 +94,14 @@ export default {
         this.errored = true;
       })
       .finally(() => (this.loading = false));
+  },
+  method: {
+    subjectClicked() {
+      console.log("SubjectClicked");
+      this.$router.push({
+        name: "assessments"
+      });
+    }
   }
 };
 </script>
@@ -91,9 +125,9 @@ export default {
   padding: 30%;
 }
 #pageBreakHeading {
-      padding:1%;
-      display:flex;
-      color:white;
+  padding: 1%;
+  display: flex;
+  color: white;
 }
 h1,
 h2,
@@ -122,7 +156,7 @@ h6 {
 }
 .add-button {
   margin-right: 3%;
+  color: white;
 }
-
 </style>
 

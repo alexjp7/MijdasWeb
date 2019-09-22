@@ -1,11 +1,21 @@
 <template>
-  <div class="home"></div>
-
+  <div class="home">
+    <h1>meme?</h1>
+  </div>
 </template>
 
 <script>
 export default {
-  components: {
+  components: {},
+  data() {
+    return {};
   },
+  methods: {}
 };
 </script>
+
+<style scoped>
+.home {
+  background-color: accent;
+}
+</style>
