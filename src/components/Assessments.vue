@@ -12,7 +12,13 @@
           <!-- Children nodes with clickable space-->
 
           <v-card-actions>
-            <v-btn class="assessments" block color="secondary" light>{{assessment.name}}</v-btn>
+            <v-btn
+              class="assessments"
+              block
+              color="secondary"
+              light
+              @click="assessmentClicked"
+            >{{assessment.name}}</v-btn>
           </v-card-actions>
         </div>
       </v-card>
@@ -28,15 +34,13 @@ export default {
     return {
       request: "VIEW_ASSESSMENT",
       coordinatorCheck: true,
+      subjectID: "",
       assessmentsData: null,
       errored: false
     };
   },
-  props: {
-    subjectID: String
-  },
   async mounted() {
-    // this.subjectID = this.$store.state.user;
+    this.subjectID = this.$store.state.subject;
     const response = await Assessment.getAssessments({
       request: this.request,
       subject_id: this.subjectID,
@@ -51,7 +55,11 @@ export default {
         this.errored = true;
       });
   },
-  methods: {}
+  methods: {
+    // assessmentClicked() {
+    //   console.log("You clicked on assessment.");
+    // }
+  }
 };
 </script>
 

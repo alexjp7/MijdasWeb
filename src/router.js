@@ -105,6 +105,11 @@ export default new Router({
       name: "students",
       component: () => import("./views/Students.vue")
     },
+    {
+      path: "/teachingstaff",
+      name: "teachingstaffs",
+      component: () => import("./views/TeachingStaff.vue")
+    },
 
     /**************
      * COMPONENTS

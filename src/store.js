@@ -19,6 +19,9 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user;
       state.isUserLoggedIn = !!user;
+    },
+    setSubject(state, subject) {
+      state.subject = subject;
     }
   },
   actions: {
@@ -27,6 +30,9 @@ export default new Vuex.Store({
     // },
     setUser({ commit }, user) {
       commit("setUser", user);
+    },
+    setSubject({ commit }, subject) {
+      commit("setSubject", subject);
     }
   }
 });

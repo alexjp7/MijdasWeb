@@ -12,7 +12,7 @@
               <v-btn icon @click="searchClicked">
                 <v-icon color="white">mdi-magnify</v-icon>
               </v-btn>
-              <v-btn  @click="addClicked" color="white" icon>
+              <v-btn @click="addClicked" color="white" icon>
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
               <v-btn @click="getStudents" color="white" icon>
@@ -24,7 +24,7 @@
       </v-card-title>
       <!-- Search Bar -->
       <v-card v-if="hasClickedSearch == true">
-        <v-text-field 
+        <v-text-field
           solo
           autofocus="true"
           refs="search"
@@ -33,9 +33,9 @@
           clearable="true"
           v-model="studentSearch"
           prepend-inner-icon="mdi-magnify"
-          class="searchBar" 
-          label="Search">
-        </v-text-field> 
+          class="searchBar"
+          label="Search"
+        ></v-text-field>
       </v-card>
       <!-- Upload Tool -->
       <v-card v-if="hasClickedAdd == true">
@@ -44,32 +44,29 @@
             <div id="uploader">
               <upload-btn id="uploadButton" icon @file-update="readFileInput">
                 <template slot="icon">
-                  <v-icon color="white">mdi-cloud-upload</v-icon>
-                  &nbsp;<h3>Upload Students</h3>
+                  <v-icon color="white">mdi-cloud-upload</v-icon>&nbsp;
+                  <h3>Upload Students</h3>
                 </template>
               </upload-btn>
             </div>
           </v-card-actions>
-          <v-card   id="fileName" color="white">
-            {{fileName}}
-          </v-card>
-            <div v-if="hasValidFile == true">
-              <v-card-actions>
-                <v-btn block  @click="submitStudents" style="color:black;font-weight:bold;" color="accent">Submit</v-btn>
-              </v-card-actions>
-            </div>
+          <v-card id="fileName" color="white">{{fileName}}</v-card>
+          <div v-if="hasValidFile == true">
+            <v-card-actions>
+              <v-btn
+                block
+                @click="submitStudents"
+                style="color:black;font-weight:bold;"
+                color="accent"
+              >Submit</v-btn>
+            </v-card-actions>
+          </div>
         </v-card>
       </v-card>
-       <v-snackbar color = "green"
-      v-model="snackbar">
-       <p style="color:white;">{{snackBarMessage}}</p>
-      <v-btn
-        color="red"
-        text
-        @click="snackbar = false">
-      Close
-      </v-btn>
-    </v-snackbar>
+      <v-snackbar color="green" v-model="snackbar">
+        <p style="color:white;">{{snackBarMessage}}</p>
+        <v-btn color="red" text @click="snackbar = false">Close</v-btn>
+      </v-snackbar>
       <!-- Student Table -->
       <v-data-table
         :headers="headers"
@@ -89,9 +86,9 @@ import Subject from "@/services/Subject";
 import UploadButton from "vuetify-upload-button";
 export default {
   data: () => ({
-    snackBarMessage:"",
-    snackbar:false,
-    subject_id: 2,
+    snackBarMessage: "",
+    snackbar: false,
+    subject_id: "",
     /* Request arrays */
     studentsUploaded: [],
     studentsRetrieved: [],
@@ -100,9 +97,9 @@ export default {
     studentSearch: "",
     fileName: "",
     /* Flags */
-    hasClickedSearch:false,
+    hasClickedSearch: false,
     hasValidFile: false,
-    hasClickedAdd:false,
+    hasClickedAdd: false
   }),
   components: {
     "upload-btn": UploadButton
@@ -110,7 +107,7 @@ export default {
 
   methods: {
     /* File Uplaoder Tool */
-    readFileInput(file) { 
+    readFileInput(file) {
       const reader = new FileReader();
       reader.onload = e => (this.studentsUploaded = e.target.result.split(","));
       reader.readAsText(file);
@@ -120,6 +117,7 @@ export default {
     },
     /* API Handler for submiting student data */
     async submitStudents() {
+      this.subject_id = this.$store.state.subject;
       const response = await Subject.addStudents({
         request: "ADD_STUDENTS",
         students: this.studentsUploaded,
@@ -133,14 +131,15 @@ export default {
     /* Tool Bar toogles */
     searchClicked() {
       this.hasClickedAdd = false;
-      this.hasClickedSearch = ! this.hasClickedSearch;
+      this.hasClickedSearch = !this.hasClickedSearch;
     },
     addClicked() {
       this.hasClickedSearch = false;
-      this.hasClickedAdd = ! this.hasClickedAdd;
+      this.hasClickedAdd = !this.hasClickedAdd;
     },
     /* Table Population */
     async getStudents() {
+      this.subject_id = this.$store.state.subject;
       Sesssion.getStudents({
         //Popualte students
         request: "VIEW_STUDENTS_BY_SUBJECT",
@@ -185,12 +184,11 @@ export default {
 
 <style  scoped>
 #pageBreakHeading {
-  padding-left:1%;
-  padding-right:1%;
+  padding-left: 1%;
+  padding-right: 1%;
   width: 100%;
   text-align: left;
   display: flex;
-
 }
 #StudentLoader {
   margin-left: 10%;
@@ -199,16 +197,13 @@ export default {
   display: block;
 }
 
-
 .searchBar.v-input {
-
   max-height: 5vh;
   background-color: white;
-
 }
 
-.v-data-table-header{
-  font-weight: bold !important; 
+.v-data-table-header {
+  font-weight: bold !important;
 }
 
 #fileName {

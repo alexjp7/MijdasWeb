@@ -84,8 +84,11 @@ export default {
     hasMatch: false,
     hasQuery: false,
     staffSelection: "",
-    subjectCode: 1
+    subjectCode: ""
   }),
+  async mounted() {
+    // this.subjectCode = this.$store.state.subject;
+  },
   methods: {
     //Event Listener for handling keyboard input with searchbar
     onKey() {
@@ -121,16 +124,18 @@ export default {
     },
     //Takes the field from search bar, and adds that username
     async addStaff() {
+      this.subjectCode = this.$store.state.subject;
       Subject.addStaffMember({
         request: "ADD_TUTOR",
         tutors: [this.searchString],
         subject_id: this.subjectCode
       }).catch(error => console.log(response));
       this.getStaff();
-      this.searchString = "";
+      this.searchString = 1;
     },
     //Makes an asyncronous call to popualte linked staff members
     async getStaff() {
+      this.subjectCode = this.$store.state.subject;
       Subject.getTutors({
         request: "VIEW_TUTORS",
         subject_id: this.subjectCode
@@ -142,6 +147,7 @@ export default {
     },
     //Removes Tutor from subject and display
     async removeStaff(staff) {
+      this.subjectCode = this.$store.state.subject;
       Subject.removeStaff({
         request: "REMOVE_TUTOR",
         subject_id: this.subjectCode,

@@ -92,7 +92,7 @@
         <router-link to="/">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Home</v-btn>
         </router-link>
-        <router-link to="/Criteria">
+        <router-link to="/criteria">
           <v-btn text class="navText">Criteria Test</v-btn>
         </router-link>
         <router-link to="/login">

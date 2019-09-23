@@ -3,7 +3,6 @@
     <section v-if="errored">
       <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
     </section>
-
     <section v-else>
       <v-card color="secondary">
         <div v-if="loading">Loading...</div>
@@ -30,7 +29,7 @@
         <div id="subjectBody">
           <h1>{{institution.institution}}</h1>
 
-          <v-expansion-panels accordion="true" focusable light multiple>
+          <v-expansion-panels accordion="true" focusable light>
             <v-expansion-panel v-for="subject in institution.subjects" v-bind:key="subject.id">
               <!-- Children nodes with clickable space-->
               <v-expansion-panel-header>
@@ -45,22 +44,52 @@
 
               <!-- <h3>Assessments</h3> -->
               <v-expansion-panel-content>
-                <v-row>
-                  <v-col cols="6">
-                    <v-btn color="secondary" block @click="teachingStaffClicked">Teaching Staff</v-btn>
-                  </v-col>
-                  <v-col cols="6">
-                    <v-btn color="secondary" block @click="studentsClicked">Students</v-btn>
+                <v-row justify="center">
+                  <v-col style="margin-left: 20vw; margin-right: 20vw">
+                    <router-link to="/teachingstaff">
+                      <v-btn
+                        color="secondary"
+                        block
+                        class="navText"
+                        @click="teachingstaff(subject.id, $event)"
+                      >Teaching Staff</v-btn>
+                    </router-link>
                   </v-col>
                 </v-row>
-                <v-expansion-panel>
+                <v-row justify="center">
+                  <v-col style="margin-left: 20vw; margin-right: 20vw">
+                    <router-link to="/students">
+                      <v-btn
+                        color="secondary"
+                        block
+                        class="navText"
+                        @click="students(subject.id, $event)"
+                      >Students</v-btn>
+                    </router-link>
+                  </v-col>
+                </v-row>
+                <v-row justify="center">
+                  <v-col style="margin-left: 20vw; margin-right: 20vw">
+                    <router-link to="/assessments">
+                      <v-btn
+                        color="secondary"
+                        block
+                        class="navText"
+                        @click="assessment(subject.id, $event)"
+                      >Assessment</v-btn>
+                    </router-link>
+                  </v-col>
+                </v-row>
+                <!-- <v-expansion-panel>
                   <v-expansion-panel-header>
                     <h3 style="text-align: center">Assessments</h3>
                   </v-expansion-panel-header>
                   <v-expansion-panel-content>
-                    <Assessment :subjectID="subject.id" />
+                    <v-btn>
+                      <Assessment :subjectID="subject.id" />
+                    </v-btn>
                   </v-expansion-panel-content>
-                </v-expansion-panel>
+                </v-expansion-panel>-->
               </v-expansion-panel-content>
             </v-expansion-panel>
           </v-expansion-panels>
@@ -73,10 +102,12 @@
 <script>
 import Subject from "@/services/Subject";
 import Assessment from "@/components/Assessments.vue";
+import StudentViewer from "@/components/StudentViewer.vue";
 
 export default {
   components: {
-    Assessment
+    Assessment,
+    StudentViewer
   },
   name: "SubjectDisplay",
   data: () => ({
@@ -103,18 +134,21 @@ export default {
       })
       .finally(() => (this.loading = false));
   },
-  method: {
-    teachingStaffClicked() {
-      console.log("teststaff");
-      this.$router.push({
-        name: "teachingStaff"
-      });
+  methods: {
+    teachingstaff: function(subjectID, event) {
+      if (event) {
+        this.$store.dispatch("setSubject", subjectID);
+      }
     },
-    studentsClicked() {
-      console.log("teststud");
-      this.$router.push({
-        name: "students"
-      });
+    students: function(subjectID, event) {
+      if (event) {
+        this.$store.dispatch("setSubject", subjectID);
+      }
+    },
+    assessment: function(subjectID, event) {
+      if (event) {
+        this.$store.dispatch("setSubject", subjectID);
+      }
     }
   }
 };
