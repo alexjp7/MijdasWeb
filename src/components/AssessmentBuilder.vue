@@ -11,10 +11,10 @@
         <v-card>
           <!-- Toolbar with search and refresh buttons -->
           <v-toolbar dense="true" flat color="secondary">
-            <v-btn  @click="addClicked" color="white" icon>
+            <v-btn  @click="addAssessment" color="white" icon>
               <v-icon>mdi-plus</v-icon>
             </v-btn>
-            <v-btn @click="getStudents" color="white" icon>
+            <v-btn @click="getAssessments" color="white" icon>
               <v-icon>mdi-refresh</v-icon>
             </v-btn>
           </v-toolbar>
@@ -22,6 +22,25 @@
     </v-card-title>
   </v-card>
   <v-card>
+    <div v-if="addClicked == true ">
+      <v-card >
+        <span style="display:flex;margin-left:10%;margin-right:10%;">
+        <v-text-field  
+        label="Task Name"
+        :counter="20"
+        v-model="newTaskName">
+        </v-text-field>
+        <v-spacer></v-spacer>
+        <v-btn 
+        @click="createAssessment" 
+        color="secondary"
+        style="height:5.6vh;min-width:40%;margin-top:1%;margin-bottom:1%;">
+        Add Task
+        </v-btn>
+
+        </span>
+      </v-card>
+    </div>
     <!-- Current Assessment -->
 <v-container id="assessmentContainer">
   <v-row id="splitPanel">
@@ -41,6 +60,7 @@
                  <div style="display:flex;">
                    <!-- Lab task Name -->
                   <v-text-field 
+                    v-on:onChange = "toggleActivation"
                     :class="`d-flex justify-1 mb-6`"
                     v-model="selectedTask.name"
                     label="Assessment Name"
@@ -50,8 +70,9 @@
                   <v-spacer></v-spacer>
                   <!-- Activation Toggle -->
                   <v-switch 
+                    @change="toggleActivation"
                     color="primary" 
-                    v-model="selectedTask.isActive" 
+                    v-model="isActive" 
                     :class="`d-flex justify-2 mb-6`"
                     class="pa-2"
                     label="active">
@@ -110,6 +131,7 @@
     <!-- Right side selector -->
     <v-col :cols="4" id="cols">
       <h1 style="padding:1%;"> Current Assessments</h1>
+      <div v-if="hasAssessment == true">
         <v-expansion-panels>
         <v-expansion-panel  v-for="assessment in assessments" v-bind:key="assessment" >
           <!-- Task Name Header -->
@@ -145,6 +167,15 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
         </v-expansion-panels>
+      </div>
+      <div v-else>
+          <v-card color='background'>
+            <p style="color:#3c5c77b5">No Assessments Available 
+            <br>
+            Click the + button to add an assessment</p>
+          </v-card>
+      </div>
+
       </v-col>
     </v-row>
   </v-container>
@@ -162,14 +193,19 @@ export default {
       assessments: [],
       criteria:[],
       subjectID:1,
-      selectedTask:"",
+      hasAssessment:false,
+      selectedTask:null,
       hasCriteria:"",
       coordinatorCheck: true,
       errored: false,
       hasSelected: false,
+      isActive: false,
+      toggleAssessmentDialog:false,
+      addClicked: false,
+      newTaskName:""
     };
   },
-
+  
   methods: {
     /* Return the value of the clicked assessment */
     taskClicked(id) {
@@ -179,8 +215,26 @@ export default {
             this.selectedTask = element;
         }
       });
+      this.isActive = parseInt(this.selectedTask.isActive);
       /* Populate Criteria if exists */
       this.getCriteria(id);
+    },
+    /* Toggles Activation from v-swtich */
+    toggleActivation() {
+      this.selectedTask.isActive = this.isActive;
+    },
+    /* Event Handles the + button */
+    addAssessment() {
+      this.addClicked = !this.addClicked;
+    },
+    /* Event handler for Add Task button */
+    createAssessment() {
+      Assessment.createAssessments({
+          request:"CREATE_ASSESSMENT",
+          task_name:this.newTaskNamem,
+          subject_id:t
+
+      });
     },
     /* Get Criteria for selected assessment */
     async getCriteria(id) {
@@ -190,25 +244,31 @@ export default {
        }).then(response => {
           this.criteria = response.data[0].records;
           this.hasCriteria = true;
-       }).catch(error=>console.log(error));
-    }
-  },
- /*  props: {
-    subjectID: String
-  }, */
-  async mounted() {
-    const response = await Assessment.getAssessments({
+       }).catch(error => this.hasCriteria = false);
+    },
+    async getAssessments() {
+      const response = await Assessment.getAssessments({
       request: this.request,
       subject_id: this.subjectID,
       is_coordinator: this.coordinatorCheck
     })
       .then(response => {
+        this.hasAssessment = true;
         this.assessments = response.data.records;
       })
       .catch(error => {
         console.log(error);
+         this.hasAssessment = false;
         this.errored = true;
       });
+    }
+
+  },
+ /*  props: {
+    subjectID: String
+  }, */
+  async mounted() {
+      this.getAssessments();
   }
 
 }
