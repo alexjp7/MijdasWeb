@@ -34,13 +34,13 @@ export default {
     return {
       request: "VIEW_ASSESSMENT",
       coordinatorCheck: true,
-      subjectID: "",
+      subjectID: null,
       assessmentsData: null,
       errored: false
     };
   },
   async mounted() {
-    this.subjectID = this.$store.state.subject;
+    this.subjectID = this.$store.state.subjectID;
     const response = await Assessment.getAssessments({
       request: this.request,
       subject_id: this.subjectID,

@@ -9,7 +9,8 @@ export default new Vuex.Store({
     // token: null,
     user: null,
     isUserLoggedIn: false,
-    subject: null
+    subjectCode: null,
+    subjectID: null
   },
   mutations: {
     // setToken(state, token) {
@@ -20,8 +21,13 @@ export default new Vuex.Store({
       state.user = user;
       state.isUserLoggedIn = !!user;
     },
-    setSubject(state, subject) {
-      state.subject = subject;
+    setSubjectCode(state, subjectCode) {
+      state.subjectCode = subjectCode;
+      console.log("test code: " + subjectCode);
+    },
+    setSubjectID(state, subjectID) {
+      state.subjectID = subjectID;
+      console.log("test id" + subjectID);
     }
   },
   actions: {
@@ -31,8 +37,18 @@ export default new Vuex.Store({
     setUser({ commit }, user) {
       commit("setUser", user);
     },
-    setSubject({ commit }, subject) {
-      commit("setSubject", subject);
+    setSubjectCode({ commit }, subjectCode) {
+      console.log(" test code: " + subjectCode);
+      commit("setSubjectCode", subjectCode);
+    },
+    setSubjectID({ commit }, subjectID) {
+      console.log("test id: " + subjectID);
+      commit("setSubjectID", subjectID);
+    }
+  },
+  getters: {
+    subjectID: state => {
+      return state.subjectID;
     }
   }
 });

@@ -51,7 +51,7 @@
                         color="secondary"
                         block
                         class="navText"
-                        @click="teachingstaff(subject.id, $event)"
+                        @click="teachingstaff(subject.subject_code, subject.id, $event)"
                       >Teaching Staff</v-btn>
                     </router-link>
                   </v-col>
@@ -70,13 +70,13 @@
                 </v-row>
                 <v-row justify="center">
                   <v-col style="margin-left: 20vw; margin-right: 20vw">
-                    <router-link to="/assessments">
+                    <router-link to="/assessment">
                       <v-btn
                         color="secondary"
                         block
                         class="navText"
                         @click="assessment(subject.id, $event)"
-                      >Assessment</v-btn>
+                      >Assessments</v-btn>
                     </router-link>
                   </v-col>
                 </v-row>
@@ -135,19 +135,21 @@ export default {
       .finally(() => (this.loading = false));
   },
   methods: {
-    teachingstaff: function(subjectID, event) {
+    teachingstaff: function(subjectCode, subjectID, event) {
       if (event) {
-        this.$store.dispatch("setSubject", subjectID);
+        console.log("test: " + subjectCode + " " + subjectID);
+        this.$store.dispatch("setSubjectCode", subjectCode);
+        this.$store.dispatch("setSubjectID", subjectID);
       }
     },
-    students: function(subjectID, event) {
+    students: function(subjectCode, subjectID, event) {
       if (event) {
-        this.$store.dispatch("setSubject", subjectID);
+        this.$store.dispatch("setSubject", subjectCode, subjectID);
       }
     },
-    assessment: function(subjectID, event) {
+    assessment: function(subjectCode, subjectID, event) {
       if (event) {
-        this.$store.dispatch("setSubject", subjectID);
+        this.$store.dispatch("setSubject", subjectCode, subjectID);
       }
     }
   }

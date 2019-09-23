@@ -88,7 +88,7 @@ export default {
   data: () => ({
     snackBarMessage: "",
     snackbar: false,
-    subject_id: "",
+    subjectID: "",
     /* Request arrays */
     studentsUploaded: [],
     studentsRetrieved: [],
@@ -104,7 +104,6 @@ export default {
   components: {
     "upload-btn": UploadButton
   },
-
   methods: {
     /* File Uplaoder Tool */
     readFileInput(file) {
@@ -117,13 +116,13 @@ export default {
     },
     /* API Handler for submiting student data */
     async submitStudents() {
-      this.subject_id = this.$store.state.subject;
+      this.subjectID = this.$store.state.subjectID;
       const response = await Subject.addStudents({
         request: "ADD_STUDENTS",
         students: this.studentsUploaded,
-        subject_id: this.subject_id
+        subject_id: this.subjectID
       }).then(response => {
-        this.snackBarMessage = "Upload Succesful!";
+        this.snackBarMessage = "Upload Successful!";
         this.snackbar = true;
       });
       this.getStudents();
@@ -139,11 +138,11 @@ export default {
     },
     /* Table Population */
     async getStudents() {
-      this.subject_id = this.$store.state.subject;
+      this.subjectID = this.$store.state.subjectID;
       Sesssion.getStudents({
         //Popualte students
         request: "VIEW_STUDENTS_BY_SUBJECT",
-        subject_id: this.subject_id
+        subject_id: this.subjectID
       })
         .then(response => {
           //Reset values of students and headers, in the case of repeated calls (through refresh)

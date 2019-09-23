@@ -84,11 +84,8 @@ export default {
     hasMatch: false,
     hasQuery: false,
     staffSelection: "",
-    subjectCode: ""
+    subjectID: null
   }),
-  async mounted() {
-    // this.subjectCode = this.$store.state.subject;
-  },
   methods: {
     //Event Listener for handling keyboard input with searchbar
     onKey() {
@@ -124,21 +121,21 @@ export default {
     },
     //Takes the field from search bar, and adds that username
     async addStaff() {
-      this.subjectCode = this.$store.state.subject;
+      this.subjectID = this.$store.state.subjectID;
       Subject.addStaffMember({
         request: "ADD_TUTOR",
         tutors: [this.searchString],
-        subject_id: this.subjectCode
+        subject_id: this.subjectID
       }).catch(error => console.log(response));
       this.getStaff();
       this.searchString = 1;
     },
     //Makes an asyncronous call to popualte linked staff members
     async getStaff() {
-      this.subjectCode = this.$store.state.subject;
+      this.subjectID = this.$store.state.subjectID;
       Subject.getTutors({
         request: "VIEW_TUTORS",
-        subject_id: this.subjectCode
+        subject_id: this.subjectID
       })
         .then(response => {
           this.teachingStaff = response.data;
@@ -147,10 +144,10 @@ export default {
     },
     //Removes Tutor from subject and display
     async removeStaff(staff) {
-      this.subjectCode = this.$store.state.subject;
+      this.subjectID = this.$store.state.subjectID;
       Subject.removeStaff({
         request: "REMOVE_TUTOR",
-        subject_id: this.subjectCode,
+        subject_id: this.subjectID,
         tutor_username: staff
       })
         .then()
@@ -205,7 +202,5 @@ export default {
   font-style: bold;
   min-width: 80%;
   display: -webkit-inline-box;
-}
-#staffCards {
 }
 </style>
