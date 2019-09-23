@@ -79,22 +79,24 @@
     <!----------------------- Top Navigation ------------------------------------->
     <v-app-bar app fixed="true">
       <v-toolbar :flat="flat" color="white" floating="true">
-        <v-btn
-          v-if="$store.state.isUserLoggedIn"
-          depressed
-          tile
-          class="grey--text"
-          @click="drawer = !drawer"
-        >
-          <v-icon>mdi-menu</v-icon>
-        </v-btn>
+        <div v-if="drawer==false">
+          <v-btn
+            v-if="$store.state.isUserLoggedIn"
+            depressed
+            tile
+            class="grey--text"
+            @click="drawer = !drawer"
+          >
+            <v-icon>mdi-menu</v-icon>
+          </v-btn>
+        </div>
         <v-spacer></v-spacer>
         <router-link to="/">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Home</v-btn>
         </router-link>
-        <router-link to="/criteria">
+        <!-- <router-link to="/criteria">
           <v-btn text class="navText">Criteria Test</v-btn>
-        </router-link>
+        </router-link>-->
         <router-link to="/login">
           <v-btn v-if="!$store.state.isUserLoggedIn" text class="navText">Login</v-btn>
         </router-link>

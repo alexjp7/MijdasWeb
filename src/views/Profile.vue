@@ -42,7 +42,7 @@
                     hint="At least 8 characters"
                     clearable
                     filled
-                    :rules="passwordRules"
+                    :rules="passwordRules1"
                   />
                 </v-col>
 
@@ -90,6 +90,7 @@ export default {
       request: "VIEW_PROFILE",
       username: "",
       password: "",
+      password1: "",
       email: "",
       firstName: "",
       lastName: "",
@@ -99,9 +100,16 @@ export default {
       updated: null,
       errored: null,
       updatedErrored: null,
+
       passwordRules: [
         v => v.length <= 64 || "Password too long",
-        v => v.length >= 4 || "Min 4 characters"
+        v => v.length >= 4 || "Min 4 characters",
+        v => v.password == password1 || "Passwords must be the same"
+      ],
+      passwordRules1: [
+        v => v.length <= 64 || "Password too long",
+        v => v.length >= 4 || "Min 4 characters",
+        v => v.password1 == password || "Passwords must be the same"
       ]
     };
   },
@@ -115,7 +123,7 @@ export default {
         this.object = response.data.records;
 
         this.email = this.object[0].email;
-        this.password = this.object[0].password;
+        //this.password = this.object[0].password;
         this.permissionType = this.object[0].permission_type;
         this.firstName = this.object[0].first_name;
         this.lastName = this.object[0].last_name;
