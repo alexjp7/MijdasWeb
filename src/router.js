@@ -115,6 +115,11 @@ export default new Router({
       name: "teachingstaffs",
       component: () => import("./views/TeachingStaff.vue")
     },
+    {
+      path: "/add-subject",
+      name: "AddSuject",
+      component: () => import("./views/AddSubject.vue")
+    },
 
     /**************
      * COMPONENTS
