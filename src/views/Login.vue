@@ -46,10 +46,10 @@ v-form {
           </v-form>
         </panel>
       </v-flex>
-      <div v-if="correct == true">
+      <div style="margin-right: 20vw" v-if="correct == true">
         <v-alert type="success">Successfully logged in!</v-alert>
       </div>
-      <div v-else-if="correct == false">
+      <div style="margin-right: 20vw" v-else-if="correct == false">
         <v-alert type="error">Incorrect credentials, please try again.</v-alert>
       </div>
     </v-container>

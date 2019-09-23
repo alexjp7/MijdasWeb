@@ -5,7 +5,7 @@
       <Navigation />
 
       <v-content>
-          <router-view></router-view>
+        <router-view></router-view>
       </v-content>
       <v-btn
         id="scrollToTopButton"
@@ -73,7 +73,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 .danger-alert {
   color: red;
@@ -89,7 +88,7 @@ export default {
   /* color: rgb(255, 255, 255) !important; */
 }
 .inner-container {
-  width:100% ;
+  width: 100%;
 }
 </style>
 <style>

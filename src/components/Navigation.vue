@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <v-nav>
     <div v-if="$store.state.isUserLoggedIn">
       <!----------- Navigation Drawer - Side Bar ----------------->
       <v-navigation-drawer
@@ -77,7 +77,7 @@
     </div>
 
     <!----------------------- Top Navigation ------------------------------------->
-    <v-app-bar fixed="true" hide-on-scroll="true">
+    <v-app-bar app fixed="true">
       <v-toolbar :flat="flat" color="white" floating="true">
         <v-btn
           v-if="$store.state.isUserLoggedIn"
@@ -108,7 +108,7 @@
         </BreadcrumbItem>
       </v-toolbar>
     </v-app-bar>
-  </nav>
+  </v-nav>
 </template>
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------
