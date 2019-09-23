@@ -37,7 +37,7 @@
             <v-card-actions>
               <div class="flex-grow-1"></div>
               <v-btn text color="primary" @click="dialog = false">Submit</v-btn>
-              <div class="field input">"@dialog"</div>
+              
             </v-card-actions>
           </v-card>
         </v-dialog>
