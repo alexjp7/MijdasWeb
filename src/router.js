@@ -68,6 +68,11 @@ export default new Router({
       component: () => import("./views/Announcements.vue")
     },
     {
+      path: "/assessment",
+      name: "assessment",
+      component: () => import("./views/Assessment.vue")
+    },
+    {
       path: "/calendar",
       name: "calendar",
       component: () => import("./views/Calendar.vue")

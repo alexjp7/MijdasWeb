@@ -1,23 +1,24 @@
 <template>
   <div>
     <h1>Welcome To Assessments For:</h1>
-    <h1>{{SubjectCode}}</h1>
+    <h1>{{subjectCode}}</h1>
+    <br />
     <Assessments />
   </div>
 </template>
 
 <script>
-import Assessments from "@/components/Assessments";
+import Assessments from "@/components/Assessments.vue";
 
 export default {
+  data: () => ({
+    subjectCode: ""
+  }),
   components: {
     Assessments
   },
-  data: () => ({
-    SubjectCode: null
-  }),
   async mounted() {
-    SubjectCode = this.$store.state.subjectCode;
+    this.subjectCode = this.$store.state.subjectCode;
   }
 };
 </script>
