@@ -5,7 +5,10 @@ import store from "./store";
 import vuetify from "./plugins/vuetify";
 import VueResource from "vue-resource";
 import "vuetify/dist/vuetify.min.css";
+import VSwitch from "v-switch-case";
 import { sync } from "vuex-router-sync";
+ 
+Vue.use(VSwitch)
 Vue.use(VueResource);
 Vue.use(vuetify);
 sync(store, router);
