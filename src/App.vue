@@ -1,5 +1,5 @@
 <template>
-  <v-app app>
+  <v-app>
     <div v-scroll="handleScroll">
       <v-system-bar :flat="flat" color="white"></v-system-bar>
       <Navigation />

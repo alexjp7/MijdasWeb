@@ -212,6 +212,7 @@ export default {
     })
       .then(response => {
         this.assessments = response.data.records;
+        // this.selectedTask = this.object[assessment.id].isActive;
       })
       .catch(error => {
         console.log(error);

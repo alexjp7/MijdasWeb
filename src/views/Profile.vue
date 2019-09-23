@@ -77,6 +77,7 @@
         </material-card>
       </v-col>
     </v-row>
+    <v-card dark color="primary">just for you ilyas my boi</v-card>
   </v-container>
 </template>
 
