@@ -23,7 +23,8 @@
       >
         <v-icon>mdi-chevron-up</v-icon>
       </v-btn>
-      <v-footer id="footer" color="background" bottom absolute>
+
+      <v-footer id="footer" color="background" bottom absolute app inset>
         <div class="inner-container">
           <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
         </div>

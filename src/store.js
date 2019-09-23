@@ -23,11 +23,9 @@ export default new Vuex.Store({
     },
     setSubjectCode(state, subjectCode) {
       state.subjectCode = subjectCode;
-      console.log("test code: " + subjectCode);
     },
     setSubjectID(state, subjectID) {
       state.subjectID = subjectID;
-      console.log("test id" + subjectID);
     }
   },
   actions: {
@@ -38,11 +36,9 @@ export default new Vuex.Store({
       commit("setUser", user);
     },
     setSubjectCode({ commit }, subjectCode) {
-      console.log(" test code: " + subjectCode);
       commit("setSubjectCode", subjectCode);
     },
     setSubjectID({ commit }, subjectID) {
-      console.log("test id: " + subjectID);
       commit("setSubjectID", subjectID);
     }
   },
