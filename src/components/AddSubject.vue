@@ -131,7 +131,7 @@
             coordinator: '',
             subjectRules: [
                 v => !!v || 'Subject code is required',
-                v => (v && v.length <= 10) || 'Subject code must be less than 10 characters',
+                // v => (v && v.length <= 10) || 'Subject code must be less than 10 characters',
             ],
             institutionRules: [
                 v => !!v || 'Institution is required',
