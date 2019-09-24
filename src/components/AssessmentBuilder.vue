@@ -99,7 +99,7 @@
             <v-btn  @click="addCriteriaClick" color="white" icon>
               <v-icon>mdi-plus</v-icon>
             </v-btn>
-            <v-btn @click="getCriteria(lastAssessmentId)" color="white" icon>
+            <v-btn @click="refresh" color="white" icon>
               <v-icon>mdi-refresh</v-icon>
             </v-btn>
           </v-toolbar>
@@ -328,6 +328,10 @@ export default {
       /* Populate Criteria if exists */
       this.getCriteria(id);
     },
+    refresh() {
+      this.isAddCriteria = false;  
+      this.getCriteria(this.lastAssessmentId);
+    },
     
     /* Event Handles the + button  for assessment*/
     addAssessment() {
@@ -354,7 +358,7 @@ export default {
       this.newTaskName = "";
     },
     async addCriteria() {
-
+      
        Criteria.createCriteria({
         request:"CREATE_CRITERIA",
         assessment_id:this.selectedTask.id,
@@ -362,10 +366,13 @@ export default {
         max_mark:this.maxMarkInput,
         display_text:this.displayTextInput
       }).then(respomse =>{
-        this.getCriteria();
+        this.refresh();
         this.snackBarMessage = "Criteria Created Successful!";
 
       }); 
+      this.maxMarkInput="";
+      this.displayTextInput="";
+      this.elementSelected=null;  
     },
     /* Toggles of a subject the from v-swtich */
     async toggleActivation() {

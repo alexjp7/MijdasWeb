@@ -128,7 +128,7 @@ export default {
         subject_id: this.subjectID
       }).catch(error => console.log(response));
       this.getStaff();
-      this.searchString = 1;
+      this.searchString = "";
     },
     //Makes an asyncronous call to popualte linked staff members
     async getStaff() {

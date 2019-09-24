@@ -11,6 +11,7 @@
             <h2 id="pageBreakHeading">Your Subjects</h2>
           </div>
           <v-spacer></v-spacer>
+          <v-card-actions>
           <div class="col-1 col-align-right">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
@@ -21,6 +22,7 @@
               <span>Add Subject</span>
             </v-tooltip>
           </div>
+          </v-card-actions>
         </div>
       </v-card>
 
