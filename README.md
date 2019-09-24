@@ -40,10 +40,12 @@
 
 > Vuex - State Management Pattern uses state,view and actions powerful for large SPA run `npm install vuex --save`
 
+> axios - post request framework based off angular. run `npm install --save axios`
+
 > Vuex-router-sync - Dependancy that allows for certain states to change the route and updates the store of vuex. To run `npm install vuex-router-sync`
 
 > Vue-resource - provides capability for making web requests and handle responses using \$http to install run `npm install vue-resource` (note: not required)
-
+> Vue-Switch-case: Allows for inline switchcase in template code  `npm install v-switch-case`
 > FOR THIS ONE run `vue ui` and install the `dependancy` called: `vuetify-upload-button`
 
 <h3> VS Code Extensions </h3>

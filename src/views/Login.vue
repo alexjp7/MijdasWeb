@@ -3,14 +3,14 @@
   display: inline-blockinline-block;
   margin: 5%;
 }
-form {
+v-form {
   width: 50vw;
   margin-left: 25vw;
 }
 </style>
 
 <template>
-  <div>
+  <div style="margin-left: 25vw">
     <v-container fluid>
       <v-flex xs6 offset-xs3 id="fields">
         <panel title="Login">
@@ -46,10 +46,10 @@ form {
           </v-form>
         </panel>
       </v-flex>
-      <div v-if="correct == true">
+      <div style="margin-right: 20vw" v-if="correct == true">
         <v-alert type="success">Successfully logged in!</v-alert>
       </div>
-      <div v-else-if="correct == false">
+      <div style="margin-right: 20vw" v-else-if="correct == false">
         <v-alert type="error">Incorrect credentials, please try again.</v-alert>
       </div>
     </v-container>
@@ -101,19 +101,18 @@ export default {
         }
         if (this.correct == true) {
           this.$store.dispatch("setUser", this.username);
-          console.log("peni");
-          const sleep = milliseconds => {
-            return new Promise(resolve => setTimeout(resolve, milliseconds));
-          };
-          sleep(1500).then(() => {
-            this.redirect();
-          });
+          // const sleep = milliseconds => {
+          //   return new Promise(resolve => setTimeout(resolve, milliseconds));
+          // };
+          // sleep(1500).then(() => {
+          this.redirect();
+          // });
         }
       }
     },
     redirect() {
       this.$router.push({
-        name: "about"
+        name: "dashboard"
       });
     }
   }

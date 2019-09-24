@@ -1,28 +1,67 @@
 <template>
   <v-app app>
-    <!-- <v-system-bar :flat="flat" color="primary"></v-system-bar> -->
-    <v-system-bar color="primary"></v-system-bar>
-    <Navigation />
-    <v-content>
-      <v-container fluid>
+    <div v-scroll="handleScroll">
+      <v-system-bar :flat="flat" color="white"></v-system-bar>
+      <Navigation />
+
+      <v-content>
         <router-view></router-view>
-      </v-container>
-    </v-content>
-    <v-footer id="footer" color="trim">
-      <div class="inner-container">
-        <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
-      </div>
-    </v-footer>
+      </v-content>
+      <v-btn
+        id="scrollToTopButton"
+        class="md-5 mr-3 elevation-21"
+        dark
+        fab
+        append
+        button
+        bottom
+        style="visibility: hidden"
+        right
+        color="primary"
+        fixed
+        @click="scrollToTop"
+      >
+        <v-icon>mdi-chevron-up</v-icon>
+      </v-btn>
+      <v-footer id="footer" color="background" bottom absolute>
+        <div class="inner-container">
+          <span class="copyright-text">&copy; Mijdas Tech 2019. All rights reserved.</span>
+        </div>
+      </v-footer>
+    </div>
   </v-app>
 </template>
 
 <script>
 import Navigation from "@/components/Navigation.vue";
+import { log } from "util";
 
 export default {
   name: "app",
   components: {
     Navigation
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+      });
+    },
+    handleScroll: function(evt, el) {
+      if (window.scrollY > 150) {
+        document.getElementById("scrollToTopButton").style.visibility =
+          "visible";
+      } else {
+        document.getElementById("scrollToTopButton").style.visibility =
+          "hidden";
+      }
+      return window.scrollY < 149;
+    }
   }
 };
 </script>
@@ -34,7 +73,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-color: #e1e2e1;
 }
 .danger-alert {
   color: red;
@@ -47,7 +85,14 @@ export default {
   padding-bottom: 10px;
 }
 #footer .inner-container {
-  width: 100vw;
-  color: rgb(85, 85, 85) !important;
+  /* color: rgb(255, 255, 255) !important; */
+}
+.inner-container {
+  width: 100%;
+}
+</style>
+<style>
+* {
+  text-transform: none !important;
 }
 </style>

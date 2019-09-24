@@ -1,128 +1,126 @@
 <template>
     <div class="add-subject-content">
         <h1>Create Subject</h1>
-          <!-- <v-row align="center"> -->
-            <!-- <v-row justify="space-around">
-                <v-switch v-model="valid" class="ma-4" label="Valid" readonly></v-switch>
-                <v-switch v-model="lazy" class="ma-4" label="Lazy"></v-switch>
-            </v-row> -->
-            <v-form
-            class="subject-form"
-            ref="form"
-            v-model="valid"
-            :lazy-validation="lazy"
-            >
-                <!-- <template> -->
-  <v-container fluid>
-    <v-row align="center">
-      <v-col cols="12" sm="6">
-        <v-subheader v-text="'Multiple with persistent hint'"></v-subheader>
-        <v-checkbox
-            v-model="checkbox"
-            :rules="[v => !!v || 'You must agree to continue!']"
-            label="Do you agree?"
-            required
-        ></v-checkbox>
-      </v-col>
-      <v-col cols="12" sm="6">
-        <v-select
-            v-if="!checkbox"
-            v-model="e6"
-            :items="test"
-            :menu-props="{ maxHeight: '400' }"
-            label="Select"
-            hint="Select an existing subject, or create a new one."
-            persistent-hint
-        ></v-select>
-        <v-text-field
-            v-if="checkbox"
-            v-model="name"
-            :counter="10"
-            :rules="nameRules"
-            label="Name"
-            required
-        ></v-text-field>
-      </v-col>
-
-      <v-col cols="12" sm="6">
-        <v-subheader v-text="'Multiple (Chips) with persistent hint'"></v-subheader>
-      </v-col>
-
-      <v-col cols="12" sm="6">
-        <v-select
-          v-model="e7"
-          :items="states"
-          label="Select"
-          multiple
-          chips
-          hint="What are the target regions"
-          persistent-hint
-        ></v-select>
-      </v-col>
-    </v-row>
-  </v-container>
-<!-- </template> -->
-
-                <v-text-field
-                    v-model="name"
-                    :counter="10"
-                    :rules="nameRules"
-                    label="Name"
-                    required
-                ></v-text-field>
-
-                <v-text-field
-                    v-model="email"
-                    :rules="emailRules"
-                    label="E-mail"
-                    required
-                ></v-text-field>
-
-                <v-select
-                    v-model="select"
-                    :items="items"
-                    :rules="[v => !!v || 'Item is required']"
-                    label="Item"
-                    required
-                ></v-select>
-
-                <v-checkbox
-                    v-model="checkbox"
-                    :rules="[v => !!v || 'You must agree to continue!']"
-                    label="Do you agree?"
-                    required
-                ></v-checkbox>
-
-                <v-btn
-                    :disabled="!valid"
-                    color="success"
-                    class="mr-4"
-                    @click="validate"
-                >
-                    Validate
-                </v-btn>
-
-                <v-btn
-                    color="error"
-                    class="mr-4"
-                    @click="reset"
-                >
-                    Reset Form
-                </v-btn>
-
-                <v-btn
-                    color="warning"
-                    @click="resetValidation"
-                >
-                    Reset Validation
-                </v-btn>
-            </v-form>
-        <!-- </v-row> -->
+        <v-form
+        class="subject-form"
+        ref="form"
+        v-model="valid"
+        :lazy-validation="lazy"
+        >
+            <v-container fluid>
+                <v-row align="center">
+                <v-col cols="12" sm="9">
+                    <v-select
+                        ref="subjectCode"
+                        v-if="!checkbox"
+                        v-model="subject"
+                        :items="subjects"
+                        :menu-props="{ maxHeight: '400' }"
+                        :rules="subjectRules"
+                        label="Subject code"
+                        hint="Select an existing subject."
+                        @input="updateSubject"
+                        persistent-hint
+                        required
+                    ></v-select>
+                    <v-text-field
+                        ref="subjectCode"
+                        v-if="checkbox"
+                        v-model="subjectCode"
+                        :counter="10"
+                        :rules="subjectRules"
+                        label="Subject code"
+                        hint="Enter the new subject code."
+                        required
+                    ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="3">
+                    <v-checkbox
+                        v-model="checkbox"
+                        label="New subject"
+                    ></v-checkbox>
+                </v-col>
+                </v-row>
+                <v-row v-if="checkbox" align="center">
+                    <v-col cols="12" sm="12">
+                            <v-select
+                                ref="institution"
+                                v-model="i_id"
+                                :items="institutions"
+                                :menu-props="{ maxHeight: '400' }"
+                                :rules="institutionRules"
+                                label="Institution"
+                                hint="Select an institution."
+                                persistent-hint
+                                required
+                            ></v-select>
+                    </v-col>
+                </v-row>
+                <v-row align="center">
+                    <v-col cols="12" sm="12">
+                            <!-- <v-text-field
+                                v-model="date"
+                            ></v-text-field> -->
+                            <v-text-field
+                                v-model="coordinator"
+                                label="Subject coordinator"
+                                readonly
+                            ></v-text-field>
+                    </v-col>
+                    <v-col cols="12" sm="12">
+                        <v-menu
+                            ref="menu"
+                            v-model="menu"
+                            :close-on-content-click="false"
+                            :return-value.sync="date"
+                            transition="scale-transition"
+                            offset-y
+                            full-width
+                            min-width="290px"
+                        >
+                            <template v-slot:activator="{ on }">
+                            <v-text-field
+                                ref="date"
+                                v-model="date"
+                                :rules="dateRules"
+                                label="Session end date"
+                                readonly
+                                v-on="on"
+                            ></v-text-field>
+                            </template>
+                            <v-date-picker v-model="date" no-title scrollable required>
+                                <div class="flex-grow-1"></div>
+                                <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+                                <v-btn text color="primary" @click="$refs.menu.save(date)">OK</v-btn>
+                            </v-date-picker>
+                        </v-menu>
+                    </v-col>
+                    <v-col cols="12" sm="12">
+                        <v-btn
+                            color="primary"
+                            class="mr-4"
+                            @click="submit"
+                            text
+                        >
+                            Submit
+                        </v-btn>
+                        <v-btn
+                            class="mr-4"
+                            @click="reset"
+                            text
+                        >
+                            Clear
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </v-form>
     </div>
 </template>
 
 <script>
     import Subject from "@/services/Subject";
+    import Profile from "@/services/Authentication"
     export default {
         name: "AddSubject",
         data: () => ({
@@ -130,15 +128,18 @@
              * v-form data
              */
             valid: true,
-            name: '',
-            nameRules: [
-                v => !!v || 'Name is required',
-                v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            coordinator: '',
+            subjectRules: [
+                v => !!v || 'Subject code is required',
+                v => (v && v.length <= 10) || 'Subject code must be less than 10 characters',
             ],
-            email: '',
-            emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+            institutionRules: [
+                v => !!v || 'Institution is required',
+                // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+            ],
+            dateRules: [
+                v => !!v || 'End date is required',
+                // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
             select: null,
             items: [
@@ -152,39 +153,18 @@
             /**
              * v-select data
              */
-            e6: [],
-            e7: [],
-            states: [
-                'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-                'Arkansas', 'California', 'Colorado', 'Connecticut',
-                'Delaware', 'District of Columbia', 'Federated States of Micronesia',
-                'Florida', 'Georgia', 'Guam', 'Hawaii', 'Idaho',
-                'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
-                'Louisiana', 'Maine', 'Marshall Islands', 'Maryland',
-                'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi',
-                'Missouri', 'Montana', 'Nebraska', 'Nevada',
-                'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
-                'North Carolina', 'North Dakota', 'Northern Mariana Islands', 'Ohio',
-                'Oklahoma', 'Oregon', 'Palau', 'Pennsylvania', 'Puerto Rico',
-                'Rhode Island', 'South Carolina', 'South Dakota', 'Tennessee',
-                'Texas', 'Utah', 'Vermont', 'Virgin Island', 'Virginia',
-                'Washington', 'West Virginia', 'Wisconsin', 'Wyoming',
-            ],
-            test: [
-                // {
-                //     text: 'text',
-                //     value: 'value',
-                //     header: 'header'
-                // },
-                // {
-                //     text: 'text_one',
-                //     value: 'value_one',
-                //     divider: 'p'
-                // }
-            ],
-            // username: null,
-            username: 'aa111',
-            institutions: null
+            username: null,
+            // username: 'aa111',
+            subjects: [],
+            subject: null,
+            subjectCode: '',
+            /**
+             * Date picker
+             */
+            date: null,
+            menu: false,
+            institutions: [],
+            i_id: null
         }),
         methods: {
             /**
@@ -196,52 +176,88 @@
                 }
             },
             reset () {
-                this.$refs.form.reset()
+                this.$refs.subjectCode.reset();
+                this.$refs.date.reset();
+                if(this.$refs.institution !== undefined) {
+                    this.$refs.institution.reset();
+                }
             },
-            resetValidation () {
-                this.$refs.form.resetValidation()
+            updateSubject(subject) {
+                if(subject !== undefined) {
+                    this.subjectCode = subject.subject_code;
+                    this.i_id = subject.i_id;
+                }
             },
+            submit() {
+                console.log(this.date);
+                let response = Subject.subjects({
+                    request: 'CREATE_SUBJECT',
+                    code: this.subjectCode,
+                    institution_id: this.i_id,
+                    coordinator: this.username
+                }).then(response => {
+                    console.log(response);
+                    let subject_id = response.data.subject_id;
+                    Subject.subjects({
+                        request: 'ACTIVATE_SUBJECT',
+                        subject_id: subject_id,
+                        session_expiry: this.date
+                    }).then(response => {
+                        console.log(response);
+                    }).finally( () => {
+                        this.reset();
+                    });
+                });
+            }
             /**
              * v-select methods
              */
         },
         async mounted() {
-            // console.log("mounted() method");
-            // this.test = ['one', 'two', 'three'];
-            // this.username = this.$store.state.user;
-            var response = await Subject.subjects({
+            this.username = this.$store.state.user;
+            let response = await Subject.subjects({
                 request: 'VIEW_OWNED_SUBJECTS',
                 username: this.username
             }).then(response => {
-                this.institutions = response.data;
+                let institutions = response.data;
                 console.log("Response data:");
-                console.log(this.institutions);
-                console.log(response);
-                console.log(this.username);
-                this.institutions.forEach( item => {
-                    this.test.push({
+                console.log(institutions);
+                institutions.forEach( item => {
+                    this.institutions.push({
+                        text: item.institution,
+                        value: item.i_id
+                    });
+                    this.subjects.push({
                         header: item.institution
                     });
                     item.subjects.forEach( subject => {
-                        this.test.push({
+                        this.subjects.push({
                             text: subject.subject_code,
-                            value: subject.id
+                            // value: subject.id
+                            value: {
+                                subject_code: subject.subject_code,
+                                i_id: item.i_id
+                            }
                         })
                     });
                 });
             }).catch(error => {
                 console.log("There was an error:");
                 console.log(error);
-            }).finally();
+            }).finally( () => {
+                let response = Profile.profile({
+                    request: 'VIEW_PROFILE',
+                    username: this.username
+                }).then(response => {
+                    var profile = response.data;
+                    console.log(profile);
+                    this.coordinator = profile.records[0].first_name + " " + profile.records[0].last_name;
+                });
+            });
+
+
         }
     };
-
-/**
- * subject:
- *   code, i_id, coordinator1, coordinator2
- * subject_session:
- *   subject_id, isActive, session_expiry
- */
 </script>
 
 <style scoped>
@@ -255,13 +271,5 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-.subject-form {
-    /* display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 80%;
-    height: 80%;
-    max-width: 800px; */
 }
 </style>
