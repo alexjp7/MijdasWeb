@@ -96,7 +96,7 @@
           <v-card>
           <!-- Toolbar with search and refresh buttons -->
           <v-toolbar dense="true" flat color="secondary">
-            <v-btn  @click="addCriteria" color="white" icon>
+            <v-btn  @click="addCriteriaClick" color="white" icon>
               <v-icon>mdi-plus</v-icon>
             </v-btn>
             <v-btn @click="getCriteria(lastAssessmentId)" color="white" icon>
@@ -114,10 +114,75 @@
               </v-card>
             </div>
             <div v-else>
-              <!-- Left side edit panel -->
-              
               <v-container>
                 <!-- Criteria Display -->
+                <!-- Add Criteria -->
+                <div v-if="isAddCriteria == true">
+                  <v-card style="padding:1%;">
+                    <v-simple-table dense>
+                      <template v-slot:default>
+                        <tbody>
+                          <tr>
+                            <th> Display Text </th>
+                            <td>
+                              <v-text-field
+                               v-model="displayTextInput"
+                               label="Display Text" 
+                              >
+                              </v-text-field>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Mark Out of</th>
+                            <td>
+                              <v-text-field
+                              v-model="maxMarkInput"
+                               label="Max-Mark">
+                              </v-text-field>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>Type Of Criteria</th>
+                            <td>
+                              <v-radio-group v-model="elementSelected">
+                                <v-radio
+                                label="Slider"
+                                :value="1"
+                                ></v-radio>
+                                <v-radio
+                                label="Checkbox"
+                                :value="0"
+                                ></v-radio>
+                                <v-radio
+                                label="Num-Box"
+                                :value="2"
+                                ></v-radio>
+                                <v-radio
+                                label="TextBox"
+                                :value="4"
+                                ></v-radio>
+                              </v-radio-group>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <v-btn @click="addCriteria" style="min-width:100%;height:5vh;" color="success">
+                                  Submit Criteria
+                                </v-btn>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </template>
+                    </v-simple-table>
+                  </v-card>
+                </div>
+                <div v-else>
+                  <v-card>
+
+                  </v-card>
+                </div>
                 <div v-if="hasCriteria == false">
                   <v-card color="background">
                     <p style="color:#3c5c77b5">
@@ -145,7 +210,7 @@
                             <th>Type</th>
                             <td v-if="criterion.element == 0">Checkbox</td>
                             <td v-else-if="criterion.element == 1">Slider</td>
-                            <td v-else-if="criterion.element == 2">TextField</td>
+                            <td v-else-if="criterion.element == 2">Numbox</td>
                             <td v-else-if="criterion.element == 4">Text-area</td>
                           </tr>
                           <tr>
@@ -240,8 +305,11 @@ export default {
       snackbarSuccess: false,
       snackbarError: false,
       addAssessmentClicked: false,
-      addCriteriaClick:false,
+      isAddCriteria:false,
       lastAssessmentId:null,
+      elementSelected:null,
+      maxMarkInput:null,
+      displayTextInput:null,
     };
   },
   
@@ -249,6 +317,7 @@ export default {
     /* Return the value of the clicked assessment */
     taskClicked(id) {
       this.hasSelected = true;
+      this.isAddCriteria = false;
       this.assessments.find(element => {
         if (element.id === id) {
           this.selectedTask = element;
@@ -259,26 +328,16 @@ export default {
       /* Populate Criteria if exists */
       this.getCriteria(id);
     },
-    /* Toggles of a subject the from v-swtich */
-    async toggleActivation() {
-      this.selectedTask.isActive = this.isActive;
-      Assessment.toggleActivation({
-        request:"TOGGLE_ACTIVATION",
-        assessment_id: this.selectedTask.id
-      }).then(response => {
-          this.snackBarMessage = parseInt(this.isActive) ? this.selectedTask.name + " activated Succesfully !":  this.selectedTask.name + " de-activated Succesfully !";
-          this.snackbarSuccess = true;
-      }).catch(error =>{
-          this.isActive = false;
-          this.selectedTask.isActive = this.isActive;
-          this.snackBarMessage = "Assessments need marking-criteria in order to be enabled";
-          this.snackbarError = true;
-      });
-    },
-    /* Event Handles the + button */
+    
+    /* Event Handles the + button  for assessment*/
     addAssessment() {
       this.addAssessmentClicked = !this.addAssessmentClicked;
     },
+    /* Event Handles the + button for assessment */
+    addCriteriaClick() {
+      this.isAddCriteria = !this.isAddCriteria;
+    },
+
     /* Event handler for Add Task button */
     async createAssessment() {
       Assessment.createAssessments({
@@ -293,7 +352,36 @@ export default {
           console.log(error);
       });
       this.newTaskName = "";
+    },
+    async addCriteria() {
 
+       Criteria.createCriteria({
+        request:"CREATE_CRITERIA",
+        assessment_id:this.selectedTask.id,
+        element:this.elementSelected,
+        max_mark:this.maxMarkInput,
+        display_text:this.displayTextInput
+      }).then(respomse =>{
+        this.getCriteria();
+        this.snackBarMessage = "Criteria Created Successful!";
+
+      }); 
+    },
+    /* Toggles of a subject the from v-swtich */
+    async toggleActivation() {
+    this.selectedTask.isActive = this.isActive;
+    Assessment.toggleActivation({
+      request:"TOGGLE_ACTIVATION",
+      assessment_id: this.selectedTask.id
+    }).then(response => {
+        this.snackBarMessage = parseInt(this.isActive) ? this.selectedTask.name + " activated Succesfully !":  this.selectedTask.name + " de-activated Succesfully !";
+        this.snackbarSuccess = true;
+    }).catch(error =>{
+        this.isActive = false;
+        this.selectedTask.isActive = this.isActive;
+        this.snackBarMessage = "Assessments need marking-criteria in order to be enabled";
+        this.snackbarError = true;
+    });
     },
     /* Get Criteria for selected assessment */
     async getCriteria(id) {
@@ -304,7 +392,10 @@ export default {
         .then(response => {
           this.criteria = response.data[0].records;
           this.hasCriteria = true;
-       }).catch(error => this.hasCriteria = false);
+       }).catch(error => {
+          this.hasCriteria = false
+          this.isAddCriteria = true;
+         });
     },
 
     /* Populates assessment data */
