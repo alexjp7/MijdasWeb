@@ -1,6 +1,10 @@
 <template>
     <div class="add-subject-content">
-        <h1>Create Subject</h1>
+        
+        <v-card class="subject-header" color="secondary">
+        <v-card-header ><h1>Create Subject</h1></v-card-header>
+        </v-card>
+        <v-card>
         <v-form
         class="subject-form"
         ref="form"
@@ -115,6 +119,7 @@
                 </v-row>
             </v-container>
         </v-form>
+        </v-card>
     </div>
 </template>
 
@@ -263,7 +268,7 @@
 <style scoped>
 .add-subject-content {
     color: #333;
-    background-color: white;
+    /* background-color: white; */
     margin-left: 10%;
     padding: 20px 50px;
     max-width:100%;  
@@ -271,5 +276,13 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+.subject-header {
+    color: #fff;
+    padding: 10px 20px;
+}
+.subject-form {
+    background-color: #fff;
+    padding: 20px 50px;
 }
 </style>

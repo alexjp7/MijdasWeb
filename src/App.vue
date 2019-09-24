@@ -87,9 +87,14 @@ export default {
 }
 #footer .inner-container {
   /* color: rgb(255, 255, 255) !important; */
+  display: flex;
+  justify-content: center;
 }
 .inner-container {
   width: 100%;
+}
+.copyright-text {
+  display: flex;
 }
 </style>
 <style>
