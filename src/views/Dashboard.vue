@@ -16,7 +16,8 @@ export default {
     // StudentLoader,
     StaffLinker,
     StudentViewer
-  }
+  },
+  async mounted() {}
 };
 </script>
 

@@ -53,7 +53,7 @@
                         color="secondary"
                         block
                         class="navText"
-                        @click="teachingstaff(subject.subject_code, subject.id, $event)"
+                        @click="updateSubject(subject.subject_code, subject.id, $event)"
                       >Teaching Staff</v-btn>
                     </router-link>
                   </v-col>
@@ -65,7 +65,7 @@
                         color="secondary"
                         block
                         class="navText"
-                        @click="students(subject.id, $event)"
+                        @click="updateSubject(subject.subject_code, subject.id, $event)"
                       >Students</v-btn>
                     </router-link>
                   </v-col>
@@ -77,7 +77,7 @@
                         color="secondary"
                         block
                         class="navText"
-                        @click="assessment(subject.id, $event)"
+                        @click="updateSubject(subject.subject_code, subject.id,$event)"
                       >Assessments</v-btn>
                     </router-link>
                   </v-col>
@@ -137,21 +137,11 @@ export default {
       .finally(() => (this.loading = false));
   },
   methods: {
-    teachingstaff: function(subjectCode, subjectID, event) {
+    updateSubject: function(subjectCode, subjectID, event) {
       if (event) {
         console.log("test: " + subjectCode + " " + subjectID);
         this.$store.dispatch("setSubjectCode", subjectCode);
         this.$store.dispatch("setSubjectID", subjectID);
-      }
-    },
-    students: function(subjectCode, subjectID, event) {
-      if (event) {
-        this.$store.dispatch("setSubject", subjectCode, subjectID);
-      }
-    },
-    assessment: function(subjectCode, subjectID, event) {
-      if (event) {
-        this.$store.dispatch("setSubject", subjectCode, subjectID);
       }
     }
   }

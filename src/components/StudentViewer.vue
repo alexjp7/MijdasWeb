@@ -39,7 +39,7 @@
       </v-card>
       <!-- Upload Tool -->
       <v-card v-if="hasClickedAdd == true">
-        <v-card>
+        <v-card  style="max-height:20vh !important;">
           <v-card-actions>
             <div id="uploader">
               <upload-btn id="uploadButton" icon @file-update="readFileInput">
@@ -108,7 +108,11 @@ export default {
     /* File Uplaoder Tool */
     readFileInput(file) {
       const reader = new FileReader();
-      reader.onload = e => (this.studentsUploaded = e.target.result.split(","));
+      reader.onload = e => {
+        this.studentsUploaded = e.target.result.split(",")
+        console.log(this.studentsUploaded);
+        
+      };
       reader.readAsText(file);
 
       this.fileName = file.name;
@@ -121,10 +125,12 @@ export default {
         request: "ADD_STUDENTS",
         students: this.studentsUploaded,
         subject_id: this.subjectID
-      }).then(response => {
+      }).then(response => 
+      {
         this.snackBarMessage = "Upload Successful!";
         this.snackbar = true;
-      });
+      }).catch(error=>console.log(error));
+      
       this.getStudents();
     },
     /* Tool Bar toogles */

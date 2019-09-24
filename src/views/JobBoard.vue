@@ -70,6 +70,80 @@
               </v-expansion-panels>  
             </v-row>    
           </v-card>
+          <br>
+          <v-card id = "job">       
+        <v-row justify="center">
+            <!-- Panels -->         
+              <v-expansion-panels>          
+                <v-expansion-panel >           
+                  <v-card color="secondary" class="expansionHeader">
+                  <v-expansion-panel-header>
+                    <h1 style="color:white;"> 
+                      Faculty of Science, Medicine and Health
+                    </h1>
+                  </v-expansion-panel-header>      
+                  </v-card>
+                  <!-- Content 1 -->
+                  <v-expansion-panel-content>
+                    <v-card class="job-content" color="secondary"> 
+                      <h3 style="color:white;"> 
+                        MEDI111 - Tutor Wanted<br>
+                        To apply, email: stan@uow.edu.au
+                      </h3> 
+                    </v-card>
+                  </v-expansion-panel-content>    
+                  <!-- Content 2 -->   
+                </v-expansion-panel>       
+              </v-expansion-panels>  
+            </v-row>    
+          </v-card>
+          <br>
+          <v-card id = "job">       
+        <v-row justify="center">
+            <!-- Panels -->         
+              <v-expansion-panels>          
+                <v-expansion-panel >           
+                  <v-card color="secondary" class="expansionHeader">
+                  <v-expansion-panel-header>
+                    <h1 style="color:white;"> 
+                      Faculty of Business
+                    </h1>
+                  </v-expansion-panel-header>      
+                  </v-card>
+                  <!-- Content 1 -->  
+                  <!-- Content 2 -->   
+                </v-expansion-panel>       
+              </v-expansion-panels>  
+            </v-row>    
+          </v-card>
+          <br>
+          <v-card id = "job">       
+        <v-row justify="center">
+            <!-- Panels -->         
+              <v-expansion-panels>          
+                <v-expansion-panel >           
+                  <v-card color="secondary" class="expansionHeader">
+                  <v-expansion-panel-header>
+                    <h1 style="color:white;"> 
+                      Faculty of Social Sciences
+                    </h1>
+                  </v-expansion-panel-header>      
+                  </v-card>
+                  <!-- Content 1 -->
+                  <v-expansion-panel-content>
+                    <v-card class="job-content" color="secondary"> 
+                      <h3 style="color:white;"> 
+                        SOC103 - Tutor Wanted<br>
+                        To apply, email: maryh@uow.edu.au
+                      </h3> 
+                    </v-card>
+                  </v-expansion-panel-content>    
+                  <!-- Content 2 -->   
+                </v-expansion-panel>       
+              </v-expansion-panels>  
+            </v-row>    
+          </v-card>
+          <br>
   </div>
 </template>
 

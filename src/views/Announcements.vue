@@ -29,32 +29,29 @@
                 </v-btn>
       </v-container>
       <v-dialog v-model="dialog" max-width="500px">
-          <v-card>
+          <v-card id>
             <v-card-text>
-              <v-text-field label="Announcement name"></v-text-field>
-              <v-textarea label="Announcement content"></v-textarea>
+              <v-text-field label="Announcement name" id="ann1"></v-text-field>
+              <v-textarea label="Announcement content" id="ann2"></v-textarea>
             </v-card-text>
             <v-card-actions>
               <div class="flex-grow-1"></div>
-              <v-btn text color="primary" @click="dialog = false">Submit</v-btn>
-              <div class="field input">"@dialog"</div>
+              <v-btn text color="primary" @click="dialog = false" id="data">Submit</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
     </v-card>
   </div>
-  
 </template>
 
 <script>
 export default {
-  data () {
-      return {
+  data: () => ({
         dialog: false,
         
-      }
-  }
-};
+      })
+}
+
 </script>
 
 <style scoped>
