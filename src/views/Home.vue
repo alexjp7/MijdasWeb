@@ -3,15 +3,18 @@
     <div id="homeBkg">
       <!-- Caroursel -->
       <div id="homeBkg">
-        <v-carousel continuous cycle="true" height="250">
+        <v-carousel continuous cycle="true" height="auto">
           <v-carousel-item>
-            <v-img src="@/assets/logo.png"></v-img>
+            <!-- <v-img src="@/assets/logo.png"></v-img> -->
+            <v-img src="@/assets/markit-logo_full.png"></v-img>
           </v-carousel-item>
           <v-carousel-item>
-            <v-img src="@/assets/Markit 1.2.png"></v-img>
+            <!-- <v-img src="@/assets/Markit 1.2.png"></v-img> -->
+            <v-img src="@/assets/logo_full.png"></v-img>
           </v-carousel-item>
           <v-carousel-item>
-            <v-img src="@/assets/markit-logo.png"></v-img>
+            <!-- <v-img src="@/assets/markit-logo.png"></v-img> -->
+            <v-img src="@/assets/logo_green_full.png"></v-img>
           </v-carousel-item>
         </v-carousel>
         <v-header class="display-2" :elevation="n-10">

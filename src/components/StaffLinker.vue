@@ -126,9 +126,9 @@ export default {
         request: "ADD_TUTOR",
         tutors: [this.searchString],
         subject_id: this.subjectID
-      }).catch(error => console.log(response));
+      }).catch(error => console.log(error));
       this.getStaff();
-      this.searchString = 1;
+      this.searchString = "";
     },
     //Makes an asyncronous call to popualte linked staff members
     async getStaff() {

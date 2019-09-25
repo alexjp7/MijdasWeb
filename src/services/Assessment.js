@@ -6,5 +6,8 @@ export default {
   },
   createAssessments(credentials) {
     return Api().post("assessment/", credentials);
+  },
+  toggleActivation(credentials) {
+    return Api().post("assessment/", credentials);
   }
 };

@@ -11,16 +11,20 @@
             <h2 id="pageBreakHeading">Your Subjects</h2>
           </div>
           <v-spacer></v-spacer>
+          <v-card-actions>
           <div class="col-1 col-align-right">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
+                <router-link to="/add-subject">
                 <v-btn v-on="on" color="secondary">
                   <v-icon>mdi-plus</v-icon>
                 </v-btn>
+                </router-link>
               </template>
               <span>Add Subject</span>
             </v-tooltip>
           </div>
+          </v-card-actions>
         </div>
       </v-card>
 
