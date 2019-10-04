@@ -141,7 +141,6 @@ export default {
   methods: {
     updateSubject: function(subjectCode, subjectID, event) {
       if (event) {
-        console.log("test: " + subjectCode + " " + subjectID);
         this.$store.dispatch("setSubjectCode", subjectCode);
         this.$store.dispatch("setSubjectID", subjectID);
       }

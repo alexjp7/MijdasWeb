@@ -120,6 +120,12 @@ export default new Router({
       name: "AddSuject",
       component: () => import("./views/AddSubject.vue")
     },
+    {
+      path: "/results",
+      name: "Results",
+      component: () => import("./views/Results.vue")
+    },
+
 
     /**************
      * COMPONENTS
