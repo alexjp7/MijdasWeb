@@ -402,6 +402,7 @@ export default {
        }).catch(error => {
           this.hasCriteria = false
           this.isAddCriteria = true;
+          
          });
     },
 
