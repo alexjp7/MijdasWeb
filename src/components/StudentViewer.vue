@@ -9,15 +9,32 @@
           <v-card>
             <!-- Toolbar with search and refresh buttons -->
             <v-toolbar dense="true" flat color="secondary">
-              <v-btn icon @click="searchClicked">
-                <v-icon color="white">mdi-magnify</v-icon>
-              </v-btn>
-              <v-btn @click="addClicked" color="white" icon>
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
-              <v-btn @click="getStudents" color="white" icon>
-                <v-icon>mdi-refresh</v-icon>
-              </v-btn>
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on" @click="searchClicked">
+                    <v-icon color="white">mdi-magnify</v-icon>
+                  </v-btn>
+                </template>
+                <span>Search</span>
+              </v-tooltip>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn v-on="on" @click="addClicked" color="white" icon>
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
+                </template>
+                <span>Upload File</span>
+              </v-tooltip>
+
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <v-btn v-on="on" @click="getStudents" color="white" icon>
+                    <v-icon>mdi-refresh</v-icon>
+                  </v-btn>
+                </template>
+                <span>Refresh</span>
+              </v-tooltip>
             </v-toolbar>
           </v-card>
         </span>
@@ -39,7 +56,7 @@
       </v-card>
       <!-- Upload Tool -->
       <v-card v-if="hasClickedAdd == true">
-        <v-card  style="max-height:20vh !important;">
+        <v-card style="max-height:20vh !important;">
           <v-card-actions>
             <div id="uploader">
               <upload-btn id="uploadButton" icon @file-update="readFileInput">
@@ -109,9 +126,8 @@ export default {
     readFileInput(file) {
       const reader = new FileReader();
       reader.onload = e => {
-        this.studentsUploaded = e.target.result.split(",")
+        this.studentsUploaded = e.target.result.split(",");
         console.log(this.studentsUploaded);
-        
       };
       reader.readAsText(file);
 
@@ -125,12 +141,13 @@ export default {
         request: "ADD_STUDENTS",
         students: this.studentsUploaded,
         subject_id: this.subjectID
-      }).then(response => 
-      {
-        this.snackBarMessage = "Upload Successful!";
-        this.snackbar = true;
-      }).catch(error=>console.log(error));
-      
+      })
+        .then(response => {
+          this.snackBarMessage = "Upload Successful!";
+          this.snackbar = true;
+        })
+        .catch(error => console.log(error));
+
       this.getStudents();
     },
     /* Tool Bar toogles */

@@ -7,9 +7,14 @@
         </span>
         <v-spacer></v-spacer>
         <v-card-action>
-          <v-btn @click="getStaff" color="secondary">
-            <v-icon>mdi-refresh</v-icon>
-          </v-btn>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn flat v-on="on" @click="getStaff" color="secondary">
+                <v-icon>mdi-refresh</v-icon>
+              </v-btn>
+            </template>
+            <span>Refresh</span>
+          </v-tooltip>
         </v-card-action>
       </v-card-title>
     </v-card>
@@ -32,9 +37,14 @@
               <h4>{{staff}}</h4>
             </span>
             <v-spacer></v-spacer>
-            <v-btn @click="removeStaff(staff)">
-              <v-icon>mdi-delete</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-btn v-on="on" @click="removeStaff(staff)">
+                  <v-icon>mdi-delete</v-icon>
+                </v-btn>
+              </template>
+              <span>Remove</span>
+            </v-tooltip>
           </v-card>
         </div>
       </v-card>
@@ -49,7 +59,7 @@
         single-line
         filled
       ></v-text-field>
-      <v-btn @click="addStaff" class="components" color="secondary">Add Staff</v-btn>
+      <v-btn @click="addStaff" style="margin-top: 20px" color="secondary">Add Staff</v-btn>
     </div>
     <div v-if="hasQuery === true">
       <div v-if="hasMatch === true">
