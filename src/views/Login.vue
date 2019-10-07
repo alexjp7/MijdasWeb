@@ -35,12 +35,21 @@ v-form {
               ></v-text-field>
               <br />
               <div class="danger-alert" v-html="error" />
-              <br />
-              <v-row>
-                <v-btn id="divider" class="primary" dark tile @click="login">Login</v-btn>
-                <router-link to="/register" class="btn btn-link" color="white">
-                  <v-btn id="divider" dark class="primary" tile>Register</v-btn>
-                </router-link>
+              <v-row no-gutters>
+                <v-cols cols="2">
+                  <v-btn
+                    id="divider"
+                    class="primary"
+                    style="min-width: 10vw"
+                    dark
+                    tile
+                    @click="login"
+                  >Login</v-btn>
+
+                  <router-link to="/register" class="btn btn-link" color="white">
+                    <v-btn dark style="min-width: 10vw" class="primary" tile>Register</v-btn>
+                  </router-link>
+                </v-cols>
               </v-row>
             </div>
           </v-form>

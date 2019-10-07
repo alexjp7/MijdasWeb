@@ -10,29 +10,46 @@ v-form {
 </style>
 
 <template>
-  <div style="margin-left: 25vw">
+  <div>
     <v-layout column>
       <v-flex xs6 offset-xs3 id="fields">
         <panel title="Register">
           <v-form name="register" autocomplete="off">
             <div class="pl-4 pr-4 pt-2 pb-2">
-              <v-text-field label="Username" v-model="username"></v-text-field>
-              <br />
-              <v-text-field
-                label="Password"
-                type="password"
-                v-model="password"
-                autocomplete="new-password"
-              ></v-text-field>
+              <v-container class="py-0">
+                <v-row>
+                  <v-col cols="12" md="6">
+                    <v-text-field label="Username" v-model="username" filled />
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field label="Email" v-model="email" filled />
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field label="First Name" v-model="firstName" filled />
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field label="Last Name" v-model="lastName" filled />
+                  </v-col>
+                  <v-col cols="12" md="6">
+                    <v-text-field
+                      label="Password"
+                      filled
+                      type="password"
+                      v-model="password"
+                      autocomplete="new-password"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
             </div>
           </v-form>
+
           <br />
           <div class="danger-alert" v-html="error" />
           <br />
           <v-row>
-            <v-btn id="divider" dark class="primary" @click="register">Register</v-btn>
             <router-link to="/login" class="btn btn-link">
-              <v-btn id="divider" dark class="primary">Login</v-btn>
+              <v-btn id="divider" style="min-width: 10vw" dark class="primary">Register</v-btn>
             </router-link>
           </v-row>
         </panel>
@@ -48,8 +65,12 @@ export default {
   data() {
     return {
       request: "CREATE",
+      email: "",
+      firstName: "",
+      lastName: "",
       username: "",
-      password: ""
+      password: "",
+      password1: ""
     };
   },
   methods: {

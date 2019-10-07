@@ -11,6 +11,15 @@
                 </v-col>
 
                 <v-col cols="12" md="6">
+                  <v-text-field
+                    label="Permission Type"
+                    v-model="permissionType"
+                    filled
+                    readonly="true"
+                  />
+                </v-col>
+
+                <v-col cols="12" md="6">
                   <v-text-field label="Email Address" v-model="email" clearable filled />
                 </v-col>
 
@@ -22,62 +31,63 @@
                   <v-text-field label="Last Name" v-model="lastName" clearable filled />
                 </v-col>
 
-                <v-col cols="6">
-                  <v-text-field
-                    label="Password"
-                    v-model="password"
-                    type="password"
-                    hint="At least 8 characters"
-                    clearable
-                    filled
-                    :rules="passwordRules"
-                  />
-                </v-col>
-
-                <v-col cols="6">
-                  <v-text-field
-                    label="Re-Enter Password"
-                    v-model="password1"
-                    type="password"
-                    hint="At least 8 characters"
-                    clearable
-                    filled
-                    :rules="passwordRules1"
-                  />
-                </v-col>
-
                 <v-col cols="12">
                   <v-textarea label="About Me" v-model="about" value clearable filled />
                 </v-col>
-                <v-col cols="12" class="text-right">
-                  <div v-if="updated == true">
-                    <v-alert type="success" dismissible>Successfully Updated Profile!</v-alert>
-                  </div>
-                  <div v-if="updatedErrored == true">
-                    <v-alert type="error" dismissible>Unsuccessfully Updated Profile!</v-alert>
-                  </div>
-                  <v-btn color="success" @click="updateProfile">Update Profile</v-btn>
+              </v-row>
+            </v-container>
+            <v-container>
+              <v-row no-gutters style="flex-wrap: nowrap">
+                <v-dialog v-model="dialog" persistent max-width="600px">
+                  <template v-slot:activator="{ on }">
+                    <v-col>
+                      <v-btn color="primary" v-on="on">Change Password</v-btn>
+                    </v-col>
+                  </template>
+                  <v-card>
+                    <v-container>
+                      <v-row justify="center">
+                        <v-col cols="8">
+                          <v-text-field
+                            label="Password"
+                            v-model="password"
+                            type="password"
+                            hint="At least 8 characters"
+                            clearable
+                            filled
+                            :rules="passwordRules"
+                          />
+                        </v-col>
+
+                        <v-col cols="8">
+                          <v-text-field
+                            label="Re-Enter Password"
+                            v-model="password1"
+                            type="password"
+                            hint="At least 8 characters"
+                            clearable
+                            filled
+                            :rules="passwordRules1"
+                          />
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <v-card-actions>
+                      <div class="flex-grow-1"></div>
+                      <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                      <v-btn color="blue darken-1" text @click="updateProfile">Save</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <v-col cols="8" class="text-right">
+                  <v-btn color="success">Update Profile</v-btn>
                 </v-col>
               </v-row>
             </v-container>
           </v-form>
         </material-card>
       </v-col>
-      <v-col cols="12" md="4">
-        <material-card class="v-card-profile">
-          <v-avatar slot="offset" class="mx-auto d-block elevation-6" size="130">
-            <img src />
-            <!-- Add a avatar image here -->
-          </v-avatar>
-          <v-card-text class="text-center">
-            <h6 class="overline mb-3">{{permissionType}}</h6>
-            <h4 class="font-weight-light">{{firstName}} {{lastName}}</h4>
-            <p class="font-weight-light"></p>
-          </v-card-text>
-        </material-card>
-      </v-col>
     </v-row>
-    <v-card dark color="primary">just for you ilyas my boi</v-card>
   </v-container>
 </template>
 
@@ -101,7 +111,7 @@ export default {
       updated: null,
       errored: null,
       updatedErrored: null,
-
+      dialog: false,
       passwordRules: [
         v => v.length <= 64 || "Password too long",
         v => v.length >= 4 || "Min 4 characters",
@@ -122,7 +132,6 @@ export default {
     })
       .then(response => {
         this.object = response.data.records;
-
         this.email = this.object[0].email;
         //this.password = this.object[0].password;
         this.permissionType = this.object[0].permission_type;
