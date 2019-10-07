@@ -3,7 +3,7 @@
       <v-card color="primary">
         <v-card-title>
             <span id="pageBreakHeading">
-                <h2 style="color:white;"> MarkIt Student Dashboard</h2>
+                <h2 style="color:white;">MarkIt Student Dashboard</h2>
                 <v-spacer></v-spacer>
                 <v-card>
                 <!-- Toolbar with search and refresh buttons -->
@@ -28,6 +28,8 @@
                     <v-treeview 
                         return-object
                         hoverable
+                        activatable
+                        color="secondary"
                         open-on-click=""
                         :items="tasks" 
                         :active="active"
@@ -37,16 +39,12 @@
                         <!-- slot for label click listener -->
                             <template slot="label" slot-scope="{ item }" >
                                 <div v-if="item.type == 'child_node'">
-                                    <v-card>
-                                        <v-btn block  @click="taskClicked(item)">
+                                        <v-btn block=""  @click="taskClicked(item)">
                                             {{ item.name}}
                                         </v-btn>
-                                    </v-card>
                                 </div>
                                 <div v-else-if="item.type == 'parent_node' ">
-                                    <v-card>
                                         {{ item.name}}
-                                    </v-card>
                                 </div>
                             </template>
                             <!-- adds open/close folder change -->
@@ -209,16 +207,13 @@
                                                 </v-card>
                                             </v-col>
                                             <v-col>
-                                                <v-card  elevation="3" style="font-weight:bold;" v-if="criterion.student_mark > criterion.average" >
-                                                    <v-icon color="success">mdi-chevron-up-box</v-icon>
-                                                    {{Math.abs(((criterion.student_mark/criterion.max_mark) * 100) - ((criterion.average/criterion.max_mark) * 100)).toFixed(1)}}%
-                                                </v-card>
-                                                <v-card  elevation="3" style="font-weight:bold;" v-else-if="criterion.student_mark < criterion.average" >
+                                                <v-card  elevation="3" style="font-weight:bold;" v-if="criterion.student_mark < criterion.average" >
                                                     <v-icon color="warning">mdi-chevron-down-box</v-icon>
                                                     {{Math.abs(((criterion.student_mark/criterion.max_mark) * 100) - ((criterion.average/criterion.max_mark) * 100)).toFixed(1)}}%
                                                 </v-card>
-                                                <v-card  elevation="3" style="font-weight:bold;" v-else-if="criterion.student_mark == criterion.average" >
-                                                    <v-icon color="primary">mdi-approximately-equal-box</v-icon>
+                                                <v-card  elevation="3" style="font-weight:bold;" v-else>
+                                                    <v-icon color="success">mdi-chevron-up-box</v-icon>
+                                                    {{Math.abs(((criterion.student_mark/criterion.max_mark) * 100) - ((criterion.average/criterion.max_mark) * 100)).toFixed(1)}}%
                                                 </v-card>
                                             </v-col>
                                         </v-row>
@@ -361,7 +356,7 @@ export default {
         },
         processCohortData(cohortData) {
 
-            this.labels = [ "0 - "+ this.markOutOf/4, this.markOutOf/4 + "-" + this.markOutOf/2,  this.markOutOf/2 + " - " + (this.markOutOf/4)*3, (this.markOutOf/4)*3 + " - " + this.markOutOf];
+            this.labels = [ "0 - "+ (this.markOutOf/4), (this.markOutOf/4) + "-" + this.markOutOf/2,  (this.markOutOf/2) + " - " + (this.markOutOf/4)*3, (this.markOutOf/4)*3 + " - " + this.markOutOf];
             this.cohortResults = cohortData;
             this.graphDraw = true;
         },
