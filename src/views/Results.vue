@@ -101,15 +101,15 @@
                                         <template v-slot:default>
                                             <tbody>
                                                 <tr>
-                                                    <th>Assessment  Average:</th>
+                                                    <th>Assessment Average:</th>
                                                     <td><h3>{{averageMark}} / {{markOutOf}}</h3></td>
                                                 </tr>
                                                 <tr>
-                                                <th> Cohort Best Attempted:</th>
+                                                <th> Cohort highest Average:</th>
                                                     <td><h3>{{bestCriterion.display_text}}</h3></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Cohort Worst Attempted:</th>
+                                                    <th>Cohort Lowest Average:</th>
                                                     <td><h3>{{worstCriterion.display_text}}</h3></td>
                                                 </tr>
                                             </tbody>
@@ -182,7 +182,7 @@
                             </v-col>
                             <v-col>
                                 <v-card color="accent" style="color:black;">
-                                    <h4>Your Mark Compared to Cohort Average</h4>
+                                    <h4>Your Mark vs Cohort Average</h4>
                                 </v-card>
                             </v-col>
                         </v-row>
