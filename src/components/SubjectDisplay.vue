@@ -4,26 +4,23 @@
       <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
     </section>
     <section v-else>
-      <v-card color="secondary">
+      <v-card color="primary">
         <div v-if="loading">Loading...</div>
         <div class="col-container">
-          <div class="col-2">
-            <h2 id="pageBreakHeading">Your Subjects</h2>
-          </div>
+          <h2 id="pageBreakHeading">Your Subjects</h2>
+
           <v-spacer></v-spacer>
           <v-card-actions>
-          <div class="col-1 col-align-right">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <router-link to="/add-subject">
-                <v-btn v-on="on" color="secondary">
-                  <v-icon>mdi-plus</v-icon>
-                </v-btn>
+                  <v-btn v-on="on" color="secondary">
+                    <v-icon>mdi-plus</v-icon>
+                  </v-btn>
                 </router-link>
               </template>
               <span>Add Subject</span>
             </v-tooltip>
-          </div>
           </v-card-actions>
         </div>
       </v-card>

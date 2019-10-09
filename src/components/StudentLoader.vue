@@ -1,5 +1,13 @@
 <template>
   <div id="StudentLoader">
+    <v-card color="primary">
+      <v-card-title>
+        <span id="pageBreakHeading">
+          <h2 style="color:white;">Students Of {{subjectCode}}</h2>
+          <v-spacer></v-spacer>
+        </span>
+      </v-card-title>
+    </v-card>
     <v-card color="secondary">
       <v-card-title>
         <span id="pageBreakHeading">

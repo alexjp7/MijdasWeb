@@ -1,5 +1,14 @@
 <template>
   <div id="StudentLoader">
+    <v-card color="primary">
+      <v-card-title>
+        <span id="pageBreakHeading">
+          <h2 style="color:white;">Teaching Staff Of {{subjectCode}}</h2>
+          <v-spacer></v-spacer>
+        </span>
+      </v-card-title>
+    </v-card>
+    <v-divider vertical></v-divider>
     <v-card color="secondary">
       <!-- Header -->
       <v-card-title>
@@ -103,6 +112,7 @@ import Subject from "@/services/Subject";
 import UploadButton from "vuetify-upload-button";
 export default {
   data: () => ({
+    subjectCode: "",
     snackBarMessage: "",
     snackbar: false,
     subjectID: "",
@@ -200,6 +210,7 @@ export default {
   /* LifeCycle hooks */
   async mounted() {
     this.getStudents();
+    this.subjectCode = this.$store.state.subjectCode;
   }
 };
 </script>

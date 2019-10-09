@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <h1>Welcome To Assessments For:</h1>
-    <h1>{{subjectCode}}</h1>
+  <div id="assessmentDisplay">
+    <v-card color="primary">
+      <v-card-title>
+        <span id="pageBreakHeading">
+          <h2 style="color:white;">Assessment Management For {{subjectCode}}</h2>
+          <v-spacer></v-spacer>
+        </span>
+      </v-card-title>
+    </v-card>
     <br />
     <!-- <Assessments /> -->
     <AssessmentBuilder />
@@ -27,4 +33,10 @@ export default {
 </script>
 
 <style scoped>
+#assessmentDisplay {
+  margin-left: 10%;
+  margin-right: 10%;
+  max-width: 100%;
+  display: block;
+}
 </style>

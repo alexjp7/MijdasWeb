@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <h1>Welcome To Teaching Staff Management For:</h1>
-    <h1>{{subjectCode}}</h1>
+  <div id="StudentDisplay">
+    <v-card color="primary">
+      <v-card-title>
+        <span id="pageBreakHeading">
+          <h2 style="color:white;">Teaching Staff Of {{subjectCode}}</h2>
+          <v-spacer></v-spacer>
+        </span>
+      </v-card-title>
+    </v-card>
     <br />
     <StaffLinker />
   </div>
@@ -24,4 +30,15 @@ export default {
 </script>
 
 <style scoped>
+#pageBreakHeading {
+  padding: 1%;
+  display: flex;
+  color: white;
+}
+#StudentDisplay {
+  margin-left: 10%;
+  margin-right: 10%;
+  max-width: 100%;
+  display: block;
+}
 </style>
