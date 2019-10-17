@@ -9,7 +9,7 @@
             <!-- Toolbar with search and refresh buttons -->
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
-                <v-btn v-on="on" @click="getStudents" color="primary">
+                <v-btn v-on="on" @click="getStudents" color="secondary">
                   <v-icon>mdi-refresh</v-icon>
                 </v-btn>
               </template>
@@ -19,12 +19,41 @@
         </span>
       </v-card-title>
     </v-card>
+    <!-- Validate whether site has been visited with student ID access string-->
+  <div  v-if="hasValidStudentId == false">
+     <v-dialog v-model="dialog" persistent max-width="700">
+      <v-card>
+        <v-card color="primary">
+          <v-card-title  style="color:white;" class="headline">Results Unreachable</v-card-title>
+        </v-card>
+          <v-card color="accent">
+        <v-row>
+          <v-col :cols="2">
+            <v-icon x-large  class="group pa-2" >mdi-lock-alert</v-icon>
+          </v-col>
+          <v-col>
+            <h2>
+                Whoops,
+            </h2>
+              <h3>
+                 Please use the link that was emailed to you!
+              </h3>
+                If you're note sure about this
+                 feature, contact your Subject Supervisor
+          </v-col>
+
+        </v-row>
+          </v-card>
+      </v-card>
+    </v-dialog>
+  </div>
+  <div v-else>
     <v-card color="background">
       <v-row>
         <v-col :cols="2">
           <v-card elevation="4" color="secondary">
             <v-card-title>
-              <h4 style="padding-left:3%;" id="pageBreakHeading">Your Assessments</h4>
+              <h4 style="padding-left:3%;" id="pageBreakHeading">Your Tasks</h4>
             </v-card-title>
           </v-card>
           <v-card elevation="4" id="drillDownCard">
@@ -254,6 +283,7 @@
       </v-row>
     </v-card>
   </div>
+  </div>
 </template>
 
 <script>
@@ -276,8 +306,10 @@ export default {
     gradients,
     type: "bars",
 
+    //dialog
+    dialog:true,
     // Test Student
-    student_id: "edward",
+    student_id:null,
     //Rendered Values
     selectedSubject: "",
     averageMark: null,
@@ -290,7 +322,8 @@ export default {
     markBreakdown: [],
     tasks: [],
     labels: [],
-    cohortPerformance: []
+    cohortPerformance: [],
+    hasValidStudentId: true,
   }),
   methods: {
     taskClicked(item) {
@@ -349,8 +382,6 @@ export default {
           max_mark: assessmentData[i - 1].max_mark
         };
       }
-
-      console.table(this.cohortPerformance);
       this.averageMark = cohortAverage.toFixed(1);
       this.worstCriterion = lowestPerformingCriterion;
       this.bestCriterion = highestPerformingCriterion;
@@ -384,8 +415,7 @@ export default {
       })
         .then(response => {
           this.tasks = response.data;
-        })
-        .catch(error => console.log(error));
+        }).catch(error => console.error(error));
     },
     async getAssessmentData(assessmentId) {
       Session.getStudentAssessmentData({
@@ -402,12 +432,18 @@ export default {
             response.data.cohort_average
           );
           this.processCohortData(response.data.quartiles);
-        })
-        .catch(error => console.log(error));
+          this.hasValidStudentId = true;
+        }).catch(error => console.error(error));
     }
   },
-
+  
+  //Only retrieve student data if ID query parameter is set
   async mounted() {
+    if(this.$route.query["id"]==null ){
+      this.hasValidStudentId = false;
+      return;
+    }
+    this.student_id = this.$route.query["id"];
     this.getTasks();
   }
 };
