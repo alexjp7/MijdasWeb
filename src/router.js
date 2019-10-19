@@ -23,6 +23,7 @@ export default new Router({
     return { x: 0, y: 0 };
   },
   meta:{domains:"www.lol.com"},
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     /**************
