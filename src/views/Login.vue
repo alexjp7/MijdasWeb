@@ -28,7 +28,6 @@ v-form {
                 label="Password"
                 v-model="password"
                 type="password"
-                hint="At least 8 characters"
                 clearable
                 filled
                 :rules="passwordRules"
