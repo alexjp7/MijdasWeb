@@ -7,10 +7,12 @@
       <v-card color="primary">
         <div v-if="loading">Loading...</div>
         <div class="col-container">
+          <div class="col-heading">
           <h2 id="pageBreakHeading">Your Subjects</h2>
-
-          <v-spacer></v-spacer>
-          <v-card-actions>
+          </div>
+          <!-- <v-spacer></v-spacer> -->
+          <div class="col-add-button">
+          <v-card-actions class="add-button">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <router-link to="/add-subject">
@@ -22,6 +24,7 @@
               <span>Add Subject</span>
             </v-tooltip>
           </v-card-actions>
+          </div>
         </div>
       </v-card>
 
@@ -186,6 +189,7 @@ h6 {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 .col-2 {
   width: 50%;
@@ -194,9 +198,20 @@ h6 {
 .col-align-right {
   align-items: right;
 }
-.add-button {
+/* .add-button {
   margin-right: 3%;
   color: white;
+} */
+.col-heading {
+  width: 50%;
+  padding-left: 10px;
+}
+.col-add-button {
+  width: 50%;
+  padding-left: 10px;
+}
+.add-button {
+  justify-content: flex-end;
 }
 </style>
 

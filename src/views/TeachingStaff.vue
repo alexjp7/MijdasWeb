@@ -1,11 +1,11 @@
 <template>
   <div id="StudentDisplay">
     <v-card color="primary">
-      <v-card-title>
-        <span id="pageBreakHeading">
-          <h2 style="color:white;">Teaching Staff Of {{subjectCode}}</h2>
-          <v-spacer></v-spacer>
-        </span>
+      <v-card-title class="card-title">
+        <!-- <span id="pageBreakHeading"> -->
+          <h2 style="color:white;" id="pageBreakHeading">Teaching Staff Of {{subjectCode}}</h2>
+          <!-- <v-spacer></v-spacer> -->
+        <!-- </span> -->
       </v-card-title>
     </v-card>
     <br />
@@ -34,11 +34,18 @@ export default {
   padding: 1%;
   display: flex;
   color: white;
+  width: 100%;
 }
 #StudentDisplay {
   margin-left: 10%;
   margin-right: 10%;
   max-width: 100%;
   display: block;
+}
+.card-title {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 10px;
 }
 </style>
