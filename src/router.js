@@ -6,11 +6,14 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "@/views/Home.vue";
+
 //Components
 import SubjectDisplay from "@/components/SubjectDisplay";
 import Navigation from "@/components/Navigation";
-// import { Store } from "vuex";
+
+import { Store } from "vuex";
 // import store from "./store";
+
 /**
  * Create the routes for the views
  * Note that these maybe nested to serve possible purpose
@@ -19,14 +22,13 @@ import Navigation from "@/components/Navigation";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
       return savedPosition;
     }
     return { x: 0, y: 0 };
   },
-  meta: { domains: "www.lol.com" },
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -35,12 +37,15 @@ export default new Router({
      **************/
     {
       path: "*",
-      redirect: "/"
+      redirect: "/" //Redirects Home if link is not recognised
     },
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Home,
+      meta: {
+        guest: true
+      }
     },
     {
       path: "/dashboard",
@@ -73,27 +78,42 @@ export default new Router({
     {
       path: "/announcements",
       name: "announcements",
-      component: () => import("./views/Announcements.vue")
+      component: () => import("./views/Announcements.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/assessment",
       name: "assessment",
-      component: () => import("./views/Assessment.vue")
+      component: () => import("./views/Assessment.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/calendar",
       name: "calendar",
-      component: () => import("./views/Calendar.vue")
+      component: () => import("./views/Calendar.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/criteria",
       name: "criteria",
-      component: () => import("./views/Criteria.vue")
+      component: () => import("./views/Criteria.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/jobboard",
       name: "jobboard",
-      component: () => import("./views/JobBoard.vue")
+      component: () => import("./views/JobBoard.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/register",
@@ -106,32 +126,50 @@ export default new Router({
     {
       path: "/profile",
       name: "profile",
-      component: () => import("./views/Profile.vue")
+      component: () => import("./views/Profile.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/settings",
       name: "settings",
-      component: () => import("./views/Settings.vue")
+      component: () => import("./views/Settings.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/students",
       name: "students",
-      component: () => import("./views/Students.vue")
+      component: () => import("./views/Students.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/teachingstaff",
       name: "teachingstaffs",
-      component: () => import("./views/TeachingStaff.vue")
+      component: () => import("./views/TeachingStaff.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/add-subject",
       name: "AddSuject",
-      component: () => import("./views/AddSubject.vue")
+      component: () => import("./views/AddSubject.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/results",
       name: "Results",
-      component: () => import("./views/Results.vue")
+      component: () => import("./views/Results.vue"),
+      meta: {
+        requiresAuth: true
+      }
     },
 
     /**************
@@ -146,27 +184,24 @@ export default new Router({
     {
       path: "/subjectDisplay",
       name: "subjectDisplay",
-      component: SubjectDisplay
+      component: SubjectDisplay,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/assessments",
       name: "assessments",
       component: () => import("./components/Assessments.vue")
-    }
-    /*
-
-    }
-
-    /*
+    },
     {
       path: "/Admin",
       name: "Admin",
-      component: () =>
-        import("./views/Admin.vue"),
+      component: () => import("./views/Admin.vue"),
       meta: {
         requiresAuth: true,
         is_admin: true
-      },
+      } /*
       async beforeEnter(to, from, next) {
         try {
           var hasPermission = await Store.state("isUserLoggedIn");
@@ -181,5 +216,21 @@ export default new Router({
         }
       }
       */
+    }
   ]
 });
+
+async () =>
+  router.beforeEach((to, from, next) => {
+    // redirect to login page if not logged in and trying to access a restricted page
+    const publicPages = ["/login", "/register", "/"];
+    const authRequired = !publicPages.includes(to.path);
+    const loggedIn = Store.state("isUserLoggedIn");
+
+    if (authRequired && !loggedIn) {
+      return next("/login");
+    }
+    next();
+  });
+
+export default router;
