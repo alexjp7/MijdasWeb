@@ -1,7 +1,13 @@
 <template>
-  <div>
-    <h1>Welcome To The Student List For:</h1>
-    <h1>{{subjectCode}}</h1>
+  <div id="studentViewer">
+  <v-card color="primary">
+      <v-card-title>
+        <span id="pageBreakHeading">
+          <h2 style="color:white;">Students for {{subjectCode}}</h2>
+          <v-spacer></v-spacer>
+        </span>
+      </v-card-title>
+    </v-card>
     <StudentViewer />
   </div>
 </template>
@@ -22,4 +28,8 @@ export default {
 </script>
 
 <style scoped>
+#studentViewer {
+  padding-left:2%;
+  padding-right:2%;
+}
 </style>

@@ -37,8 +37,8 @@ export default {
   width: 100%;
 }
 #StudentDisplay {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 1%;
+  margin-right: 1%;
   max-width: 100%;
   display: block;
 }

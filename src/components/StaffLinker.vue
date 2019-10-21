@@ -183,8 +183,6 @@ export default {
   border: 1px;
   max-width: 100%;
   display: block;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 #searchComponent {
   display: inline-flex;

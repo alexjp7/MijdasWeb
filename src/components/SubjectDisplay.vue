@@ -31,30 +31,27 @@
       <div class="cards" v-for="institution in institutions" v-bind:key="institution.id">
         <!-- <v-card-title  ></v-card-title> -->
         <div id="subjectBody">
+          <br>
           <h1>{{institution.institution}}</h1>
-
-          <v-expansion-panels accordion="true" focusable light>
-            <v-expansion-panel v-for="subject in institution.subjects" v-bind:key="subject.id">
+          <v-expansion-panels accordion="true" focusable light >
+            <v-expansion-panel v-for="subject in institution.subjects" v-bind:key="subject.id"  style="padding-bottom:15px;">
               <!-- Children nodes with clickable space-->
-              <v-expansion-panel-header>
-                <v-btn
+                <v-card  
                   x-large
-                  class="subjects"
-                  block
-                  color="secondary"
-                  light
-                >{{subject.subject_code}}</v-btn>
-              </v-expansion-panel-header>
-
-              <!-- <h3>Assessments</h3> -->
-              <v-expansion-panel-content>
-                <v-row justify="center">
+                  id="subjects"
+                  color="secondary">
+                    <v-expansion-panel-header  >
+                        <span  class="text-center"> {{subject.subject_code}} </span>
+                    </v-expansion-panel-header>
+              </v-card>
+              <v-expansion-panel-content >
+                <v-row  >
                   <v-col style="margin-left: 20vw; margin-right: 20vw">
                     <router-link to="/teachingstaff">
-                      <v-btn
-                        color="secondary"
+                      <v-btn 
+                        color="trim"
                         block
-                        class="navText"
+                        id="navText"
                         @click="updateSubject(subject.subject_code, subject.id, $event)"
                       >Teaching Staff</v-btn>
                     </router-link>
@@ -64,9 +61,9 @@
                   <v-col style="margin-left: 20vw; margin-right: 20vw">
                     <router-link to="/students">
                       <v-btn
-                        color="secondary"
+                        color="trim"
                         block
-                        class="navText"
+                        id="navText"
                         @click="updateSubject(subject.subject_code, subject.id, $event)"
                       >Students</v-btn>
                     </router-link>
@@ -76,9 +73,9 @@
                   <v-col style="margin-left: 20vw; margin-right: 20vw">
                     <router-link to="/assessment">
                       <v-btn
-                        color="secondary"
+                        color="trim"
                         block
-                        class="navText"
+                        id="navText"
                         @click="updateSubject(subject.subject_code, subject.id,$event)"
                       >Assessments</v-btn>
                     </router-link>
@@ -95,6 +92,7 @@
                   </v-expansion-panel-content>
                 </v-expansion-panel>-->
               </v-expansion-panel-content>
+              <v-spacer></v-spacer>
             </v-expansion-panel>
           </v-expansion-panels>
         </div>
@@ -153,9 +151,9 @@ export default {
 .subjectDisplay {
   color: #333;
   background-color: white;
-  margin-left: 10%;
+  margin-left: 2%;
   max-width: 100%;
-  margin-right: 10%;
+  margin-right: 2%;
 }
 .cards {
   color: #333;
@@ -163,9 +161,8 @@ export default {
   margin: auto;
   text-align: left !important;
 }
-.subjects {
+#subjects {
   color: white !important;
-  padding: 30%;
 }
 #pageBreakHeading {
   padding: 1%;
@@ -181,9 +178,6 @@ h6 {
   color: #333;
 }
 #subjectBody {
-  margin-left: 2%;
-  margin-right: 2%;
-  padding: 1%;
 }
 .col-container {
   width: 100%;
@@ -213,5 +207,13 @@ h6 {
 .add-button {
   justify-content: flex-end;
 }
+
+#navText {
+  color:white;
+  text-decoration: none;
+
+}
+
+
 </style>
 
