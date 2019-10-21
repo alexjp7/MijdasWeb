@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex, Ilyas
+-->
+
 <template>
   <div id="StudentLoader">
     <v-card color="primary">

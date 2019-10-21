@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div id="assessmentDisplay">
     <v-card color="primary">

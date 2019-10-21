@@ -1,3 +1,7 @@
+/*
+  Authors: Sam, Alex
+*/
+
 //Base Vue Import
 import Vue from "vue";
 import Router from "vue-router";
@@ -22,7 +26,7 @@ export default new Router({
     }
     return { x: 0, y: 0 };
   },
-  meta:{domains:"www.lol.com"},
+  meta: { domains: "www.lol.com" },
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -128,7 +132,6 @@ export default new Router({
       name: "Results",
       component: () => import("./views/Results.vue")
     },
-
 
     /**************
      * COMPONENTS

@@ -1,3 +1,7 @@
+<!--
+--  Authors: Alex
+-->
+
 <template>
   <div id="staffLinker">
     <v-card color="secondary">

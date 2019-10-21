@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div id="StudentDisplay">
     <v-card color="primary">

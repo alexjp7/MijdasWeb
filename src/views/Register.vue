@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Dylan
+-->
+
 <style scoped>
 #fields {
   display: inline-blockinline-block;

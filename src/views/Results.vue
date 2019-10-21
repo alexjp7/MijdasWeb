@@ -1,3 +1,7 @@
+<!--
+--  Authors: Alex
+-->
+
 <template>
   <div id="studentsPage">
     <v-card color="primary">

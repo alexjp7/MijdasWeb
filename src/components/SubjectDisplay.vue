@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex, Dylan
+-->
+
 <template>
   <div class="subjectDisplay">
     <section v-if="errored">

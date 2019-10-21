@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex, Dylan, Ilyas
+-->
+
 <template>
   <div class="dashboard">
     <SubjectDisplay />

@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div>
     <h1>Welcome To The Student List For:</h1>

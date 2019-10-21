@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <!-- 0 == checkbox, 1 == slider, 2 == number box -->
   <div id="criteriaBuilder">
