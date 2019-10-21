@@ -88,6 +88,7 @@
                     <v-switch
                       @change="toggleActivation"
                       color="primary"
+					  :disabled="switchDisabled"
                       v-model="isActive"
                       :class="`d-flex justify-2 mb-6`"
                       class="pa-2"
@@ -120,18 +121,7 @@
                         <span>Refresh</span>
                       </v-tooltip>
                 </v-card>
-                <div v-if="hasCriteria == false">
-                  <v-card color="background">
-                    <p style="color:#3c5c77b5">
-                      No Criteria For this task
-                      <br />Click the plus to create
-                    </p>
-                  </v-card>
-                </div>
-                <div v-else>
-                  <v-container>
-                    <!-- Criteria Display -->
-                    <!-- Add Criteria -->
+                 <!-- Add Criteria -->
                     <div v-if="isAddCriteria == true">
                       <v-card>
                         <v-simple-table dense>
@@ -175,9 +165,18 @@
                         </v-simple-table>
                       </v-card>
                     </div>
-                    <div v-else>
-                      <v-card></v-card>
-                    </div>
+                <div v-if="hasCriteria == false">
+                  <v-card color="background">
+                    <p style="color:#3c5c77b5">
+                      No Criteria For this task
+                      <br />Click the plus to create
+                    </p>
+                  </v-card>
+                </div>
+                <div v-else>
+                  <v-container>
+                    <!-- Criteria Display -->
+                   
                     <div v-if="hasCriteria == false">
                       <v-card color="background">
                         <p style="color:#3c5c77b5">
@@ -188,18 +187,21 @@
                     </div>
                     <!-- Populate Criteria Items -->
                     <div v-else>
-                      <div v-for="criterion in criteria" v-bind:key="criterion">
+                      <div v-for="(criterion) in criteria" v-bind:key="criterion">
                         <v-card>
                           <v-row>
-                            <v-card style="width:50%;" color="primary">
-                              <v-col>
-                                <h4 style="color:white;">ID</h4>
-                              </v-col>
-                            </v-card>
-                            <v-card style="width:50%;">
-                              <v-col>
-                                {{criterion.criteria}}
-                              </v-col>
+                            <v-card  style="display:flex;width:100%;" color="trim">
+                                <h4 class="text-start" style="color:white;">Criteria: {{criterion.criteria}}</h4>
+                                <v-spacer></v-spacer>
+                                <!-- Toolbar with search and refresh buttons -->
+                                <v-tooltip bottom>
+                                  <template v-slot:activator="{ on }">
+                                    <v-btn v-on="on" @click="deleteCriteria(criterion.criteria)" color="white" icon>
+                                      <v-icon>mdi-trash-can</v-icon>
+                                    </v-btn>
+                                  </template>
+                                  <span>Remove Criteria</span>
+                                </v-tooltip>   
                             </v-card>
                             <hr>
                           </v-row>
@@ -245,8 +247,30 @@
                               </v-col>
                               </v-card>
                           </v-row>  
-                        </v-card>  
-                         <hr>
+                        </v-card> 
+<!--                         <div v-if="hasClickedEditCriteria[parseInt(criterion.criteria)-1] == true">
+                          <v-row>
+                            <v-col style="width:50%;"> 
+                              <v-btn
+                                @click="editCriteriaClicked(criterion.criteria)"
+                                block
+                                color="success"
+                                style="height:5.6vh;min-width:40%;margin-top:1%;margin-bottom:1%;">
+                                Save Changes
+                              </v-btn>
+                            </v-col>
+                            <v-col>
+                              <v-btn
+                                @click="editCriteria"
+                                block
+                                color="error"
+                                style="height:5.6vh;min-width:40%;margin-top:1%;margin-bottom:1%;">
+                                Discard Changes
+                              </v-btn> 
+                            </v-col>
+                          </v-row> 
+                        </div> -->           
+                        <hr>
                         <br>
                       </div>
                     </div>
@@ -341,7 +365,8 @@ export default {
       lastAssessmentId: null,
       elementSelected: null,
       maxMarkInput: null,
-      displayTextInput: null
+	  displayTextInput: null,
+	  switchDisabled: false,
     };
   },
 
@@ -356,13 +381,13 @@ export default {
         }
       });
       this.lastAssessmentId = id;
-      this.isActive = parseInt(this.selectedTask.isActive);
+	  this.isActive = parseInt(this.selectedTask.isActive);
       /* Populate Criteria if exists */
       this.getCriteria(id);
     },
-    refresh() {
-      this.isAddCriteria = false;
-      this.getCriteria(this.lastAssessmentId);
+    async refresh() {
+		this.isAddCriteria = false;
+		this.getCriteria(this.lastAssessmentId);
     },
 
     /* Event Handles the + button  for assessment*/
@@ -373,97 +398,132 @@ export default {
     addCriteriaClick() {
       this.isAddCriteria = !this.isAddCriteria;
     },
-
+    /* Toggles of a subject the from v-swtich */
+    toggleActivation() {
+		let validToggle = true;
+		// Check if an activation is being executed
+        if(this.isActive === true) {
+			 //If ONLY the default criteria exists in the assessment
+			if(this.criteria.length === 1)  {
+				this.isActive = false;
+				this.selectedTask.isActive = this.isActive;
+				this.switchDisabled = true;
+				this.snackBarMessage = "Assessments need 1 more additinal critiera in order to be enabled";
+				this.snackbarError = true;
+				validToggle = false;
+			}
+			else if(this.criteria.length > 1) {
+				validToggle = true;
+			} 
+		}
+		// Only if the previous block flagged the toggle as valid
+		if(validToggle){
+			this.submitToggle();
+		}
+	},
+	async submitToggle() {
+		this.selectedTask.isActive = this.isActive;
+		Assessment.toggleActivation({
+			request: "TOGGLE_ACTIVATION",
+			assessment_id: this.selectedTask.id
+		}).then(response => {
+			this.snackbarError = false;
+			this.snackBarMessage = this.isActive
+							? this.selectedTask.name + " activated Succesfully !"
+							: this.selectedTask.name + " de-activated Succesfully !";
+			this.snackbarSuccess = true;
+		}).catch();
+	},
+	/* Event hander for delete button for criteria */
+    async deleteCriteria(criteriaId) {
+		//Disable the ability to remove the comment box
+		if(parseInt(criteriaId) === 1) {
+			this.snackBarMessage =  "You can't delete the comment box of an Assessment!"
+			this.snackbarError = true;
+			return;
+		}
+		//disable the ability to delete criteria from active assessments
+		if(this.isActive){
+			this.snackBarMessage =  "You can't delete criteria for an active Assessment!"
+			this.snackbarError = true;
+			return;
+		}
+		await Criteria.deleteCriteria({
+			request:"DELETE_CRITERIA",
+			a_id: this.selectedTask.id,
+			c_id: criteriaId
+		}).then(this.refresh()).catch(error=>console.log());
+    },
     /* Event handler for Add Task button */
     async createAssessment() {
-      Assessment.createAssessments({
-        request: "CREATE_ASSESSMENT",
-        task_name: this.newTaskName,
-        subject_id: this.subjectID
-      })
-        .then(response => {
-          this.getAssessments();
-          this.snackBarMessage = "Assessment Created Successful!";
-          this.snackbarSuccess = true;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-      this.newTaskName = "";
+		Assessment.createAssessments({
+			request: "CREATE_ASSESSMENT",
+			task_name: this.newTaskName,
+			subject_id: this.subjectID
+		}).then(response => {
+			this.getAssessments();
+			this.snackBarMessage = "Assessment Created Successful!";
+			this.snackbarSuccess = true;
+		}).catch(error => {
+			console.error(error);
+		});
+
+		this.newTaskName = "";
     },
     async addCriteria() {
-      Criteria.createCriteria({
-        request: "CREATE_CRITERIA",
-        assessment_id: this.selectedTask.id,
-        element: this.elementSelected,
-        max_mark: this.maxMarkInput,
-        display_text: this.displayTextInput
-      }).then(respomse => {
-        this.refresh();
-        this.snackBarMessage = "Criteria Created Successful!";
-      });
-      this.maxMarkInput = "";
-      this.displayTextInput = "";
-      this.elementSelected = null;
-    },
-    /* Toggles of a subject the from v-swtich */
-    async toggleActivation() {
-      this.selectedTask.isActive = this.isActive;
-      Assessment.toggleActivation({
-        request: "TOGGLE_ACTIVATION",
-        assessment_id: this.selectedTask.id
-      })
-        .then(response => {
-          this.snackBarMessage = parseInt(this.isActive)
-            ? this.selectedTask.name + " activated Succesfully !"
-            : this.selectedTask.name + " de-activated Succesfully !";
-          this.snackbarSuccess = true;
-        })
-        .catch(error => {
-          this.isActive = false;
-          this.selectedTask.isActive = this.isActive;
-          this.snackBarMessage =
-            "Assessments need marking-criteria in order to be enabled";
-          this.snackbarError = true;
-        });
-    },
+		Criteria.createCriteria({
+			request: "CREATE_CRITERIA",
+			assessment_id: this.selectedTask.id,
+			element: this.elementSelected,
+			max_mark: this.maxMarkInput,
+			display_text: this.displayTextInput
+			}).then(respomse => {
+				this.refresh();
+				this.snackBarMessage = "Criteria Created Successful!";
+			});
+
+			this.maxMarkInput = "";
+			this.displayTextInput = "";
+			this.elementSelected = null;
+		},
+	
     /* Get Criteria for selected assessment */
     async getCriteria(id) {
-      Criteria.getCriteria({
-        request: "VIEW_CRITERIA",
-        assessment_id: id
-      })
-        .then(response => {
-          this.criteria = response.data[0].records;
-          this.hasCriteria = true;
-        })
-        .catch(error => {
-          this.hasCriteria = false;
-          this.isAddCriteria = true;
-        });
+			Criteria.getCriteria({
+			request: "VIEW_CRITERIA",
+			assessment_id: id
+			}).then(response => {
+				this.criteria = response.data[0].records;
+				this.hasCriteria = true;
+				this.isActive = parseInt(this.selectedTask.isActive);
+				this.switchDisabled = false;
+				return;
+			}).catch(error => {
+				this.hasCriteria = false;
+				this.isAddCriteria = true;
+			});
     },
 
     /* Populates assessment data */
     async getAssessments() {
-      this.subjectID = this.$store.state.subjectID;
-      const response = await Assessment.getAssessments({
-        request: this.request,
-        subject_id: this.subjectID,
-        is_coordinator: this.coordinatorCheck
-      })
+      	this.subjectID = this.$store.state.subjectID;
+    	Assessment.getAssessments({
+			request: this.request,
+			subject_id: this.subjectID,
+			is_coordinator: this.coordinatorCheck
+      	})
         .then(response => {
-          this.hasAssessment = true;
-          this.assessments = response.data.records;
-        })
-        .catch(error => {
+			this.hasAssessment = true;
+			this.assessments = response.data.records;
+        }).catch(error => {
           this.hasAssessment = false;
           this.errored = true;
         });
     },
   },
   async mounted() {
-    this.getAssessments();
-    this.subjectCode = this.$store.state.subjectCode;
+		this.getAssessments();
+		this.subjectCode = this.$store.state.subjectCode;
   }
 };
 </script>
