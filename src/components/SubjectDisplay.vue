@@ -12,22 +12,22 @@
         <div v-if="loading">Loading...</div>
         <div class="col-container">
           <div class="col-heading">
-          <h2 id="pageBreakHeading">Your Subjects</h2>
+            <h2 id="pageBreakHeading">Your Subjects</h2>
           </div>
           <!-- <v-spacer></v-spacer> -->
           <div class="col-add-button">
-          <v-card-actions class="add-button">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <router-link to="/add-subject">
-                  <v-btn v-on="on" color="secondary">
-                    <v-icon>mdi-plus</v-icon>
-                  </v-btn>
-                </router-link>
-              </template>
-              <span>Add Subject</span>
-            </v-tooltip>
-          </v-card-actions>
+            <v-card-actions class="add-button">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on }">
+                  <router-link to="/add-subject">
+                    <v-btn v-on="on" icon color="white">
+                      <v-icon>mdi-plus</v-icon>
+                    </v-btn>
+                  </router-link>
+                </template>
+                <span>Add Subject</span>
+              </v-tooltip>
+            </v-card-actions>
           </div>
         </div>
       </v-card>
@@ -35,24 +35,25 @@
       <div class="cards" v-for="institution in institutions" v-bind:key="institution.id">
         <!-- <v-card-title  ></v-card-title> -->
         <div id="subjectBody">
-          <br>
+          <br />
           <h1>{{institution.institution}}</h1>
-          <v-expansion-panels accordion="true" focusable light >
-            <v-expansion-panel v-for="subject in institution.subjects" v-bind:key="subject.id"  style="padding-bottom:15px;">
+          <v-expansion-panels accordion="true" focusable light>
+            <v-expansion-panel
+              v-for="subject in institution.subjects"
+              v-bind:key="subject.id"
+              style="padding-bottom:15px;"
+            >
               <!-- Children nodes with clickable space-->
-                <v-card  
-                  x-large
-                  id="subjects"
-                  color="secondary">
-                    <v-expansion-panel-header  >
-                        <span  class="text-center"> {{subject.subject_code}} </span>
-                    </v-expansion-panel-header>
+              <v-card x-large id="subjects" color="secondary">
+                <v-expansion-panel-header>
+                  <span class="text-center">{{subject.subject_code}}</span>
+                </v-expansion-panel-header>
               </v-card>
-              <v-expansion-panel-content >
-                <v-row  >
+              <v-expansion-panel-content>
+                <v-row>
                   <v-col style="margin-left: 20vw; margin-right: 20vw">
                     <router-link to="/teachingstaff">
-                      <v-btn 
+                      <v-btn
                         color="trim"
                         block
                         id="navText"
@@ -213,11 +214,8 @@ h6 {
 }
 
 #navText {
-  color:white;
+  color: white;
   text-decoration: none;
-
 }
-
-
 </style>
 

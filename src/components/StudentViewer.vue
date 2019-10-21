@@ -5,91 +5,96 @@
 <template>
   <div id="StudentLoader">
     <v-divider vertical></v-divider>
+
     <v-card color="secondary">
       <!-- Header -->
       <v-card-title>
-        <span id="pageBreakHeading">
-          <h2 style="color:white;">Students</h2>
-          <v-spacer></v-spacer>
-          <v-card>
-            <!-- Toolbar with search and refresh buttons -->
-            <v-toolbar dense="true" flat color="secondary">
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on" @click="searchClicked">
-                    <v-icon color="white">mdi-magnify</v-icon>
-                  </v-btn>
-                </template>
-                <span>Search</span>
-              </v-tooltip>
+        <!-- <span id="pageBreakHeading"> -->
+        <h2 style="color:white;">Students</h2>
+        <!-- </span> -->
+        <v-spacer></v-spacer>
+        <!-- Toolbar with search and refresh buttons -->
+        <v-card-actions>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn icon v-on="on" @click="searchClicked" color="white">
+                <v-icon>mdi-magnify</v-icon>
+              </v-btn>
+            </template>
+            <span>Search</span>
+          </v-tooltip>
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" @click="addClicked" color="white" icon>
-                    <v-icon>mdi-plus</v-icon>
-                  </v-btn>
-                </template>
-                <span>Upload File</span>
-              </v-tooltip>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on" @click="addClicked" color="white" icon>
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+            </template>
+            <span>Upload File</span>
+          </v-tooltip>
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-on="on" @click="getStudents" color="white" icon>
-                    <v-icon>mdi-refresh</v-icon>
-                  </v-btn>
-                </template>
-                <span>Refresh</span>
-              </v-tooltip>
-            </v-toolbar>
-          </v-card>
-        </span>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on }">
+              <v-btn v-on="on" @click="getStudents" color="white" icon>
+                <v-icon>mdi-refresh</v-icon>
+              </v-btn>
+            </template>
+            <span>Refresh</span>
+          </v-tooltip>
+        </v-card-actions>
       </v-card-title>
-      <!-- Search Bar -->
-      <v-card v-if="hasClickedSearch == true">
-        <v-text-field
-          solo
-          autofocus="true"
-          refs="search"
-          flat="true"
-          outlined="true"
-          clearable="true"
-          v-model="studentSearch"
-          prepend-inner-icon="mdi-magnify"
-          class="searchBar"
-          label="Search"
-        ></v-text-field>
-      </v-card>
-      <!-- Upload Tool -->
-      <v-card v-if="hasClickedAdd == true">
-        <v-card style="max-height:20vh !important;">
-          <v-card-actions>
-            <div id="uploader">
-              <upload-btn id="uploadButton" icon @file-update="readFileInput">
-                <template slot="icon">
-                  <v-icon color="white">mdi-cloud-upload</v-icon>&nbsp;
-                  <h3>Upload Students</h3>
-                </template>
-              </upload-btn>
-            </div>
-          </v-card-actions>
-          <v-card id="fileName" color="white">{{fileName}}</v-card>
-          <div v-if="hasValidFile == true">
-            <v-card-actions>
-              <v-btn
-                block
-                @click="submitStudents"
-                style="color:black;font-weight:bold;"
-                color="accent"
-              >Submit</v-btn>
-            </v-card-actions>
+    </v-card>
+
+    <!-- Search Bar -->
+    <v-card v-if="hasClickedSearch == true">
+      <v-text-field
+        solo
+        autofocus="true"
+        refs="search"
+        flat="true"
+        outlined="true"
+        clearable="true"
+        v-model="studentSearch"
+        prepend-inner-icon="mdi-magnify"
+        class="searchBar"
+        label="Search"
+      ></v-text-field>
+      <v-divider vertical></v-divider>
+    </v-card>
+    <!-- Upload Tool -->
+    <v-card v-if="hasClickedAdd == true">
+      <v-card style="max-height:20vh !important;">
+        <v-card-actions>
+          <div id="uploader">
+            <upload-btn id="uploadButton" icon @file-update="readFileInput">
+              <template slot="icon">
+                <v-icon color="white">mdi-cloud-upload</v-icon>&nbsp;
+                <h3>Upload Students</h3>
+              </template>
+            </upload-btn>
           </div>
-        </v-card>
+        </v-card-actions>
+        <v-card id="fileName" color="white">{{fileName}}</v-card>
+        <div v-if="hasValidFile == true">
+          <v-card-actions>
+            <v-btn
+              block
+              @click="submitStudents"
+              style="color:black;font-weight:bold;"
+              color="accent"
+            >Submit</v-btn>
+          </v-card-actions>
+          <v-divider vertical></v-divider>
+        </div>
       </v-card>
+
       <v-snackbar color="green" v-model="snackbar">
         <p style="color:white;">{{snackBarMessage}}</p>
         <v-btn color="red" text @click="snackbar = false">Close</v-btn>
       </v-snackbar>
       <!-- Student Table -->
+    </v-card>
+    <v-card>
       <v-data-table
         :headers="headers"
         :items="studentsRetrieved"

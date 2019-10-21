@@ -18,8 +18,7 @@
           <h2>Student Import</h2>
         </span>
       </v-card-title>
-    </v-card>
-    <v-card>
+
       <v-card-actions>
         <div id="uploader">
           <upload-btn icon @file-update="readFileInput">

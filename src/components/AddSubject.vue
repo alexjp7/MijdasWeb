@@ -168,7 +168,6 @@ export default {
     reset() {
       this.$refs.subjectCode.reset();
       this.$refs.date.reset();
-      this.subjectValidation = null;
       if (this.$refs.institution !== undefined) {
         this.$refs.institution.reset();
       }
@@ -180,6 +179,7 @@ export default {
       }
     },
     submit() {
+      this.subjectValidation = null;
       console.log(this.date);
       let response = Subject.subjects({
         request: "CREATE_SUBJECT",

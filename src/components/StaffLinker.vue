@@ -13,7 +13,7 @@
         <v-card-action>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-              <v-btn flat v-on="on" @click="getStaff" color="secondary">
+              <v-btn flat v-on="on" @click="getStaff" icon color="white">
                 <v-icon>mdi-refresh</v-icon>
               </v-btn>
             </template>
