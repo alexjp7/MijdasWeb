@@ -6,7 +6,7 @@
   <div id="assessmentDisplay">
     <v-breadcrumbs :items="items" large>
       <template v-slot:divider>
-        <v-icon>mdi-forward</v-icon>
+        <v-icon>mdi-power-on</v-icon>
       </template>
     </v-breadcrumbs>
     <br />

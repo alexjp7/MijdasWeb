@@ -6,10 +6,10 @@
   <div id="studentViewer">
     <v-breadcrumbs :items="items" large>
       <template v-slot:divider>
-        <v-icon>mdi-forward</v-icon>
+        <v-icon>mdi-power-on</v-icon>
       </template>
     </v-breadcrumbs>
-  <v-card color="primary">
+    <v-card color="primary">
       <v-card-title>
         <span id="pageBreakHeading">
           <h2 style="color:white;">Students for {{subjectCode}}</h2>
@@ -55,7 +55,7 @@ export default {
 
 <style scoped>
 #studentViewer {
-  padding-left:2%;
-  padding-right:2%;
+  padding-left: 2%;
+  padding-right: 2%;
 }
 </style>

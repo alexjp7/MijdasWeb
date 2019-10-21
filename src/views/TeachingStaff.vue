@@ -6,14 +6,14 @@
   <div id="StudentDisplay">
     <v-breadcrumbs :items="items" large>
       <template v-slot:divider>
-        <v-icon>mdi-forward</v-icon>
+        <v-icon>mdi-power-on</v-icon>
       </template>
     </v-breadcrumbs>
     <v-card color="primary">
       <v-card-title class="card-title">
         <!-- <span id="pageBreakHeading"> -->
-          <h2 style="color:white;" id="pageBreakHeading">Teaching Staff Of {{subjectCode}}</h2>
-          <!-- <v-spacer></v-spacer> -->
+        <h2 style="color:white;" id="pageBreakHeading">Teaching Staff Of {{subjectCode}}</h2>
+        <!-- <v-spacer></v-spacer> -->
         <!-- </span> -->
       </v-card-title>
     </v-card>
