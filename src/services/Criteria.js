@@ -9,5 +9,8 @@ export default {
   },
   createCriteria(credentials) {
     return Api().post("criteria/", credentials);
+  },
+  deleteCriteria(credentials) {
+    return Api().post("criteria/", credentials);
   }
 };
