@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam
+-->
+
 <template>
   <v-nav>
     <div v-if="$store.state.isUserLoggedIn">

@@ -1,3 +1,7 @@
+<!--
+--  Authors: Ilyas, Alex
+-->
+
 <template>
   <div id="home">
     <div id="homeBkg">

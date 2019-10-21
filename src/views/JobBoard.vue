@@ -1,3 +1,7 @@
+<!--
+--  Authors: Ilyas
+-->
+
 <template>
  <div class="jobBoard">
      <h1>Job Board</h1>

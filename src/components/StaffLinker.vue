@@ -1,9 +1,13 @@
+<!--
+--  Authors: Alex
+-->
+
 <template>
   <div id="staffLinker">
     <v-card color="secondary">
       <v-card-title class="pageBreakHeading">
         <span id="teachingStaffHeading">
-          <h2>Teaching Staff</h2>
+          <h2>Current Staff</h2>
         </span>
         <v-spacer></v-spacer>
         <v-card-action>

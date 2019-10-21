@@ -1,5 +1,14 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div id="studentViewer">
+    <v-breadcrumbs :items="items" large>
+      <template v-slot:divider>
+        <v-icon>mdi-forward</v-icon>
+      </template>
+    </v-breadcrumbs>
   <v-card color="primary">
       <v-card-title>
         <span id="pageBreakHeading">
@@ -19,7 +28,24 @@ export default {
     StudentViewer
   },
   data: () => ({
-    subjectCode: ""
+    subjectCode: "",
+    items: [
+      {
+        text: "Dashboard",
+        disabled: false,
+        to: "/dashboard"
+      },
+      {
+        text: "Teaching Staff",
+        disabled: false,
+        to: "/teachingstaff"
+      },
+      {
+        text: "Assessments",
+        disabled: false,
+        to: "/assessment"
+      }
+    ]
   }),
   async mounted() {
     this.subjectCode = this.$store.state.subjectCode;

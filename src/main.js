@@ -1,3 +1,7 @@
+/*
+  Authors: Sam, Alex
+*/
+
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -7,7 +11,6 @@ import VueResource from "vue-resource";
 import "vuetify/dist/vuetify.min.css";
 
 import { sync } from "vuex-router-sync";
- 
 
 Vue.use(VueResource);
 Vue.use(vuetify);

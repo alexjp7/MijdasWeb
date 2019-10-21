@@ -1,3 +1,9 @@
+<!--
+--  Authors: Sam, Alex, Dylan & Ilyas
+--
+--  Primary Vue file that controls the flow and acts as the main page.
+-->
+
 <template>
   <v-app>
     <div v-scroll="handleScroll">

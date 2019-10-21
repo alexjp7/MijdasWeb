@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div id="StudentLoader">
     <v-divider vertical></v-divider>

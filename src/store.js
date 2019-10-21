@@ -1,3 +1,7 @@
+/*
+  Authors: Sam, Alex
+*/
+
 import Vue from "vue";
 import Vuex from "vuex";
 

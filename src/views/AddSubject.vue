@@ -1,3 +1,7 @@
+<!--
+--  Authors: Alex, Dylan
+-->
+
 <template>
   <div class="add-subject">
     <AddSubject></AddSubject>
@@ -9,14 +13,13 @@
 import AddSubject from "@/components/AddSubject.vue";
 export default {
   name: "add-subject",
-  components:{
+  components: {
     AddSubject
   }
-}
+};
 </script>
 
 <style scoped>
-  .add-subject{
-
-  }
+.add-subject {
+}
 </style>
