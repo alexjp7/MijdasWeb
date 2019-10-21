@@ -4,6 +4,11 @@
 
 <template>
   <div id="StudentDisplay">
+    <v-breadcrumbs :items="items" large>
+      <template v-slot:divider>
+        <v-icon>mdi-forward</v-icon>
+      </template>
+    </v-breadcrumbs>
     <v-card color="primary">
       <v-card-title>
         <span id="pageBreakHeading">
@@ -22,7 +27,24 @@ import StaffLinker from "@/components/StaffLinker.vue";
 
 export default {
   data: () => ({
-    subjectCode: ""
+    subjectCode: "",
+    items: [
+      {
+        text: "Dashboard",
+        disabled: false,
+        to: "/dashboard"
+      },
+      {
+        text: "Students",
+        disabled: false,
+        to: "/students"
+      },
+      {
+        text: "Assessments",
+        disabled: false,
+        to: "/assessments"
+      }
+    ]
   }),
   components: {
     StaffLinker

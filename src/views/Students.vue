@@ -4,8 +4,11 @@
 
 <template>
   <div>
-    <h1>Welcome To The Student List For:</h1>
-    <h1>{{subjectCode}}</h1>
+    <v-breadcrumbs :items="items" large>
+      <template v-slot:divider>
+        <v-icon>mdi-forward</v-icon>
+      </template>
+    </v-breadcrumbs>
     <StudentViewer />
   </div>
 </template>
@@ -17,7 +20,24 @@ export default {
     StudentViewer
   },
   data: () => ({
-    subjectCode: ""
+    subjectCode: "",
+    items: [
+      {
+        text: "Dashboard",
+        disabled: false,
+        to: "/dashboard"
+      },
+      {
+        text: "Teaching Staff",
+        disabled: false,
+        to: "/teachingstaff"
+      },
+      {
+        text: "Assessments",
+        disabled: false,
+        to: "/assessment"
+      }
+    ]
   }),
   async mounted() {
     this.subjectCode = this.$store.state.subjectCode;
