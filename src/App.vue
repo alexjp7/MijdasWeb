@@ -81,6 +81,9 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+[class*="col-"] {
+  width: 100%;
+}
 .danger-alert {
   color: red;
 }

@@ -11,7 +11,7 @@ import Home from "@/views/Home.vue";
 import SubjectDisplay from "@/components/SubjectDisplay";
 import Navigation from "@/components/Navigation";
 
-import { Store } from "vuex";
+//import { Store } from "vuex";
 import store from "./store";
 // import store from "./store";
 
@@ -223,13 +223,12 @@ const router = new Router({
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ["/login", "/register", "/"];
+  const publicPages = ["/login", "/register", "/", "/admin"];
   const authRequired = !publicPages.includes(to.path);
 
   if (authRequired && !store.state.isUserLoggedIn) {
     return next("/login");
   }
-
   next();
 });
 
