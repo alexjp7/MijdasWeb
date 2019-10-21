@@ -44,7 +44,7 @@ v-form {
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-select :items="items" filled label="Filled style"></v-select>
+                    <v-select :items="items" filled label="Role"></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -79,7 +79,7 @@ export default {
       username: "",
       password: "",
       password1: "",
-      items: ["Tutor", "Admin"]
+      items: ["Tutor", "Coordinator", "Admin"]
     };
   },
   methods: {
