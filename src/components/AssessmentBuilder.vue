@@ -13,16 +13,15 @@
       <p style="color:white;">{{snackBarMessage}}</p>
       <v-btn color="red" text @click="snackbar = false">Close</v-btn>
     </v-snackbar>
-    <v-card class="mx-auto" flat color="secondary">
       <!-- Title -->
-      <v-card-title class="pageBreakHeading">
-        <span id="teachingStaffHeading">
-          <h2>Assessments</h2>
+      <v-card color="primary">
+        <v-card-title>
+        <span id="pageBreakHeading">
+        <h2 style="color:white;">Assessment Management For {{subjectCode}}</h2>
+        <v-spacer></v-spacer>
         </span>
         <v-spacer></v-spacer>
-        <v-card tiled>
           <!-- Toolbar with search and refresh buttons -->
-          <v-toolbar dense="true" flat color="secondary">
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" @click="addAssessment" color="white" icon>
@@ -31,7 +30,6 @@
               </template>
               <span>Add Assessment</span>
             </v-tooltip>
-
             <v-tooltip bottom>
               <template v-slot:activator="{ on }">
                 <v-btn v-on="on" @click="getAssessments" color="white" icon>
@@ -40,8 +38,6 @@
               </template>
               <span>Refresh</span>
             </v-tooltip>
-          </v-toolbar>
-        </v-card>
       </v-card-title>
     </v-card>
     <!-- Add Assessment Card -->
@@ -60,10 +56,11 @@
         </v-card>
       </div>
       <!-- Current Assessment -->
-      <v-container id="assessmentContainer">
         <v-row id="splitPanel">
           <v-col id="cols" :cols="4">
-            <h1 style="padding:1%;">Selected</h1>
+            <v-card color="secondary">
+              <h2 style="padding:1%;color:white;">Selected</h2>
+            </v-card>
             <div v-if="hasSelected == false">
               <v-card color="background">
                 <p style="color:#3c5c77b5">
@@ -98,15 +95,13 @@
                     ></v-switch>
                   </div>
                 </v-card>
+                <br>
               </v-form>
-              <v-container>
                 <!-- Criteria Display -->
-                <v-card color="secondary" style="display:flex;padding:1%;">
-                  <h2 style="color:white;">Assessment-Criteria</h2>
+                <v-card color="secondary" style="display:flex;padding:1%">
+                   <h2 class="text-center"  style="color:white;">Criteria</h2>
                   <v-spacer></v-spacer>
-                  <v-card color="secondary">
                     <!-- Toolbar with search and refresh buttons -->
-                    <v-toolbar color="secondary">
                       <v-tooltip bottom>
                         <template v-slot:activator="{ on }">
                           <v-btn v-on="on" @click="addCriteriaClick" color="white" icon>
@@ -124,8 +119,6 @@
                         </template>
                         <span>Refresh</span>
                       </v-tooltip>
-                    </v-toolbar>
-                  </v-card>
                 </v-card>
                 <div v-if="hasCriteria == false">
                   <v-card color="background">
@@ -140,7 +133,7 @@
                     <!-- Criteria Display -->
                     <!-- Add Criteria -->
                     <div v-if="isAddCriteria == true">
-                      <v-card style="padding:1%;">
+                      <v-card>
                         <v-simple-table dense>
                           <template v-slot:default>
                             <tbody>
@@ -196,43 +189,76 @@
                     <!-- Populate Criteria Items -->
                     <div v-else>
                       <div v-for="criterion in criteria" v-bind:key="criterion">
-                        <v-simple-table dense>
-                          <template v-slot:default>
-                            <tbody>
-                              <tr>
-                                <th>Criteria</th>
-                                <td>{{criterion.criteria}}</td>
-                              </tr>
-                              <tr>
-                                <th>Available Marks</th>
-                                <td v-if="criterion.maxMark === null">-</td>
-                                <td v-else>{{criterion.maxMark}}</td>
-                              </tr>
-                              <tr>
-                                <th>Type</th>
-                                <td v-if="criterion.element == 0">Checkbox</td>
-                                <td v-else-if="criterion.element == 1">Slider</td>
-                                <td v-else-if="criterion.element == 2">Numbox</td>
-                                <td v-else-if="criterion.element == 4">Text-area</td>
-                              </tr>
-                              <tr>
-                                <th>Display Text</th>
-                                <td>{{criterion.displayText}}</td>
-                              </tr>
-                            </tbody>
-                          </template>
-                        </v-simple-table>
-                        <hr />
+                        <v-card>
+                          <v-row>
+                            <v-card style="width:50%;" color="primary">
+                              <v-col>
+                                <h4 style="color:white;">ID</h4>
+                              </v-col>
+                            </v-card>
+                            <v-card style="width:50%;">
+                              <v-col>
+                                {{criterion.criteria}}
+                              </v-col>
+                            </v-card>
+                            <hr>
+                          </v-row>
+                          <v-row>
+                            <v-card style="width:50%;" color="accent">
+                              <v-col>
+                                <h4 style="color:black;">Available Marks</h4>
+                              </v-col>
+                            </v-card>
+                            <v-card style="width:50%;">
+                              <v-col>
+                                <div v-if="criterion.maxMark === null">-</div>
+                                <div v-else>{{criterion.maxMark}}</div>
+                              </v-col>
+                            </v-card>
+                            <hr>
+                          </v-row>
+                          <v-row>
+                            <v-card style="width:50%;" color="accent">
+                              <v-col>
+                                <h4 style="color:black;">Type</h4>
+                              </v-col>
+                            </v-card>
+                            <v-card style="width:50%;">
+                              <v-col>
+                                <div v-if="criterion.element == 0">Checkbox </div>
+                                  <div v-else-if="criterion.element == 1">Slider </div>
+                                    <div v-else-if="criterion.element == 2">Numbox </div>
+                                  <div v-else-if="criterion.element == 4">Text-area </div>
+                              </v-col>
+                            </v-card>
+                           <hr>
+                          </v-row>
+                          <v-row>
+                          <v-card style="width:50%;" color="accent">
+                              <v-col>
+                                <h4 style="color:black;">Dispaly Text</h4>
+                              </v-col>
+                            </v-card>
+                            <v-card style="width:50%;">
+                              <v-col>
+                                {{criterion.displayText}}
+                              </v-col>
+                              </v-card>
+                          </v-row>  
+                        </v-card>  
+                         <hr>
+                        <br>
                       </div>
                     </div>
                   </v-container>
                 </div>
-              </v-container>
             </div>
           </v-col>
           <!-- Right side selector -->
           <v-col :cols="4" id="cols">
-            <h1 style="padding:1%;">Current Assessments</h1>
+            <v-card color="secondary">
+              <h2 style="padding:1%;color:white;">Current Assessments</h2>
+            </v-card>
             <div v-if="hasAssessment == true">
               <v-expansion-panels>
                 <v-expansion-panel v-for="assessment in assessments" v-bind:key="assessment">
@@ -283,7 +309,6 @@
             </div>
           </v-col>
         </v-row>
-      </v-container>
     </v-card>
   </div>
 </template>
@@ -301,6 +326,7 @@ export default {
       hasCriteria: "",
       newTaskName: "",
       snackBarMessage: "",
+      subjectCode:"",
       /* Flags */
       selectedTask: null,
       hasAssessment: false,
@@ -434,10 +460,10 @@ export default {
           this.errored = true;
         });
     },
-    async mounted() {}
   },
   async mounted() {
     this.getAssessments();
+    this.subjectCode = this.$store.state.subjectCode;
   }
 };
 </script>
@@ -446,8 +472,6 @@ export default {
   border: 1px;
   max-width: 100%;
   display: block;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 .pageBreakHeading {
   padding: 1%;
@@ -456,9 +480,6 @@ export default {
 }
 #splitPanel {
   min-width: 100% !important;
-}
-
-#assessmentContainer {
 }
 
 #cols {

@@ -27,8 +27,8 @@ export default {
 
 <style  scoped>
 #job {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 .job-content {
   padding: 2%;

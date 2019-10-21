@@ -81,8 +81,6 @@ export default {
 }
 
 #StudentLoader {
-  margin-left: 10%;
-  margin-right: 10%;
   max-width: 100%;
   display: block;
 }

@@ -272,10 +272,10 @@ export default {
 .add-subject-content {
   color: #333;
   /* background-color: white; */
-  margin-left: 10%;
+  margin-left: 2%;
+  margin-right: 2%;
   padding: 20px 50px;
   max-width: 100%;
-  margin-right: 10%;
   display: flex;
   justify-content: center;
   flex-direction: column;

@@ -7,7 +7,7 @@
     <v-card color="secondary">
       <v-card-title class="pageBreakHeading">
         <span id="teachingStaffHeading">
-          <h2>Teaching Staff</h2>
+          <h2>Current Staff</h2>
         </span>
         <v-spacer></v-spacer>
         <v-card-action>
@@ -187,8 +187,6 @@ export default {
   border: 1px;
   max-width: 100%;
   display: block;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 #searchComponent {
   display: inline-flex;

@@ -9,14 +9,6 @@
         <v-icon>mdi-forward</v-icon>
       </template>
     </v-breadcrumbs>
-    <v-card color="primary">
-      <v-card-title>
-        <span id="pageBreakHeading">
-          <h2 style="color:white;">Assessment Management For {{subjectCode}}</h2>
-          <v-spacer></v-spacer>
-        </span>
-      </v-card-title>
-    </v-card>
     <br />
     <!-- <Assessments /> -->
     <AssessmentBuilder />
@@ -51,17 +43,14 @@ export default {
   components: {
     Assessments,
     AssessmentBuilder
-  },
-  async mounted() {
-    this.subjectCode = this.$store.state.subjectCode;
   }
 };
 </script>
 
 <style scoped>
 #assessmentDisplay {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 1%;
+  margin-right: 1%;
   max-width: 100%;
   display: block;
 }

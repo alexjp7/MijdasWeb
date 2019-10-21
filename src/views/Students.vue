@@ -3,12 +3,20 @@
 -->
 
 <template>
-  <div>
+  <div id="studentViewer">
     <v-breadcrumbs :items="items" large>
       <template v-slot:divider>
         <v-icon>mdi-forward</v-icon>
       </template>
     </v-breadcrumbs>
+  <v-card color="primary">
+      <v-card-title>
+        <span id="pageBreakHeading">
+          <h2 style="color:white;">Students for {{subjectCode}}</h2>
+          <v-spacer></v-spacer>
+        </span>
+      </v-card-title>
+    </v-card>
     <StudentViewer />
   </div>
 </template>
@@ -46,4 +54,8 @@ export default {
 </script>
 
 <style scoped>
+#studentViewer {
+  padding-left:2%;
+  padding-right:2%;
+}
 </style>

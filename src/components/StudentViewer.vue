@@ -4,14 +4,6 @@
 
 <template>
   <div id="StudentLoader">
-    <v-card color="primary">
-      <v-card-title>
-        <span id="pageBreakHeading">
-          <h2 style="color:white;">Teaching Staff Of {{subjectCode}}</h2>
-          <v-spacer></v-spacer>
-        </span>
-      </v-card-title>
-    </v-card>
     <v-divider vertical></v-divider>
     <v-card color="secondary">
       <!-- Header -->
@@ -228,8 +220,6 @@ export default {
   display: flex;
 }
 #StudentLoader {
-  margin-left: 10%;
-  margin-right: 10%;
   max-width: 100%;
   display: block;
 }
