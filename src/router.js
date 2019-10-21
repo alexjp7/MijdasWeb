@@ -34,7 +34,8 @@ export default new Router({
      * VIEWS
      **************/
     {
-      path: "*"
+      path: "*",
+      redirect: "/"
     },
     {
       path: "/",

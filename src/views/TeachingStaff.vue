@@ -42,7 +42,7 @@ export default {
       {
         text: "Assessments",
         disabled: false,
-        to: "/assessments"
+        to: "/assessment"
       }
     ]
   }),
