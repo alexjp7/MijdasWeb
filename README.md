@@ -76,4 +76,4 @@ Please download/install the following extension:
 
 You will need to pull/clone this repo and use it to replace the pre-existing src and public files. After that it should be fine.
 
-<h2> !!! Bugs and Issues !!! </h2>
+
