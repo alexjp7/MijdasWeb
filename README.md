@@ -36,8 +36,11 @@ To install the packages listed below please enter:
 2. `npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`
 
 > Axios - this is a framework that allows for API post requests.
+
 > Vuex-router-sync - dependancy that allows for certain states to change the route while updating the Vuex store. 
+
 > Vue-resource - provides capability for making web requests and handle responses using \$http.
+
 > Vuetify - allows for advanced components such as forms, buttons and navbars.
 
 <h3> VS Code Extensions </h3>
