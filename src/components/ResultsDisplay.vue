@@ -8,18 +8,6 @@
       <v-card-title>
         <span id="pageBreakHeading">
           <h2 style="color:white;">Student Results</h2>
-          <v-spacer></v-spacer>
-          <v-card>
-            <!-- Toolbar with search and refresh buttons -->
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on }">
-                <v-btn v-on="on" @click="getStudents" color="secondary">
-                  <v-icon>mdi-refresh</v-icon>
-                </v-btn>
-              </template>
-              <span>Refresh</span>
-            </v-tooltip>
-          </v-card>
         </span>
       </v-card-title>
     </v-card>
@@ -39,7 +27,7 @@
             </div>
             </v-tabs>
           </v-card>
-          <!-- Right side panel -->
+          <!-- Cohort Averages -->
           <div v-if="selectedTask == null">
             <v-card color="background">
               <p style="color:#3c5c77b5">
@@ -54,18 +42,53 @@
               </v-card-title>
             </v-card>
             <v-card elevation="4">
-              <hr />
+              <hr/>
+                <v-row>
+                    <v-col>
+                  <v-card color="background" style="width:100%;">
+                      <h4>Marked Students</h4>
+                  </v-card>
+                    </v-col>
+                      <v-col >
+                    <v-card style="width:100%;">
+                          {{markedStudents}} / {{totalStudents}}
+                    </v-card>
+                      </v-col>
+                </v-row>
+                <v-row>
+                  <v-col>
+                  <v-card color="background" style="width:100%;">
+                      <h4>Status</h4>
+                  </v-card>
+                    </v-col>
+                    <v-col>
+                      <div v-if="markedStudents == totalStudents">
+                        <v-card color="success" style="width:100%;color:white;;">
+                              Complete
+                        </v-card>
+                      </div>
+                      <div v-else>
+                        <v-card color="warning" style="width:100%;color:white;">
+                              In Progress
+                        </v-card>
+                    </div>
+                  </v-col>
+                </v-row>
+
+                <hr/>
+                <br/>
               <v-row style="padding-left:1%;">
                   <h3>Cohort Statistics</h3>
                   <hr/>
                   <br/>
               </v-row>
               <v-row>
+                <v-card style="width:100%;">
                   <v-simple-table>
                     <template v-slot:default>
                       <tbody>
                         <tr>
-                          <th>Assessment Average:</th>
+                          <th >Assessment Average:</th>
                           <td>
                             <h3>{{averageMark}} / {{selectedTask.max_mark}}</h3>
                           </td>
@@ -85,10 +108,10 @@
                       </tbody>
                     </template>
                   </v-simple-table>
-                    </v-row>
-            </v-card>
+              </v-card>
+            </v-row>
+          </v-card>
           <br />
-          <!-- Further stats -->
             <v-row>
               <v-card color="secondary" id="drillDownHeading">
                 <v-card-title id="pageBreakHeading">
@@ -108,7 +131,6 @@
                     </v-card>
                   </v-col>
                 </v-row>
-                <!-- Performance comparison -->
                 <div
                   v-for="(criterion) in assessmentData.slice().reverse()"
                   v-bind:key="criterion">
@@ -200,7 +222,8 @@ export default {
     cohortPerformance: [],
     hasValidStudentId: true,
     assessmentData:[],
-    grow: true,
+    markedStudents:null,
+    totalStudents:null
   }),
   methods: {
     taskClicked(item) {
@@ -241,15 +264,17 @@ export default {
       this.worstCriterion = lowestPerformingCriterion;
       this.bestCriterion = highestPerformingCriterion;
     },
-    processCohortData(cohortData) {
+    initGraph(cohortData) {
+      let maxMark = this.selectedTask.max_mark;
       this.labels = [
-        "0 - " + this.markOutOf / 4,
-        this.markOutOf / 4 + "-" + this.markOutOf / 2,
-        this.markOutOf / 2 + " - " + (this.markOutOf / 4) * 3,
-        (this.markOutOf / 4) * 3 + " - " + this.markOutOf
+        "0 - " + maxMark/ 4,
+        maxMark / 4 + "-" + maxMark / 2,
+        maxMark / 2 + " - " + (maxMark / 4) * 3,
+        (maxMark / 4) * 3 + " - " + maxMark
       ];
       this.cohortResults = cohortData;
       this.graphDraw = true;
+
     },
     clear() {
       //Reset values to prevent accumulation
@@ -280,8 +305,11 @@ export default {
         .then(response => {
           //Reset existing values, and initialise studentData and aggregated data
           this.clear();
+          this.markedStudents = response.data["markedStudents"];
+          this.totalStudents = response.data["total_students"];
+          console.log(this.markedStudents + " /" + this.totalStudents)
           this.processAggregates(response.data.criteria_performance,response.data.cohort_average);
-          this.processCohortData(response.data.quartiles);
+          this.initGraph(response.data.quartiles);
           this.hasValidStudentId = true;
         }).catch(error => console.error(error));
     }
