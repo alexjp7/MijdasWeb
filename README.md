@@ -10,7 +10,7 @@
 <h3> Installing Vue with CLI </h3>
 
 1. run `npm install vue`
-2. run `npm install -g @vue/cli`. NOTE: -g installs globally to the machine
+2. run `npm install -g @vue/cli` NOTE: -g installs globally to the machine
 
 <h3> Creating The Vue Project </h3>
 
@@ -23,9 +23,9 @@
 3. Arrow key and space on `router` and `vuex` confirm
 4. Arrow down to `Eslint + Prettier` and confirm
 5. Select `lint on save`
-6 Select `in dedicated config file`
-7 Type `N` for not saving preset
-8 Change directory to the project that was just created `cd <project-name>`
+6. Select `in dedicated config file`
+7. Type `N` for not saving preset
+8. Change directory to the project that was just created `cd <project-name>`
 
 > OPTIONAL: run `vue ui --dev` and import project directory for ui use later (provides analytics etc)
 
@@ -36,11 +36,8 @@
     Step 2: `npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`
 
 1. Axios - this is a framework that allows for API post requests.
-
 2. Vuex-router-sync - dependancy that allows for certain states to change the route while updating the Vuex store. 
-
 3. Vue-resource - provides capability for making web requests and handle responses using \$http.
-
 4. Vuetify - allows for advanced components such as forms, buttons and navbars.
 
 <h3> VS Code Extensions </h3>
@@ -61,10 +58,9 @@ Please download/install the following extension:
 
 <h3> Using The Development Environment</h3>
 
-> To build and run the project: `npm run serve` or `npm run dev`this will locally host the website.
+1. To build and run the project: `npm run serve` or `npm run dev`this will locally host the website.
   (note: if you get errors/warnings run `npm run serve --fix`)
-  
-> To run please open a browser, and enter into the url `http://localhost:8080/` 
+2. To run please open a browser, and enter into the url `http://localhost:8080/` 
   
 <h3> Source Files - Github & Zipped File </h3>
 
