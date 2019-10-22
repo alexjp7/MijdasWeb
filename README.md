@@ -4,36 +4,36 @@
 
 <h3> Installing Nodejs </h3>
 
-1. Click to [Install Node](https://nodejs.org/en/download/)
+1. Click to [Install Node](https://nodejs.org/en/download/).
 2. Once installed, open up Command prompt and navigate to a directory where you would like the following project to be located.           Please note that the project will create a folder in this location.
 
 <h3> Installing Vue with CLI </h3>
 
-1. run `npm install vue`
-2. run `npm install -g @vue/cli` NOTE: -g installs globally to the machine
+1. run `npm install vue`.
+2. run `npm install -g @vue/cli` NOTE: -g installs globally to the machine.
 
 <h3> Creating The Vue Project </h3>
 
 <h4> CLI Method </h4>
 
-** Please note: `Enter` will CONFIRM, `Space` will SELECT (if error is made ctrl-c will terminate process) **
+** Please note: `Enter` will CONFIRM, `Space` will SELECT (if error is made ctrl-c will terminate process). **
 
-1. Run `vue create <project-name>`
-2. Arrow key down to `manually select`
-3. Arrow key and space on `router` and `vuex` confirm
-4. Arrow down to `Eslint + Prettier` and confirm
-5. Select `lint on save`
-6. Select `in dedicated config file`
-7. Type `N` for not saving preset
-8. Change directory to the project that was just created `cd <project-name>`
+1. Run `vue create <project-name>`.
+2. Arrow key down to `manually select`.
+3. Arrow key and space on `router` and `vuex` confirm.
+4. Arrow down to `Eslint + Prettier` and confirm.
+5. Select `lint on save`.
+6. Select `in dedicated config file`.
+7. Type `N` for not saving preset.
+8. Change directory to the project that was just created `cd <project-name>`.
 
-> OPTIONAL: run `vue ui --dev` and import project directory for ui use later (provides analytics etc)
+> OPTIONAL: run `vue ui --dev` and import project directory for ui use later (provides analytics etc).
 
 <h3> Required Vue Packages </h3>
 
 To install the packages listed below please enter: 
-1. `vue add vuetify` and hit enter on `default`
-2. `npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`
+1. `vue add vuetify` and hit enter on `default`.
+2. `npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`.
 
 > Axios - this is a framework that allows for API post requests.
 
@@ -47,23 +47,22 @@ To install the packages listed below please enter:
 
 Please download/install the following extension:
 
-> `Name: Vue VS Code Extension Pack`
+> `Name: Vue VS Code Extension Pack`.
 
-> `Id: sdras.vue-vscode-extensionpack`
+> `Id: sdras.vue-vscode-extensionpack`.
 
-> `Description: A collection of extensions for working with Vue Applications in VS Code`
+> `Description: A collection of extensions for working with Vue Applications in VS Code`.
 
-> `Version: 0.2.0`
+> `Version: 0.2.0`.
 
-> `Publisher: sarah.drasner`
+> `Publisher: sarah.drasner`.
 
-> `VS Marketplace Link: <https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack>`
+> `VS Marketplace Link: <https://marketplace.visualstudio.com/items?itemName=sdras.vue-vscode-extensionpack>`.
 
 <h3> Using The Development Environment</h3>
 
-1. To build and run the project: `npm run serve` or `npm run dev`this will locally host the website.
-  (note: if you get errors/warnings run `npm run serve --fix`)
-2. To run please open a browser, and enter into the url `http://localhost:8080/` 
+1. To build and run the project: `npm run serve` or `npm run dev`this will locally host the website (note: if you get errors/warnings run `npm run serve --fix`).
+2. To run please open a browser, and enter into the url `http://localhost:8080/`. 
   
 <h3> Source Files - Github & Zipped File </h3>
 
@@ -73,6 +72,6 @@ Option 2: Additionally you can download the zip file of the source code, extract
 
 <h3> Additional Information </h3>
 
-> Open terminal and run `node -v` to check the install version 
+> Open terminal and run `node -v` to check the install version.
 
-> Check npm (Node Package Manger Version) `npm -v` 
+> Check npm (Node Package Manger Version) `npm -v`.
