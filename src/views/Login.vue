@@ -95,7 +95,11 @@ export default {
         await Authentication.login({
           request: this.request,
           username: this.username,
-          password: this.password
+          password: this.password,
+          scopes: "tutor"
+        }).then(response => {
+          var token = response.data.success.token;
+          console.log(token);
         }).catch(error => {
           console.log(error);
           this.errored = true;
