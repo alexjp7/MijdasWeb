@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Dylan
+-->
+
 <style scoped>
 #fields {
   display: inline-blockinline-block;
@@ -113,12 +117,7 @@ export default {
         }
         if (this.correct == true) {
           this.$store.dispatch("setUser", this.username);
-          // const sleep = milliseconds => {
-          //   return new Promise(resolve => setTimeout(resolve, milliseconds));
-          // };
-          // sleep(1500).then(() => {
           this.redirect();
-          // });
         }
       }
     },

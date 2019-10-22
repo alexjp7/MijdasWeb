@@ -1,3 +1,7 @@
+/*
+  Authors: Sam, Alex
+*/
+
 import Vue from "vue";
 import Vuex from "vuex";
 
@@ -10,7 +14,8 @@ export default new Vuex.Store({
     user: null,
     isUserLoggedIn: false,
     subjectCode: null,
-    subjectID: null
+    subjectID: null,
+    permissionType: null
   },
   mutations: {
     // setToken(state, token) {
@@ -26,6 +31,13 @@ export default new Vuex.Store({
     },
     setSubjectID(state, subjectID) {
       state.subjectID = subjectID;
+    },
+    logout(state) {
+      state.user = null;
+      state.isUserLoggedIn = false;
+      state.subjectCode = null;
+      state.subjectID = null;
+      state.permissionType = null;
     }
   },
   actions: {
@@ -40,6 +52,9 @@ export default new Vuex.Store({
     },
     setSubjectID({ commit }, subjectID) {
       commit("setSubjectID", subjectID);
+    },
+    logout({ commit }, user, isUserLoggedIn, subjectCode, subjectID) {
+      commit("logout", user, isUserLoggedIn, subjectCode, subjectID);
     }
   },
   getters: {

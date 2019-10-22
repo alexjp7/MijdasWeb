@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam
+-->
+
 <template>
   <v-nav>
     <div v-if="$store.state.isUserLoggedIn">
@@ -165,7 +169,7 @@ export default {
   methods: {
     logout() {
       //this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
+      this.$store.dispatch("logout");
       this.$router.push({
         name: "home"
       });

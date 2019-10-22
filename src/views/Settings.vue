@@ -1,3 +1,7 @@
+<!--
+--  Authors: Ilyas
+-->
+
 <template>
   <v-app app>
     <div class="settings">

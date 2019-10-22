@@ -1,7 +1,11 @@
+<!--
+--  Authors: Ilyas
+-->
+
 <template>
   <div class="announcements">
     <h1>Announcements</h1>
-    
+
     <v-card max-width="600" max-height="50" flat="true" class="mx-auto">
       <v-container class="pa-2" fluid>
         <v-row>
@@ -23,23 +27,22 @@
             </v-card>
           </v-col>
         </v-row>
-        <v-btn v-on="on" color="secondary"
-        @click="dialog = !dialog">
-                  <v-icon>mdi-plus</v-icon>
-                </v-btn>
+        <v-btn v-on="on" color="secondary" @click="dialog = !dialog">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
       </v-container>
       <v-dialog v-model="dialog" max-width="500px">
-          <v-card id>
-            <v-card-text>
-              <v-text-field label="Announcement name" id="ann1"></v-text-field>
-              <v-textarea label="Announcement content" id="ann2"></v-textarea>
-            </v-card-text>
-            <v-card-actions>
-              <div class="flex-grow-1"></div>
-              <v-btn text color="primary" @click="dialog = false" id="data">Submit</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+        <v-card id>
+          <v-card-text>
+            <v-text-field label="Announcement name" id="ann1"></v-text-field>
+            <v-textarea label="Announcement content" id="ann2"></v-textarea>
+          </v-card-text>
+          <v-card-actions>
+            <div class="flex-grow-1"></div>
+            <v-btn text color="primary" @click="dialog = false" id="data">Submit</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-card>
   </div>
 </template>
@@ -47,11 +50,9 @@
 <script>
 export default {
   data: () => ({
-        dialog: false,
-        
-      })
-}
-
+    dialog: false
+  })
+};
 </script>
 
 <style scoped>

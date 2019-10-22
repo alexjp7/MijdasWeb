@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Dylan
+-->
+
 <style scoped>
 #fields {
   display: inline-blockinline-block;
@@ -39,6 +43,9 @@ v-form {
                       autocomplete="new-password"
                     ></v-text-field>
                   </v-col>
+                  <v-col cols="12" md="6">
+                    <v-select :items="items" filled label="Role"></v-select>
+                  </v-col>
                 </v-row>
               </v-container>
             </div>
@@ -48,8 +55,9 @@ v-form {
           <div class="danger-alert" v-html="error" />
           <br />
           <v-row>
+            <v-btn id="divider" style="min-width: 10vw" dark class="primary">Register</v-btn>
             <router-link to="/login" class="btn btn-link">
-              <v-btn id="divider" style="min-width: 10vw" dark class="primary">Register</v-btn>
+              <v-btn id="divider" style="min-width: 10vw" dark class="primary">Login</v-btn>
             </router-link>
           </v-row>
         </panel>
@@ -70,7 +78,8 @@ export default {
       lastName: "",
       username: "",
       password: "",
-      password1: ""
+      password1: "",
+      items: ["Tutor", "Coordinator", "Admin"]
     };
   },
   methods: {

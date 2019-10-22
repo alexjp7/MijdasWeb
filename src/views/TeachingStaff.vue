@@ -1,10 +1,19 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div id="StudentDisplay">
+    <v-breadcrumbs :items="items" large>
+      <template v-slot:divider>
+        <v-icon>mdi-power-on</v-icon>
+      </template>
+    </v-breadcrumbs>
     <v-card color="primary">
       <v-card-title class="card-title">
         <!-- <span id="pageBreakHeading"> -->
-          <h2 style="color:white;" id="pageBreakHeading">Teaching Staff Of {{subjectCode}}</h2>
-          <!-- <v-spacer></v-spacer> -->
+        <h2 style="color:white;" id="pageBreakHeading">Teaching Staff Of {{subjectCode}}</h2>
+        <!-- <v-spacer></v-spacer> -->
         <!-- </span> -->
       </v-card-title>
     </v-card>
@@ -18,7 +27,24 @@ import StaffLinker from "@/components/StaffLinker.vue";
 
 export default {
   data: () => ({
-    subjectCode: ""
+    subjectCode: "",
+    items: [
+      {
+        text: "Dashboard",
+        disabled: false,
+        to: "/dashboard"
+      },
+      {
+        text: "Students",
+        disabled: false,
+        to: "/students"
+      },
+      {
+        text: "Assessments",
+        disabled: false,
+        to: "/assessment"
+      }
+    ]
   }),
   components: {
     StaffLinker
@@ -37,8 +63,8 @@ export default {
   width: 100%;
 }
 #StudentDisplay {
-  margin-left: 10%;
-  margin-right: 10%;
+  margin-left: 1%;
+  margin-right: 1%;
   max-width: 100%;
   display: block;
 }

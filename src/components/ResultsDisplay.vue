@@ -7,7 +7,7 @@
     <v-card color="primary">
       <v-card-title>
         <span id="pageBreakHeading">
-          <h2 style="color:white;">MarkIt Student Dashboard</h2>
+          <h2 style="color:white;">Student Results</h2>
           <v-spacer></v-spacer>
           <v-card>
             <!-- Toolbar with search and refresh buttons -->
@@ -23,118 +23,51 @@
         </span>
       </v-card-title>
     </v-card>
-    <!-- Validate whether site has been visited with student ID access string-->
-  <div  v-if="hasValidStudentId == false">
-     <v-dialog v-model="dialog" persistent max-width="700">
-      <v-card>
-        <v-card color="primary">
-          <v-card-title  style="color:white;" class="headline">Results Unreachable</v-card-title>
-        </v-card>
-          <v-card color="accent">
-        <v-row>
-          <v-col :cols="2">
-            <v-icon x-large  class="group pa-2" >mdi-lock-alert</v-icon>
-          </v-col>
-          <v-col>
-            <h2>
-                Whoops,
-            </h2>
-              <h3>
-                 Please use the link that was emailed to you!
-              </h3>
-                If you're note sure about this
-                 feature, contact your Subject Supervisor
-          </v-col>
-
-        </v-row>
-          </v-card>
-      </v-card>
-    </v-dialog>
-  </div>
-  <div v-else>
     <v-card color="background">
-      <v-row>
-        <v-col :cols="2">
           <v-card elevation="4" color="secondary">
             <v-card-title>
-              <h4 style="padding-left:3%;" id="pageBreakHeading">Your Tasks</h4>
+              <h4  id="pageBreakHeading">Assessments</h4>
             </v-card-title>
           </v-card>
           <v-card elevation="4" id="drillDownCard">
-            <v-treeview
-              return-object
-              hoverable
-              activatable
-              color="secondary"
-              open-on-click
-              :items="tasks"
-              :active="active"
-              transition
-              v-model="taskSelection"
-              @click:active="taskClicked"
-            >
-              <!-- slot for label click listener -->
-              <template slot="label" slot-scope="{ item }">
-                <div v-if="item.type == 'child_node'">
-                  <v-btn block @click="taskClicked(item)">{{ item.name}}</v-btn>
-                </div>
-                <div v-else-if="item.type == 'parent_node' ">{{ item.name}}</div>
-              </template>
-              <!-- adds open/close folder change -->
-              <template v-slot:prepend="{ item, open }">
-                <v-icon v-if="!item.file">{{ open ? 'mdi-folder-open' : 'mdi-folder' }}</v-icon>
-                <v-icon v-else>{{ files[item.file] }}</v-icon>
-              </template>
-            </v-treeview>
+            <v-tabs
+            fixed-tabs>
+            <div v-for="task in tasks" v-bind:key="task">
+              <v-tab @click="taskClicked(task)" >
+                  {{task.name}}
+              </v-tab>
+            </div>
+            </v-tabs>
           </v-card>
-        </v-col>
-        <v-col>
           <!-- Right side panel -->
-          <div v-if="selectedTaskName == null">
+          <div v-if="selectedTask == null">
             <v-card color="background">
               <p style="color:#3c5c77b5">
-                Expand a subject and select a task
-                <br />to view your results!
+                Click  a task to view <br/>your students results  
               </p>
             </v-card>
           </div>
           <div v-else>
-            <v-card color="secondary">
+            <v-card color="trim">
               <v-card-title id="pageBreakHeading">
-                <h3>{{selectedTaskName}}</h3>
+                <h3>{{selectedTask.name}}</h3>
               </v-card-title>
             </v-card>
             <v-card elevation="4">
               <hr />
               <v-row style="padding-left:1%;">
-                <v-col :cols="4">
-                  <v-card>
-                    <v-simple-table>
-                      <template v-slot:default>
-                        <tbody>
-                          <tr>
-                            <th>Overall:</th>
-                            <td>
-                              <h3>{{markRecieved}}/{{markOutOf}}</h3>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </template>
-                    </v-simple-table>
-                    <!-- Overall Cohort Statistics -->
-                  </v-card>
-                  <br />
-                  <br />
                   <h3>Cohort Statistics</h3>
-                  <hr />
-                  <br />
+                  <hr/>
+                  <br/>
+              </v-row>
+              <v-row>
                   <v-simple-table>
                     <template v-slot:default>
                       <tbody>
                         <tr>
                           <th>Assessment Average:</th>
                           <td>
-                            <h3>{{averageMark}} / {{markOutOf}}</h3>
+                            <h3>{{averageMark}} / {{selectedTask.max_mark}}</h3>
                           </td>
                         </tr>
                         <tr>
@@ -152,39 +85,10 @@
                       </tbody>
                     </template>
                   </v-simple-table>
-                </v-col>
-                <v-col>
-                  <!-- Mark Breakdown expansion panel -->
-                  <v-card>
-                    <h3>Result Breakdown</h3>
-                    <br />
-
-                    <div v-for="result in markBreakdown.slice().reverse()" v-bind:key="result">
-                      <v-card>
-                        <v-row>
-                          <v-col :cols="3">
-                            <v-card color="trim" style="color:white;">{{result.criteria}}</v-card>
-                          </v-col>
-                          <v-col v-if="result.comment == null">
-                            <v-card
-                              elevation="3"
-                              style="font-weight:bold;"
-                            >{{result.result}} / {{result.maxMark}}</v-card>
-                          </v-col>
-                          <v-col v-else>
-                            <v-layout align-center>{{result.comment}}</v-layout>
-                          </v-col>
-                        </v-row>
-                      </v-card>
-                    </div>
-                  </v-card>
-                </v-col>
-              </v-row>
+                    </v-row>
             </v-card>
-          </div>
           <br />
           <!-- Further stats -->
-          <div v-if="selectedTaskName != null">
             <v-row>
               <v-card color="secondary" id="drillDownHeading">
                 <v-card-title id="pageBreakHeading">
@@ -200,25 +104,14 @@
                   </v-col>
                   <v-col>
                     <v-card color="accent" style="color:black;">
-                      <h4>Your Mark</h4>
-                    </v-card>
-                  </v-col>
-                  <v-col>
-                    <v-card color="accent" style="color:black;">
                       <h4>Cohort Average</h4>
-                    </v-card>
-                  </v-col>
-                  <v-col>
-                    <v-card color="accent" style="color:black;">
-                      <h4>Your Mark vs Cohort Average</h4>
                     </v-card>
                   </v-col>
                 </v-row>
                 <!-- Performance comparison -->
                 <div
-                  v-for="(criterion) in cohortPerformance.slice().reverse()"
-                  v-bind:key="criterion"
-                >
+                  v-for="(criterion) in assessmentData.slice().reverse()"
+                  v-bind:key="criterion">
                   <div v-if="criterion.index != 0">
                     <v-card style="padding:1%;">
                       <v-row>
@@ -229,27 +122,7 @@
                           <v-card
                             elevation="3"
                             style="font-weight:bold;"
-                          >{{criterion.student_mark}} / {{criterion.max_mark}}</v-card>
-                        </v-col>
-                        <v-col>
-                          <v-card
-                            elevation="3"
-                            style="font-weight:bold;"
-                          >{{criterion.average}} / {{criterion.max_mark}}</v-card>
-                        </v-col>
-                        <v-col>
-                          <v-card
-                            elevation="3"
-                            style="font-weight:bold;"
-                            v-if="criterion.student_mark < criterion.average"
-                          >
-                            <v-icon color="warning">mdi-chevron-down-box</v-icon>
-                            {{Math.abs(((criterion.student_mark/criterion.max_mark) * 100) - ((criterion.average/criterion.max_mark) * 100)).toFixed(1)}}%
-                          </v-card>
-                          <v-card elevation="3" style="font-weight:bold;" v-else>
-                            <v-icon color="success">mdi-chevron-up-box</v-icon>
-                            {{Math.abs(((criterion.student_mark/criterion.max_mark) * 100) - ((criterion.average/criterion.max_mark) * 100)).toFixed(1)}}%
-                          </v-card>
+                          >{{criterion.average.toFixed(1)}} / {{criterion.max_mark}}</v-card>
                         </v-col>
                       </v-row>
                     </v-card>
@@ -283,10 +156,7 @@
             </v-row>
             <v-col></v-col>
           </div>
-        </v-col>
-      </v-row>
     </v-card>
-  </div>
   </div>
 </template>
 
@@ -301,7 +171,8 @@ const gradients = [
   ["#f72047", "#ffd200", "#1feaea"]
 ];
 import Session from "@/services/Session";
-import { type } from "os";
+import Subject from "@/services/Subject";
+import Assessment from "@/services/Assessment";
 export default {
   data: () => ({
     //Graph attributes
@@ -317,7 +188,7 @@ export default {
     //Rendered Values
     selectedSubject: "",
     averageMark: null,
-    selectedTaskName: null,
+    selectedTask: null,
     markRecieved: null,
     markOutOf: null,
     files: { task: "mdi-file-document-outline" },
@@ -328,27 +199,15 @@ export default {
     labels: [],
     cohortPerformance: [],
     hasValidStudentId: true,
+    assessmentData:[],
+    grow: true,
   }),
   methods: {
     taskClicked(item) {
       //Only process click event if child node is pressed
-      if (item.type !== "child_node") return;
       this.graphDraw = false;
-      this.selectedTaskName = item.name;
+      this.selectedTask = item;
       this.getAssessmentData(item.id);
-    },
-    initialiseStudentData(studentData) {
-      studentData.forEach(element => {
-        this.markRecieved += element.result === null ? 0 : element.result;
-
-        this.markOutOf += element.max_mark === null ? 0 : element.max_mark;
-        this.markBreakdown.push({
-          result: element.result,
-          criteria: element.display_text,
-          comment: element.comment,
-          maxMark: element.max_mark
-        });
-      });
     },
     processAggregates(assessmentData, cohortAverage) {
       //Derive performance values
@@ -377,15 +236,7 @@ export default {
         }
       });
 
-      let arraySize = this.markBreakdown.length;
-      for (let i = 1; i < arraySize; i++) {
-        this.cohortPerformance[i - 1] = {
-          display_text: assessmentData[i - 1].display_text,
-          average: assessmentData[i - 1].average.toFixed(1),
-          student_mark: this.markBreakdown[i].result,
-          max_mark: assessmentData[i - 1].max_mark
-        };
-      }
+      this.assessmentData = assessmentData;
       this.averageMark = cohortAverage.toFixed(1);
       this.worstCriterion = lowestPerformingCriterion;
       this.bestCriterion = highestPerformingCriterion;
@@ -413,28 +264,23 @@ export default {
       this.graphDraw = false;
     },
     async getTasks() {
-      Session.getStudentSubjects({
-        request: "VIEW_STUDENT_ENROLMENT",
-        student_id: this.student_id
-      })
-        .then(response => {
-          this.tasks = response.data;
+      Assessment.getAssessments({
+        request: "VIEW_ASSESSMENT",
+        subject_id: this.$store.state.subjectID,
+        is_coordinator: false
+      }).then(response => {
+          this.tasks = response.data["records"];
         }).catch(error => console.error(error));
     },
     async getAssessmentData(assessmentId) {
       Session.getStudentAssessmentData({
-        request: "VIEW_STUDENT_RESULTS",
-        assessment_id: assessmentId,
-        student_id: this.student_id
+        request: "VIEW_COHORT_RESULTS",
+        assessment_id: assessmentId
       })
         .then(response => {
           //Reset existing values, and initialise studentData and aggregated data
           this.clear();
-          this.initialiseStudentData(response.data.student_results);
-          this.processAggregates(
-            response.data.criteria_performance,
-            response.data.cohort_average
-          );
+          this.processAggregates(response.data.criteria_performance,response.data.cohort_average);
           this.processCohortData(response.data.quartiles);
           this.hasValidStudentId = true;
         }).catch(error => console.error(error));
@@ -443,11 +289,6 @@ export default {
   
   //Only retrieve student data if ID query parameter is set
   async mounted() {
-    if(this.$route.query["id"]==null ){
-      this.hasValidStudentId = false;
-      return;
-    }
-    this.student_id = this.$route.query["id"];
     this.getTasks();
   }
 };

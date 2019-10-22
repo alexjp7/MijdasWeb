@@ -1,15 +1,19 @@
+<!--
+--  Authors: Alex
+-->
+
 <template>
   <div id="staffLinker">
     <v-card color="secondary">
       <v-card-title class="pageBreakHeading">
         <span id="teachingStaffHeading">
-          <h2>Teaching Staff</h2>
+          <h2>Current Staff</h2>
         </span>
         <v-spacer></v-spacer>
         <v-card-action>
           <v-tooltip bottom>
             <template v-slot:activator="{ on }">
-              <v-btn flat v-on="on" @click="getStaff" color="secondary">
+              <v-btn flat v-on="on" @click="getStaff" icon color="white">
                 <v-icon>mdi-refresh</v-icon>
               </v-btn>
             </template>
@@ -183,8 +187,6 @@ export default {
   border: 1px;
   max-width: 100%;
   display: block;
-  margin-left: 10%;
-  margin-right: 10%;
 }
 #searchComponent {
   display: inline-flex;

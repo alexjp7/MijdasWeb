@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex, Ilyas
+-->
+
 <template>
   <div id="StudentLoader">
     <v-card color="primary">
@@ -14,8 +18,7 @@
           <h2>Student Import</h2>
         </span>
       </v-card-title>
-    </v-card>
-    <v-card>
+
       <v-card-actions>
         <div id="uploader">
           <upload-btn icon @file-update="readFileInput">
@@ -77,8 +80,6 @@ export default {
 }
 
 #StudentLoader {
-  margin-left: 10%;
-  margin-right: 10%;
   max-width: 100%;
   display: block;
 }

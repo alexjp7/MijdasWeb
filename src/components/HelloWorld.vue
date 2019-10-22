@@ -1,3 +1,7 @@
+<!--
+--  Authors: Sam, Alex
+-->
+
 <template>
   <div class="hello"></div>
 </template>
