@@ -44,7 +44,7 @@ v-form {
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" md="6">
-                    <v-select :items="items" filled label="Role"></v-select>
+                    <v-select :items="items" v-model="role" filled label="Role"></v-select>
                   </v-col>
                 </v-row>
               </v-container>
@@ -55,7 +55,7 @@ v-form {
           <div class="danger-alert" v-html="error" />
           <br />
           <v-row>
-            <v-btn id="divider" style="min-width: 10vw" dark class="primary">Register</v-btn>
+            <v-btn @click="register" id="divider" style="min-width: 10vw" dark class="primary">Register</v-btn>
             <router-link to="/login" class="btn btn-link">
               <v-btn id="divider" style="min-width: 10vw" dark class="primary">Login</v-btn>
             </router-link>
@@ -79,17 +79,22 @@ export default {
       username: "",
       password: "",
       password1: "",
-      items: ["Tutor", "Coordinator", "Admin"]
+      items: ["tutor", "coordinator", "admin"],
+      role: ""
     };
   },
   methods: {
     async register() {
       const response = await Authentication.register({
-        request: this.request,
+        // request: this.request,
         username: this.username,
-        password: this.password
+        password: this.password,
+        c_password: this.password,
+        email: this.email,
+        name: this.firstName + " " + this.lastName,
+        scopes: this.role
       }).then(function(response) {
-        console.log(username, password);
+        // console.log(username, password);
       });
       // this.$store.dispatch("setToken", response.data.token);
       // this.$store.dispatch("setUser", response.data.user);
