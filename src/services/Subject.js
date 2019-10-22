@@ -18,5 +18,8 @@ export default {
   },
   removeStaff(credentials) {
     return Api().post("subject/", credentials);
+  },
+  getAssessments(credentials) {
+    return Api().post("subject/", credentials);
   }
 };
