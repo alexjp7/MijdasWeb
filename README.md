@@ -31,7 +31,7 @@
 6. Select `lint on save`
 7. Select `in dedicated config file`
 8. Type `N` for not saving preset
-9. Change directory to the project you've created.
+9. Change directory to the project you've created `cd <project-name>`
 10. OPTIONAL - run `vue ui --dev` and import project directory for ui use later (provides analytics etc)
 
 <h3> Packages that need to be installed </h3>
