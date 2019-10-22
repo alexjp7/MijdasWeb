@@ -36,6 +36,8 @@
 
 <h3> Packages that need to be installed </h3>
 
+`npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`
+
 > Vuetify - allows for advanced components such as forms/calendars/navbars etc `vue add veutify` then hit enter on `default settings`
 
 > Vuex - State Management Pattern uses state,view and actions powerful for large SPA run `npm install vuex --save`
