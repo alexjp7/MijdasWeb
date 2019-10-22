@@ -119,6 +119,7 @@ export default {
   name: "SubjectDisplay",
   data: () => ({
     request: "VIEW_OWNED_SUBJECTS",
+    // request: "POPULATE_SUBJECTS",
     username: null,
     institutions: null,
     loading: true,
@@ -137,7 +138,7 @@ export default {
       })
       .catch(error => {
         console.log(error);
-        this.errored = true;
+        // this.errored = true;
       })
       .finally(() => (this.loading = false));
   },

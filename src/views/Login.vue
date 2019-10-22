@@ -76,6 +76,7 @@ export default {
     return {
       request: "LOGIN",
       username: "",
+      token: "",
       password: "",
       correct: null,
       errored: false,
@@ -100,10 +101,10 @@ export default {
           request: this.request,
           username: this.username,
           password: this.password,
-          scopes: "tutor"
+          scopes: "coordinator"
         }).then(response => {
-          var token = response.data.success.token;
-          console.log(token);
+          let token = response.data.success.token;
+          this.token = token;
         }).catch(error => {
           console.log(error);
           this.errored = true;
@@ -111,11 +112,11 @@ export default {
         if (this.errored == false) {
           this.correct = true;
         }
-        //this.$store.dispatch("setToken", response.data.token);
         else {
           this.correct = false;
         }
         if (this.correct == true) {
+          this.$store.dispatch("setToken", this.token);
           this.$store.dispatch("setUser", this.username);
           this.redirect();
         }
