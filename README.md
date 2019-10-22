@@ -31,14 +31,14 @@
 
 <h3> Required Vue Packages </h3>
 
-> To install the packages listed below please enter: 
-    Step 1: `vue add vuetify` and hit enter on `default`
-    Step 2: `npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`
+To install the packages listed below please enter: 
+1. `vue add vuetify` and hit enter on `default`
+2. `npm install -- save axios vuex-router-sync vue-resource vuetify-upload-button`
 
-1. Axios - this is a framework that allows for API post requests.
-2. Vuex-router-sync - dependancy that allows for certain states to change the route while updating the Vuex store. 
-3. Vue-resource - provides capability for making web requests and handle responses using \$http.
-4. Vuetify - allows for advanced components such as forms, buttons and navbars.
+> Axios - this is a framework that allows for API post requests.
+> Vuex-router-sync - dependancy that allows for certain states to change the route while updating the Vuex store. 
+> Vue-resource - provides capability for making web requests and handle responses using \$http.
+> Vuetify - allows for advanced components such as forms, buttons and navbars.
 
 <h3> VS Code Extensions </h3>
 
