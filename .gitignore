@@ -22,7 +22,6 @@ yarn-error.log*
 
 #PROJECT IGNORES
 #Directorys
-src/plugins
 #Configs
 package.json
 package-lock.json
