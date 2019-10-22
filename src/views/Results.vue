@@ -423,7 +423,7 @@ export default {
     },
     async getAssessmentData(assessmentId) {
       Session.getStudentAssessmentData({
-        request: "VIEW_RESULTS",
+        request: "VIEW_STUDENT_RESULTS",
         assessment_id: assessmentId,
         student_id: this.student_id
       })

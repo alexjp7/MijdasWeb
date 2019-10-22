@@ -18,14 +18,20 @@
       </v-card-title>
     </v-card>
     <StudentViewer />
+    <br>
+    <br>
+    <ResultsDisplay/>
+
   </div>
 </template>
 
 <script>
 import StudentViewer from "@/components/StudentViewer.vue";
+import ResultsDisplay from "@/components/ResultsDisplay.vue";
 export default {
   components: {
-    StudentViewer
+    StudentViewer,
+    ResultsDisplay
   },
   data: () => ({
     subjectCode: "",
