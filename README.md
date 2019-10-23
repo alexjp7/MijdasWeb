@@ -61,8 +61,9 @@ Please download/install the following extension:
 
 <h3> Using The Development Environment</h3>
 
-1. To build and run the project: `npm run serve` or `npm run dev`this will locally host the website (note: if you get errors/warnings run `npm run serve --fix`).
-2. To run please open a browser, and enter into the url `http://localhost:8080/`. 
+1. To correct errors between dependancies please run: `npm run serve --fix`.
+2. To build and run the project: `npm run serve` or `npm run dev`this will locally host the website 
+3. To run please open a browser, and enter into the url `http://localhost:8080/`. 
   
 <h3> Source Files - Github & Zipped File </h3>
 
