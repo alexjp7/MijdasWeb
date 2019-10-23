@@ -1,5 +1,5 @@
 <!--
---  Authors: Ilyas, Alex
+--  Authors: Dylan, Alex
 -->
 
 <template>
@@ -8,18 +8,20 @@
       <!-- Caroursel -->
       <div id="homeBkg">
         <v-carousel continuous cycle="true" height="auto">
+          <!-- <v-responsive :aspect-ratio="16/9"> -->
           <v-carousel-item>
-            <!-- <v-img src="@/assets/logo.png"></v-img> -->
             <v-img src="@/assets/markit-logo_full.png"></v-img>
           </v-carousel-item>
           <v-carousel-item>
-            <!-- <v-img src="@/assets/Markit 1.2.png"></v-img> -->
-            <v-img src="@/assets/logo_full.png"></v-img>
+            <v-img src="@/assets/dashboard.png"></v-img>
           </v-carousel-item>
           <v-carousel-item>
-            <!-- <v-img src="@/assets/markit-logo.png"></v-img> -->
-            <v-img src="@/assets/logo_green_full.png"></v-img>
+            <v-img src="@/assets/subject.png"></v-img>
           </v-carousel-item>
+          <v-carousel-item>
+            <v-img src="@/assets/results.png"></v-img>
+          </v-carousel-item>
+          <!-- </v-responsive> -->
         </v-carousel>
         <v-header class="display-2" :elevation="n-10">
           <v-card id="alternateBkg">
