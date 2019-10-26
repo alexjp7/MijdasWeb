@@ -5,7 +5,7 @@
 <h3> Installing Nodejs </h3>
 
 1. Click to [Install Node](https://nodejs.org/en/download/).
-2. Once installed, open up Command prompt and navigate to a directory where you would like the following project to be located.           Please note that the project will create a folder in this location.
+2. Once installed, open up a Command prompt and navigate to a directory where you would like the following project to be located. Please note that the project will create a folder in this location.
 
 <h3> Installing Vue with CLI </h3>
 
@@ -37,7 +37,7 @@ To install the packages listed below please enter:
 
 > Axios - this is a framework that allows for API post requests.
 
-> Vuex-router-sync - dependancy that allows for certain states to change the route while updating the Vuex store. 
+> Vuex-router-sync - dependency that allows for certain states to change the route while updating the Vuex store. 
 
 > Vue-resource - provides capability for making web requests and handle responses using \$http.
 
@@ -61,7 +61,7 @@ Please download/install the following extension:
 
 <h3> Using The Development Environment</h3>
 
-1. To correct errors between dependancies please run: `npm run serve --fix`.
+1. To correct errors between dependencies please run: `npm run serve --fix`.
 2. To build and run the project: `npm run serve` or `npm run dev`this will locally host the website 
 3. To run please open a browser, and enter into the url `http://localhost:8080/`. 
   
