@@ -2,7 +2,7 @@
 
 * The MarkIt web application serves as one of the front end user applications for the MarkIt student assessment managment system that was developed as apart of a final year software developmment project.
 
-Other MarkIt repos:
+* Other MarkIt repos:
   * Markit Mobile.
   * [Markit Server](https://github.com/alexjp7/MijdasServer).
 
